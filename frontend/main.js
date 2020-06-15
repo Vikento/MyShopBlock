@@ -36,10 +36,6 @@ const loaderExample = <Loader scale={0.5}  fillColor="#33bbaa" />;
 
 
 
-
-const FIELD_ID_WIDTH_PERCENTAGE = '30%';
-const FIELD_DESCRIPTION_WIDTH_PERCENTAGE = '55%';
-const FIELD_QUANTITY_WIDTH_PERCENTAGE = '15%';
 const Couleur_BBC = "#FF9F1C";
 
 // css list for first page
