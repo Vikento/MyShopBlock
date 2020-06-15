@@ -9,6 +9,7 @@ import {
 import Home from "./Home";
 import Contact from "./Contact";
 import kpi from "./kpi";
+import InitBase from "./InitBase";
 import item_information from "./item_information";
 const Index = React.lazy(() => import('./Index'));
 import {loadCSSFromString} from '@airtable/blocks/ui';
@@ -42,8 +43,8 @@ const FIELD_QUANTITY_WIDTH_PERCENTAGE = '15%';
 const Couleur_BBC = "#FF9F1C";
 
 // css list for first page
-loadCSSFromString('body {padding: 20px;  margin: 0;  color: #011627;} h1, h2, p, ul, li {font-family: sans-serif;text-align: center;  } ');
-loadCSSFromString('ul.header li {  display: inline-block;  list-style-type: none;  margin: auto; } ul.header { border-radius: 25px; border: 5px solid #E71D36; background-color: #2EC4B6;  padding: 0;}'); 
+loadCSSFromString('body {padding: 20px;  margin: 0;  color: #011627;} h1, h2, p, ul, li {font-family: sans-serif;   } ');
+loadCSSFromString('ul.header li {  display: inline-block;  list-style-type: none;  margin: auto;  } ul.header { border-radius: 25px; border: 5px solid #E71D36; background-color: #2EC4B6;  padding: 0; text-align: center;}'); 
 loadCSSFromString('ul.header li a {  color: #FFF;  font-weight: bold;  text-decoration: none;  padding: 20px;  display: inline-block;  border-radius: 25px; border: 2px solid #2EC4B6 } ');
 loadCSSFromString('.content {  background-color:rgba(250,250,250,0.7);  padding: 20px; border-radius: 25px; border: 2px solid #E71D36 ; } .content h2 {  padding: 0;  margin: 0;}');
 loadCSSFromString(' .content li {  margin-bottom: 10px; text-align: left;} a:hover { background: #FF9F1C; border-radius: 25px; border: 2px solid #FF9F1C } ');
@@ -62,8 +63,10 @@ loadCSSFromString(' a { display: inline;  list-style-type: none;  margin: 0; pad
 loadCSSFromString(' div.Select_css { background: rgba(155, 155, 155, 0.3); display: flex; align-items: center ; margin: 0; padding: 0; color: #fff; text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4); min-height: 30px; border: 2px solid ; border-color: #2EC5B6; border-radius: 5px; text-align: center;} ');
 loadCSSFromString(' .Select_css1 { background: rgba(0, 0, 0, 0.3); color: #fff; text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4); min-height: 30px; border: 2px solid coral; border-radius: 5px;} ');
 
+
 // CSS KPI
-loadCSSFromString(' .column1g{ border-radius: 25px; float: left;   width: 100%;  border: 2px solid #E71D36; padding: 10px;  margin: 20px; position: relative;} .column2g{  border-radius: 25px; float: left;   width: 100%;  border: 2px solid #E71D36; padding: 10px;  margin: 20px; position: relative;} h1 { text-align: center; } ');
+loadCSSFromString(' .column1g{  border-radius: 25px; float: left;   width: 100%;  border: 2px solid #E71D36; padding: 10px;  margin: 20px; position: relative;} .column2g{  border-radius: 25px; float: left;   width: 100%;  border: 2px solid #E71D36; padding: 10px;  margin: 20px; position: relative;} h1 { text-align: center; } ');
+loadCSSFromString(' ul.column1{ text-align: left ; display: inline-block;}');
 // FIN CSS
 
 
@@ -82,35 +85,37 @@ loadCSSFromString('#donne_enregistre {min-width : 300px; height : 28px; font-siz
 
 
 
-
 function Change_background() {
 	const base = useBase()
 	const [tableName, setTableName] = useState('Configuration CSS');
 	const table_css = base.getTableByNameIfExists(tableName);
 
-	let records_id = useRecords(table_css, {fields: ['Attachments']});
-	let img = records_id[0].getCellValueAsString('Attachments');
-	
-	let source_image = "";
-	
-	
-		for (let i = 0; i < img.length; i++) {
-				if (img[i] == "("){
-					source_image = "";
-					
-					while (img[i] != ")") {
-						i = i + 1;
-						if ((img[i] != ")") && (i < img.length)){
-							source_image = source_image + img[i];
+	if (table_css){ 
+		let records_id = useRecords(table_css, {fields: ['Attachments']});
+		let img = records_id[0].getCellValueAsString('Attachments');
+		
+		let source_image = "";
+		
+		
+			for (let i = 0; i < img.length; i++) {
+					if (img[i] == "("){
+						source_image = "";
+						
+						while (img[i] != ")") {
+							i = i + 1;
+							if ((img[i] != ")") && (i < img.length)){
+								source_image = source_image + img[i];
+							}
 						}
-					}
-				}	
-		}
-	
-
+					}	
+			}	
 		console.log(" l 68 recode " + source_image ); 
-	loadCSSFromString('body { background-image: url(' + source_image+')');
-	
+		loadCSSFromString('body { background-image: url(' + source_image+')');
+		
+	}
+	else {
+		// ne rien faire
+	}
 	return <div> </div>
 }
  
@@ -127,6 +132,7 @@ class Main extends Component {
 				<li className="stock_h"><NavLink to="/index">My Stock</NavLink></li>
 				<li className="iteem_h"><NavLink to="/item_information">Item information</NavLink></li>
 				<li className="dash_board_h"><NavLink to="/kpi">My Dash Board</NavLink></li>
+				<li className="InitBase"><NavLink to="/InitBase">Initialization</NavLink></li>				
 				<li className="help_h"><NavLink to="/contact">Contact</NavLink></li>
 			  </ul>
 			  <div className="content">
@@ -136,6 +142,7 @@ class Main extends Component {
 						<Route path="/index" component={Index}/>
 						<Route path="/item_information" component={item_information} />
 						<Route path="/kpi" component={kpi}/>
+						<Route path="/InitBase" component={InitBase}/>
 						<Route path="/contact" component={Contact}/>
 					</React.Suspense>
 			  </div>

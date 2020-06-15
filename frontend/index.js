@@ -40,8 +40,6 @@ var field_total_Stock = 'Total Stock';
 //  Amelioration
 //
 // - recuperer l'ID du champs a la place du nom
-// - INPUT find, afin de trouver une reference
-// - un bouton pour afficher une nouvelle page avec les stats
 // - un bouton pour affichier une nouvelle pages exhustive
 // - correction :
 //      - tester avec 1 images, avec 100 image, avec d'autre type de fichier		
@@ -50,13 +48,23 @@ var field_total_Stock = 'Total Stock';
 //
 //  _ dans le fichier index, limite le nombre de caractere vu par la liste de stock
 //
+//  - dans le fichier item information gerer les images si on en trouve
+//	- dans le fichier item information gerer clicker sur images pour les faire defiler si on en trouve
 //
+//	- ajout la possibilite de paramettre un alerte en mettant une condition en vlookup.
+//
+// ajout dans l'aide le nom de la table 'Stock in the warehouse'
+			// a l interieur de la table on doit avoir le nom de la base Name pour decricre au user facilement le nom de l item
+
 // limit : garder les Nom de DashBoard
 // supprimer les hover sur les party stock Name et quantity
 // test : ajouter 1000 items
 // changer le currency
 // verifier pourquoi l image ne se met pas a la bonne taille directement
 // visu de plusieurs photos en cliquant sur la photo  en cours
+
+// check the URLL des images, car elles ne sont valables suelment 30 jours a compter du 15 juin 2020
+// 	=> voir comment les lier directement au repertoire media
 
 // Verifier le cas :
 // -  une base de donne avec un seul field Ok, mais n'apparait pas dans les KPI
@@ -109,23 +117,34 @@ function TableStructureBlock() {
 	//
 	//    INITITALISAZION A SUPPRIMER PLUS TARD ET VOIR QUELLE VA ETTRE LA PARAMETTRE DINITIALISAZION
 	// 
-		page_choose = "SOL1520814ED";
 	//
 	// 
 	//   '---------------------------------------------------------------------------------'
 
 	const table = base.getTableByNameIfExists(tableName);
 	console.log("Ma base : " + table);
-    const view = table && table.getViewByIdIfExists(cursor.activeViewId);
-
 
 
 	// we check the table exist and we transmit element we need in TableSchema
 	
 	if (table) {
-        return <TableSchema base={base} table={table} view={view} page_choose={page_choose} />;
+        return <TableSchema base={base} table={table} />;
     } else {
-        return null;
+        return ( 
+		
+				<div>
+				<h2> List of Stock : </h2>
+				<p> </p>
+				Error : No base with the name 'Stock in the warehouse' . For the full functionnality you have to create a Table with the name of 'Stock in the warehouse' as following :
+				<p> </p>
+				<img src="https://i.postimg.cc/52P43k6F/Change-Name-Table.gif" width="100%" />
+				When you create the 'Stock in the warehouse', you can reload or refresh the page.
+				<p> </p>
+				If it is still not working, please contact the dev team. Thank you !
+	
+		</div>
+		
+		);
     }
 }
 
@@ -135,7 +154,17 @@ function Select_table_field_third({table}){
 	
     let records_desc;
 	const globalConfig = useGlobalConfig();
-	const doneFieldId_third = globalConfig.get('X_FIELD_ID_THIRD_COLL');
+	let doneFieldId_third;
+	
+	if (globalConfig.get('X_FIELD_ID_THIRD_COLL')){
+		doneFieldId_third = globalConfig.get('X_FIELD_ID_THIRD_COLL');
+	}
+	else {
+		console.log ("l 143 doneFieldId_third : " + doneFieldId_third);
+		doneFieldId_third = table.fields[0].name;
+	}
+	
+	console.log (" l 147 doneFieldId_third : " + doneFieldId_third);
 
 // Activate the line bellow to clean the globalConfig
 //	const doneFieldId_third = "Name";
@@ -145,7 +174,17 @@ function Select_table_field_third({table}){
 	//
 	//   Change Name with another value (Field if exist ????)
 	// 
-	const doneField_third = table ? table.getFieldByIdIfExists(doneFieldId_third) : "Name";
+	let doneField_third;
+	if (table.getFieldIfExists(doneFieldId_third)){
+		console.log(" cas 160 le cahamps exit: ");
+		doneField_third = table.getFieldIfExists(doneFieldId_third);
+	}
+	else { 
+		console.log(" cas 163 PAS de champs , on peut le 1 champs existant: ");
+		doneField_third = table.getFieldIfExists(table.fields[0].name);
+	}
+	console.log(" doneFieldId_third  165: " + doneFieldId_third);
+	console.log("doneField_third l 160 : " + doneField_third + " " + doneField_third.name);
 	//
 	//
 	//   '---------------------------------------------------------------------------------'
@@ -211,9 +250,18 @@ function Select_table_field({table}){
     let records_desc;
 
 	const globalConfig = useGlobalConfig();
-//	const doneFieldId = globalConfig.get('X_FIELD_ID');
+	let doneFieldId ;
+	
+	if (globalConfig.get('X_FIELD_ID')){
+		doneFieldId = globalConfig.get('X_FIELD_ID');
+		console.log ("l 226 doneFieldId : " + doneFieldId);
+	}
+	else {
+		console.log ("before l 229 doneFieldId : " + doneFieldId);
+		doneFieldId = table.fields[0].name;
+	}
 
-	const doneFieldId = "Material description";
+	console.log ("after l 233 doneFieldId : " + doneFieldId);
 
 	console.log("l 214 X_FIELD_ID " + globalConfig.get('X_FIELD_ID'));
 	console.log("l 215 doneFieldId " + doneFieldId);
@@ -270,7 +318,7 @@ function Select_table_field({table}){
 }
 
 
-function TableSchema({base, table, view, page_choose}) {
+function TableSchema({base, table}) {
    
     let records_id;
     let records_qty;
@@ -326,6 +374,8 @@ function TableSchema({base, table, view, page_choose}) {
 		options={selection_value_picker}
 		globalConfigKey="X_FIELD_ID_THIRD_COLL"
 		className ="Select_css1"
+		tabIndex ="Select a field"
+		
 	  />
 	);	
 	
@@ -365,7 +415,7 @@ function TableSchema({base, table, view, page_choose}) {
 						<table  width="100%">
 							<tr hasThickBorderBottom={true} className="core_list"  >
 								<td width={FIELD_ID_WIDTH_PERCENTAGE}>
-								<div  className="Select_css">PRIMARY KEY </div>
+								<div  className="Select_css">ITEM ID - PRIMARY KEY </div>
 
 								</td>
 						

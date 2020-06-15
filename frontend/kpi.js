@@ -6,7 +6,7 @@ import {
     useRecords,
 } from '@airtable/blocks/ui';
 import {cursor} from '@airtable/blocks';
-import React from "react";
+import React, {useState} from 'react';
 import {globalConfig} from '@airtable/blocks';
 import {session} from '@airtable/blocks';
 import ErrorBoundary from "./ErrorBoundary";
@@ -26,38 +26,43 @@ function kpi() {
     // useWatchable is used to re-render the block whenever the active table or view changes.
     useWatchable(cursor, ['activeTableId', 'activeViewId']);
 
-	
-	// We fix the table name
-	//
-	//
-	//
-	
-	// NEED TO PUT THE NAME Stock in the warehouse in general all autorize name to avoid crash  
-	//
-	const table = base.getTable("Stock in the warehouse");
-	console.log("Ma base : " + table);
+
+	const [tableName, setTableName] = useState('Stock in the warehouse');
+
+
+	const table = base.getTableByNameIfExists(tableName);
+
 
     if (table) {
         return <TableSchema base={base} table={table} item_key_primary={my_key} />;
     } else {
-        return null;
+
+
+        return ( 
+			<div>
+				<h2> My KPI : </h2>
+				<p> </p>
+				Error : No base with the name 'Stock in the warehouse' . For the full functionnality you have to create a Table with the name of 'Stock in the warehouse' as following :
+				<p> </p>
+				<img src="https://i.postimg.cc/52P43k6F/Change-Name-Table.gif" width="100%" />
+				When you create the 'Stock in the warehouse', you can reload or refresh the page.
+				<p> </p>
+				If it is still not working, please contact the dev team. Thank you !
+	
+		</div>
+		
+		);
     }
 }
 
 
-
+// implemented indicator base on the 'Stock in the warehouse' including all the  
+// field 
 function List_of_log_fonction() {
 	
 	const base = useBase();
 	
 
-	//
-	//
-	//
-	//
-	// voir si on garde le nom de la base tell quel :
-	//
-	//
 	const table_warehouse_stock = base.getTable("Stock in the warehouse");
 	let my_record_historique = useRecords(table_warehouse_stock);
 
@@ -70,18 +75,16 @@ function List_of_log_fonction() {
 	let target_stock_min = new Array();
 	let total_stock = new Array();
 	let list_of_log_value = new Array();
-
-	let check_stock_exist = false;
-	let Threshold_Alarm_exist = false;
-	let Total_Stock_exist  = false;
-	let Product_Code_Serrial_exist = false;
-	let Name_exist = false;
-	let Threshold_total_Value_exist = false;
-	let total_value_exist = false;
-	let Check_total_Value_exist = false ;
-	let alert_logv2 ;
+		let check_stock_exist = false;
+		let Threshold_Alarm_exist = false;
+		let Total_Stock_exist  = false;
+		let Product_Code_Serrial_exist = false;
+		let Name_exist = false;
+		let Threshold_total_Value_exist = false;
+		let total_value_exist = false;
+		let Check_total_Value_exist = false ;
+		let alert_logv2 ;
 	
-console.log("taille base : "  + table_warehouse_stock.fields.length);
 
 for (let i = 0; i < table_warehouse_stock.fields.length; i++) {
 		console.log("l 103 - " + table_warehouse_stock.fields[i].name);
@@ -111,7 +114,6 @@ for (let i = 0; i < table_warehouse_stock.fields.length; i++) {
 			Check_total_Value_exist = true;
 		}	
 }
-	console.log("check_stock_exist " + check_stock_exist);
 
 if (check_stock_exist && Threshold_Alarm_exist && Total_Stock_exist && Product_Code_Serrial_exist && Name_exist && Threshold_total_Value_exist  &&  total_value_exist  && Check_total_Value_exist){
 
@@ -133,7 +135,7 @@ if (check_stock_exist && Threshold_Alarm_exist && Total_Stock_exist && Product_C
 	}
 
 	
-	// list de 
+	// list of personnalized indicators
 	  const list_log_KO = [];
 
 		for (let i = 0; i < compteur_log; i++) {
@@ -153,7 +155,7 @@ if (check_stock_exist && Threshold_Alarm_exist && Total_Stock_exist && Product_C
 					my_name_log_no_ok : name_log_no_ok[i],
 					my_id_log_no_ok : id_log_no_ok[i],
 					my_message_log_no_ok : list_of_log_value[i],
-					my_nb_item_log_no_ok : value_log_no_ok[i]	,
+					my_nb_item_log_no_ok : value_log_no_ok[i],
 					my_target : target_nb_item_log_no_ok[i]			
 				});
 			
@@ -187,6 +189,9 @@ else 	return null;
 
 }
 
+
+//
+// function to check the user is authorized to get indicator
 function User_check_for_kpi(table,type_field) {
 	let shared_personnalized_kpi = false;
 	let query = table.selectRecords();
@@ -226,14 +231,13 @@ function User_check_for_kpi(table,type_field) {
 	return  shared_personnalized_kpi;
 }
 
-
+// personnalized indicators per user 
 function List_of_personalize_indicateur() {
-  const base = useBase();	
+ const base = useBase();	
   
   
  let table ;
  let my_record;
- let number_of_element_to_show  = [];
  let nb_table_DashBoard_perso = 0;
  
 
@@ -286,7 +290,7 @@ const list_KPI = [];
   
 	
 	
-// classement de variable par ordre alphabetique
+// order the item by alphebetic order
 list_KPI.sort((a, b) => (a.name_variable_indicator > b.name_variable_indicator) ? 1 : -1)
 
 
@@ -376,37 +380,9 @@ const all_element = a_renvoyer_enssembe_donnees ? a_renvoyer_enssembe_donnees.ma
 
 function TableSchema({base, table, item_key_primary}) {
 
-	let cle_primaire_a_recuperer = item_key_primary;
-	let name_item;
-	let description_item;
-	let color_item;
-	let unit_value_item;
-	let last_inventory_quantity_item;
-	let total_value_last_inventory_item;
-	let date_Last_Inventory_item;
-	let total_consumption_item;
-	let total_stock_item;
-	let threshold_alarm_item;
-	let check_stock_item;
-	let total_value_item;
-	let threshold_total_value_item;
-	let check_total_value_item;
-	let pictures_item;
-	
-	let my_record = useRecords(table);
-	
-	let sum_of_last_inventory_quantity = 0;
-	let sum_total_value_last_inventory_item = 0;
-	let sum_total_stock_item = 0;
-	let sum_total_value_item = 0;
-
-	let sum_total_value_last_inventory_item_string  = sum_total_value_last_inventory_item.toLocaleString();
-	let sum_total_value_item_string = sum_total_value_item.toLocaleString();
-	let diff_of_sum_value_item_string = (sum_total_value_item-sum_total_value_last_inventory_item).toLocaleString();
-	
     
     return (
-			<ErrorBoundary> 
+			
             <Box>
                 <Box padding={3} borderBottom="thick" className="H1">
                     <h1><Heading size="small" margin={0}>
@@ -425,8 +401,7 @@ function TableSchema({base, table, item_key_primary}) {
 									<List_of_personalize_indicateur />
 								</td>
 							</table>
-							
-						
+								
                     }
                                         
                 </Box>
@@ -434,7 +409,7 @@ function TableSchema({base, table, item_key_primary}) {
 
 
             </Box>
-	</ErrorBoundary> 
+	
     );
     
 }
