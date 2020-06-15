@@ -40,4 +40,4 @@ The Stock Block was created with the template offered by Airtable : blocks-todo-
 
 ## See the block running
 
-![Block that shows information about the selected table and its fields](media/Block creation/PresentationBlcok.gif)
+![Block that shows information about the selected table and its fields](media/Block creation/PresentationBlock.gif)
