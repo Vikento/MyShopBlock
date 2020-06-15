@@ -26,6 +26,7 @@ The Project offer :
 4. From the root of your new block, run `block run`.
 
 ## Utility and User
+After seen a lot of message in Airtable on warehouse table and stock management I decide to create a block in order to help the users.
 The block was designed for a small business, a store or a warehouse. All of the following users have access to the block and to the database with specific rights. The users are for example:
 - the store manager to check the stocks, update the inventory, add the items received and given to the supplier and customer
 - the buyer to follow the state of stocks and anticipate an order of material

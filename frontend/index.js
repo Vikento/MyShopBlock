@@ -321,10 +321,9 @@ function Select_table_field({table}){
 function TableSchema({base, table}) {
    
     let records_id;
-    let records_qty;
 		
-	 records_id = useRecords(table);
-     records_qty = useRecords(table, {fields: [field_total_Stock]});
+	records_id = useRecords(table);
+
  
     // Returns all records in the table
 
