@@ -331,7 +331,6 @@ function List_items__usestate({table,my_record}){
 		}
 	}
 
-	
 	//order by name the list of item name and ID	
 	items.sort(function(a, b) {
 		if (a.value==null){
@@ -354,8 +353,6 @@ function List_items__usestate({table,my_record}){
 	  // names must be equal
 	  return 0;
 	});
-
-
 
 	const my_data_list = items?items.map((items,index) =>
 	<option key={index} value={items.value} />
@@ -466,8 +463,7 @@ function List_items__usestate({table,my_record}){
 				return 0;
 					});
 			
-		
-			
+
 			const List_of_variable = list_item?list_item.map((list_item,index) =>
 									<li key={index}>{list_item.name_variable} = {list_item.value_variable} </li>
 								) : null;
@@ -501,7 +497,6 @@ function List_items__usestate({table,my_record}){
 					
 					</div>
 				</div>
-
 		)
 	}
 }
@@ -513,7 +508,6 @@ function TableSchema({table}) {
 
 	let name_item;
 	let pictures_item;
-	
 	let my_record = useRecords(table);
 		
 	
@@ -550,8 +544,7 @@ function TableSchema({table}) {
 									<div class="row" >
 									
 										<List_items__usestate  table={table} my_record={my_record} />
-										<p></p>
-																																
+										<p></p>																						
 										</div>
 										<div class="row"  >
 											<div class="column2" display="table-cell" vertical-align="middle" >
@@ -560,17 +553,12 @@ function TableSchema({table}) {
 										<p></p>									
 									</div>
 								</div>
-							</div>
-							
-							}
-												
+							</div>	
+							}					
 						</Box>
-
 					</Box>
-			
 			);
-		
-	
+
 }
 
 export default item_information;
