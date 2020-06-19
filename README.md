@@ -42,3 +42,8 @@ The Stock Block was created with the template offered by Airtable : blocks-todo-
 ## See the block running
 
 ![Block that shows information about the selected table and its fields](media/Block creation/PresentationBlock.gif)
+
+
+## Definition
+
+- Storage Activities or Store activities : place managed by the store responsible and where all the items are kept. The items can be received or distributed to a third party.

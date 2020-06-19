@@ -32,8 +32,12 @@ import ReactDOM from "react-dom";
 import { Button } from "@airtable/blocks/ui";
 
 import { Loader } from "@airtable/blocks/ui";
-const loaderExample = <Loader scale={0.5}  fillColor="#33bbaa" />;
+const loaderExample = <Loader scale={0.5}  fillColor="#33bbaa" />
 
+
+// clear_key will be used to know which page is clicked by the user
+// data structure : .user : USER ID , .key : the item ID clicked;
+global.clear_key = [];
 
 
 const Couleur_BBC = "#FF9F1C";
@@ -117,6 +121,8 @@ function Change_background() {
  
 class Main extends Component {
 	
+	
+
   render() {
 	    return (
 	<HashRouter>

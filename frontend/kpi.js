@@ -10,7 +10,7 @@ import React, {useState} from 'react';
 import {globalConfig} from '@airtable/blocks';
 import {session} from '@airtable/blocks';
 import ErrorBoundary from "./ErrorBoundary";
-
+const INVENTORY_WAREHOUSE = "Inventory List";
 
 
 function kpi() {
@@ -27,7 +27,7 @@ function kpi() {
     useWatchable(cursor, ['activeTableId', 'activeViewId']);
 
 
-	const [tableName, setTableName] = useState('Stock in the warehouse');
+	const [tableName, setTableName] = useState(INVENTORY_WAREHOUSE);
 
 
 	const table = base.getTableByNameIfExists(tableName);
@@ -42,10 +42,10 @@ function kpi() {
 			<div>
 				<h2> My KPI : </h2>
 				<p> </p>
-				Error : No base with the name 'Stock in the warehouse' . For the full functionnality you have to create a Table with the name of 'Stock in the warehouse' as following :
+				Error : No base with the name "Inventory List" . For the full functionnality you have to create a Table with the name of "Inventory List" as following :
 				<p> </p>
 				<img src="https://i.postimg.cc/52P43k6F/Change-Name-Table.gif" width="100%" />
-				When you create the 'Stock in the warehouse', you can reload or refresh the page.
+				When you create the "Inventory List", you can reload or refresh the page.
 				<p> </p>
 				If it is still not working, please contact the dev team. Thank you !
 	
@@ -56,14 +56,14 @@ function kpi() {
 }
 
 
-// implemented indicator base on the 'Stock in the warehouse' including all the  
+// implemented indicator base on the "Inventory List" including all the  
 // field 
 function List_of_log_fonction() {
 	
 	const base = useBase();
 	
 
-	const table_warehouse_stock = base.getTable("Stock in the warehouse");
+	const table_warehouse_stock = base.getTable(INVENTORY_WAREHOUSE);
 	let my_record_historique = useRecords(table_warehouse_stock);
 
 	let compteur_log = 0;

@@ -22,7 +22,6 @@ import { Loader } from "@airtable/blocks/ui";
 const loaderExample = <Loader scale={0.5}  fillColor="#33bbaa" />;
 
 
-
 // FIN CSS
 
 const FIELD_ID_WIDTH_PERCENTAGE = '35%';
@@ -32,9 +31,9 @@ const NUNBER_OF_CHAR_SEEN_IN_STOCK_PER_COLL = 10;
 
 
 var page_choose ="STOCK";
+const INVENTORY_WAREHOUSE = "Inventory List";
 
 
-var field_total_Stock = 'Total Stock';
 
 
 //  Amelioration
@@ -53,7 +52,7 @@ var field_total_Stock = 'Total Stock';
 //
 //	- ajout la possibilite de paramettre un alerte en mettant une condition en vlookup.
 //
-// ajout dans l'aide le nom de la table 'Stock in the warehouse'
+// ajout dans l'aide le nom de la table INVENTORY_WAREHOUSE
 			// a l interieur de la table on doit avoir le nom de la base Name pour decricre au user facilement le nom de l item
 
 // limit : garder les Nom de DashBoard
@@ -77,7 +76,6 @@ var field_total_Stock = 'Total Stock';
 //
 
 
-//
 // 		Here you will find 2 solution to get the select field : 
 //		1- with select where we can personalize the items to be show
 //		2- fieldpicker where all the fields are shower
@@ -85,10 +83,11 @@ var field_total_Stock = 'Total Stock';
 
 
 
-async function updateKey(key_value) {
+function updateKey(key_value) {
 
 	let session_name;
 	let session_id;	
+	let user_exist_in_the_global_var = false;
 	
 	if (session.currentUser !== null) {
 			session_name = session.currentUser.name;
@@ -96,13 +95,20 @@ async function updateKey(key_value) {
 	}
 	else alert ("Please identify as an user or you cannot access to the information reauested");
 
-	let key_to_save = "key_primary" + session_id;
 
-    if (globalConfig.hasPermissionToSet(key_to_save, key_value)) {
-		console.log("Cle sauvegarde l 48 : " + key_value);
-		console.log("Variable de la cle l 49 : " + key_to_save);
-        await globalConfig.setAsync(key_to_save, key_value);
-    }
+	global.clear_key = key_value;
+	console.log("Key save !!!");
+
+		
+	console.log("l 128 taille base de cle : " + global.clear_key.length + " ma cle : " + global.clear_key);
+	// update of my clear key for user 
+	for  (let i = 0; i < global.clear_key.length; i++) { 
+		if  (global.clear_key[i].user == session_id){
+			console.log("l127 My user : " + global.clear_key[i].user + " item chosen : " + global.clear_key[i].key);
+		}
+	}
+
+
 }
 
 
@@ -111,7 +117,7 @@ function TableStructureBlock() {
 	
     const base = useBase();
 	
-	const [tableName, setTableName] = useState('Stock in the warehouse');
+	const [tableName, setTableName] = useState(INVENTORY_WAREHOUSE);
 
 	//   '---------------------------------------------------------------------------------'
 	//
@@ -135,10 +141,10 @@ function TableStructureBlock() {
 				<div>
 				<h2> List of Stock : </h2>
 				<p> </p>
-				Error : No base with the name 'Stock in the warehouse' . For the full functionnality you have to create a Table with the name of 'Stock in the warehouse' as following :
+				Error : No base with the name "Inventory List" . For the full functionnality you have to create a Table with the name of "Inventory List" as following :
 				<p> </p>
 				<img src="https://i.postimg.cc/52P43k6F/Change-Name-Table.gif" width="100%" />
-				When you create the 'Stock in the warehouse', you can reload or refresh the page.
+				When you create the "Inventory List", you can reload or refresh the page.
 				<p> </p>
 				If it is still not working, please contact the dev team. Thank you !
 	
@@ -164,7 +170,8 @@ function Select_table_field_third({table}){
 		doneFieldId_third = table.fields[0].name;
 	}
 	
-	console.log (" l 147 doneFieldId_third : " + doneFieldId_third);
+	console.log(" l 147 doneFieldId_third : " + doneFieldId_third);
+	console.log("Cle en claire l 170 : " + clear_key);
 
 // Activate the line bellow to clean the globalConfig
 //	const doneFieldId_third = "Name";
@@ -244,7 +251,6 @@ function Select_table_field_third({table}){
 
 
 
-
 function Select_table_field({table}){
 	
     let records_desc;
@@ -265,13 +271,14 @@ function Select_table_field({table}){
 
 	console.log("l 214 X_FIELD_ID " + globalConfig.get('X_FIELD_ID'));
 	console.log("l 215 doneFieldId " + doneFieldId);
+	console.log("Cle en claire l 270 : " + clear_key);
 	//
 	//
 	// 	Change Name by a general value if exist
 	// 
 //	const doneField = table ? table.getFieldByIdIfExists(doneFieldId) : "Name";
 	const doneField = table ? table.getFieldIfExists(doneFieldId) : "Name";
-	//console.log("l 220 doneField " + doneField);
+
 
     records_desc = useRecords(table, {fields: [doneField]});
 	
@@ -327,7 +334,7 @@ function TableSchema({base, table}) {
  
     // Returns all records in the table
 
-	const table_warehouse_stock = base.getTable("Stock in the warehouse");
+	const table_warehouse_stock = base.getTable(INVENTORY_WAREHOUSE);
 	
 
 	 // my_item_id recupere lensemble des ID
@@ -377,7 +384,20 @@ function TableSchema({base, table}) {
 		
 	  />
 	);	
-	
+
+
+	const SelectExample = () => {
+		const [value, setValue] = useState({selection_value_picker});
+		return (
+		  <Select
+			options={options}
+			value={value}
+			onChange={newValue => setValue(newValue)}
+			width="320px"
+		  />
+		);
+	  };
+
 
 
     // my_item_id get all of the ID
@@ -390,7 +410,7 @@ function TableSchema({base, table}) {
                 style={{cursor: 'pointer'}}
                 onClick={() => updateKey(my_item_id_value)}
             >
-            <NavLink to="/item_information"> {my_item_id_value || "NA or no information"}  </NavLink>
+            <NavLink to="/item_information" > {my_item_id_value || "NA or no information"}  </NavLink>
            </a>
         </div>
 
@@ -398,6 +418,7 @@ function TableSchema({base, table}) {
       
     }) : null;
 	
+	console.log("Cle en claire l 404 : " + clear_key);
        
     return (
 		<React.Suspense fallback={loaderExample} >
@@ -414,12 +435,13 @@ function TableSchema({base, table}) {
 						<table  width="100%">
 							<tr hasThickBorderBottom={true} className="core_list"  >
 								<td width={FIELD_ID_WIDTH_PERCENTAGE}>
-								<div  className="Select_css">ITEM ID - PRIMARY KEY </div>
+								<div  className="Select_css">ITEM ID </div>
 
 								</td>
 						
-								<td width={FIELD_DESCRIPTION_WIDTH_PERCENTAGE}>		
-									<FieldPickerSyncedcol />
+								<td width={FIELD_DESCRIPTION_WIDTH_PERCENTAGE}>	
+									{SelectExample}	
+									
 								</td>
 
 								<td width={FIELD_QUANTITY_WIDTH_PERCENTAGE}>
@@ -439,6 +461,7 @@ function TableSchema({base, table}) {
 					   
 							<td width={FIELD_DESCRIPTION_WIDTH_PERCENTAGE}>
 								<Select_table_field table={table}/>
+
 							</td>
 
 							<td width={FIELD_QUANTITY_WIDTH_PERCENTAGE}>
