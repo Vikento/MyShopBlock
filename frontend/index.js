@@ -23,8 +23,6 @@ const FIELD_ID_WIDTH_PERCENTAGE = '35%';
 const FIELD_DESCRIPTION_WIDTH_PERCENTAGE = '35%';
 const FIELD_QUANTITY_WIDTH_PERCENTAGE = '30%';
 const NUNBER_OF_CHAR_SEEN_IN_STOCK_PER_COLL = 10;
-
-
 const INVENTORY_WAREHOUSE = "Inventory List";
 
 
@@ -148,7 +146,7 @@ function TableStructureBlock() {
 }
 
 
-function Selec_and_show_table({base,table}){
+function Selec_and_show_table({base,table,item_selected}){
 
 
 //---------------------------  label Select -----------------------------
@@ -162,7 +160,7 @@ function Selec_and_show_table({base,table}){
 	 });
 	}
 
-	const [value, setValue] = useState(selection_value_picker[0].value);
+	const [value, setValue] = useState(selection_value_picker[item_selected].value);
 
 
 //-----------------------END     label Select -----------------------------
@@ -304,12 +302,12 @@ function TableSchema({base, table}) {
 								</td>
 						
 								<td width={FIELD_DESCRIPTION_WIDTH_PERCENTAGE}>	
-									<Selec_and_show_table base={base} table={table} />	
+									<Selec_and_show_table base={base} table={table} item_selected={1} />	
 									
 								</td>
 
 								<td width={FIELD_QUANTITY_WIDTH_PERCENTAGE}>
-									<Selec_and_show_table base={base} table={table} />					
+									<Selec_and_show_table base={base} table={table} item_selected={2}  />					
 								</td>
 
 							</tr>

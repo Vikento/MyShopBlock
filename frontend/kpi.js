@@ -15,7 +15,6 @@ const INVENTORY_WAREHOUSE = "Inventory List";
 
 function kpi() {
 	
-
 	const my_key = globalConfig.get('key_primary');
 	
 	console.log("Key my_key " + my_key);
@@ -48,13 +47,10 @@ function kpi() {
 				When you create the "Inventory List", you can reload or refresh the page.
 				<p> </p>
 				If it is still not working, please contact the dev team. Thank you !
-	
 		</div>
-		
 		);
     }
 }
-
 
 // implemented indicator base on the "Inventory List" including all the  
 // field 
@@ -188,7 +184,6 @@ if (compteur_log != 0) {
 else 	return null;
 
 }
-
 
 //
 // function to check the user is authorized to get indicator
@@ -381,8 +376,7 @@ const all_element = a_renvoyer_enssembe_donnees ? a_renvoyer_enssembe_donnees.ma
 function TableSchema({base, table, item_key_primary}) {
 
     
-    return (
-			
+    return (		
             <Box>
                 <Box padding={3} borderBottom="thick" className="H1">
                     <h1><Heading size="small" margin={0}>
