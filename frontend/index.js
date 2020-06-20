@@ -30,7 +30,6 @@ const INVENTORY_WAREHOUSE = "Inventory List";
 //  Amelioration
 //
 // - recuperer l'ID du champs a la place du nom
-// - un bouton pour affichier une nouvelle pages exhustive
 // - correction :
 //      - tester avec 1 images, avec 100 image, avec d'autre type de fichier		
 //		- meme non d article pour 2 ID differents
@@ -60,6 +59,11 @@ const INVENTORY_WAREHOUSE = "Inventory List";
 // -  une base de donne avec un seul field Ok, mais n'apparait pas dans les KPI
 // -  faire un test a vide, sans table, sans base
 
+
+// KPI Vlookup creation 
+//	 	- check the INPUT issue : when we write the name, it stock and we have to click again on the input field : FIXED
+//		- change CSS to apply to all the page
+//		- create CONST for all the field : the goal is to rename in the futur
 
 //
 // regrouper les CSS dans un fichier separer
@@ -183,8 +187,10 @@ function Selec_and_show_table({base,table,item_selected}){
 	let my_item_description = records_desc ? records_desc.map(record => {
 		let type_const = doneField.type;
 		
+	// it is possible to limit select and doesn't authorize some type to be accessibles
+	// to do so, please disable to "//" below until the next "//else { //}"  
+	// if (type_const !="multipleAttachments"){
 
-		if (type_const !="multipleAttachments"){
 			const my_item_desc_value = record.getCellValueAsString(doneField).substring(0,NUNBER_OF_CHAR_SEEN_IN_STOCK_PER_COLL);
 				return(
 					<div style={{fontSize: 18, padding: 12, borderBottom: '1px solid #ddd'}}>
@@ -199,22 +205,11 @@ function Selec_and_show_table({base,table,item_selected}){
 					</div>
 
 				)
-		}
-		else {
-				return(
-					<div style={{fontSize: 18, padding: 12, borderBottom: '1px solid #ddd'}}>
-						<a
-							style={{cursor: 'pointer'}}
-							onClick={() => {
-								expandRecord(record);
-							}}
-						>   
-					   {"NA : attachement cannot be loaded"}  
-					   </a>
-					</div>
+		//}
+		//else {
 
-				)
-		}
+		//}
+
 				
 		}) : null;
 		
@@ -236,8 +231,6 @@ function Selec_and_show_table({base,table,item_selected}){
 			</div>
 	</div>
 	)
- 
-
 }
 
 

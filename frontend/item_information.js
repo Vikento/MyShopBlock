@@ -17,7 +17,6 @@ import Home from "./Home";
 import {globalConfig} from '@airtable/blocks';
 import {session} from '@airtable/blocks';
 
-
 const my_const_Product_Code_Serrial_Number = "Product Code Serrial Number";
 const my_const_Quantity_Before ="Quantity Before";
 const my_const_Quantity_after = "Quantity after";
@@ -28,7 +27,6 @@ const my_const_Supply_name = "Supplier Name";
 const INVENTORY_WAREHOUSE = "Inventory List";
 
 const History_Movement = "Storage activities";
-
 
 
 function item_information() {

@@ -134,7 +134,7 @@ class Main extends Component {
 				<li className="stock_h"><NavLink to="/index">My Stock</NavLink></li>
 				<li className="iteem_h"><NavLink to="/item_information">Item information</NavLink></li>
 				<li className="dash_board_h"><NavLink to="/kpi">My Dash Board</NavLink></li>
-				<li className="InitBase"><NavLink to="/InitBase">Initialization</NavLink></li>				
+				<li className="InitBase"><NavLink to="/InitBase">Initialization</NavLink></li>			
 				<li className="help_h"><NavLink to="/contact">Contact</NavLink></li>
 			  </ul>
 			  <div className="content">
