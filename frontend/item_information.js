@@ -16,6 +16,7 @@ import {
 import Home from "./Home";
 import {globalConfig} from '@airtable/blocks';
 import {session} from '@airtable/blocks';
+import { controlSizePropType } from '@airtable/blocks/dist/types/src/ui/control_sizes';
 
 const my_const_Product_Code_Serrial_Number = "Product Code Serrial Number";
 const my_const_Quantity_Before ="Quantity Before";
@@ -319,9 +320,14 @@ function List_items__usestate({table,my_record}){
 		value : my_record[i].name})
 	}
 	
+
+	//
+	//   SUPPRIMER ------------------- Name ---------------------------
+	//
 	//get the Name of item if the field "Name" is created
 	for (let j = 0; j < table.fields.length; j++) { 
 		if (table.fields[j].name == "Name"){
+			console.log(" Champs " + j + " : " + my_record[i].getCellValue("Name") + " - type : " + table.fields[j].type);
 			for (let i = 0; i < my_record.length; i++) {
 				items.push({
 				value : my_record[i].getCellValue("Name") })
