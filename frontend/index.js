@@ -64,6 +64,12 @@ const INVENTORY_WAREHOUSE = "Inventory List";
 //	 	- check the INPUT issue : when we write the name, it stock and we have to click again on the input field : FIXED
 //		- change CSS to apply to all the page
 //		- create CONST for all the field : the goal is to rename in the futur
+//		- hide the button is the user is not a creator
+//Error: Field 'FIELD_NAME_KPI' does not exist in table 'Dashboard Table VLookup' at Table._  ===> check if we change the name of the table how
+// it will react
+// Error: Rendered more hooks than during the previous render. ===> after the creation of the new table ===> putting the ErrorBoundary :
+//  check in the future if there is another way to solve this issue:
+
 
 //
 // regrouper les CSS dans un fichier separer
