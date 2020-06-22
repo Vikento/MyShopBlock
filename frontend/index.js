@@ -33,62 +33,52 @@ const INVENTORY_WAREHOUSE = "Inventory List";
 // - correction :
 //      - tester avec 1 images, avec 100 image, avec d'autre type de fichier		
 //		- meme non d article pour 2 ID differents
-// - to be fix : when we load new item, the page didnt redimension the pictures streight
 //
-//  _ dans le fichier index, limite le nombre de caractere vu par la liste de stock
 //
-//  - dans le fichier item information gerer les images si on en trouve
-//	- dans le fichier item information gerer clicker sur images pour les faire defiler si on en trouve
+
+//	Feature :
+//  - Dans ItemInformation
+//		 1/ dans le fichier item information gerer clicker sur images pour les faire defiler si on en trouve
 //
-//	- ajout la possibilite de paramettre un alerte en mettant une condition en vlookup.
+//	- Dans KPI
+//		1/ cacher le bouton create KPI Vlookup si ce n'est pas le creator
+//		2/ faire afficher correctement les unites currency et autres pour les dashboard vlookup
+//		3/ finaliser la fonction ConditionMedian
+//		4/ Add limit of user for VLookup indicator 		
+//
+//	- dans aide utilisateur GitHub + index
+//		1/ check the URLL des images, car elles ne sont valables suelment 30 jours a compter du 15 juin 2020
+// 			=> voir comment les lier directement au repertoire media
+//
+//	- dans une page a part
+//		1/ change CSS to apply to all the page + create a specific page for the CSS
+//		2/ create CONST for all the field : the goal is to rename in the futur
 //
 // ajout dans l'aide le nom de la table INVENTORY_WAREHOUSE
 			// a l interieur de la table on doit avoir le nom de la base Name pour decricre au user facilement le nom de l item
+	
 
-// limit : garder les Nom de DashBoard
-// supprimer les hover sur les party stock Name et quantity
-// test : ajouter 1000 items
-// changer le currency
-// verifier pourquoi l image ne se met pas a la bonne taille directement
-// visu de plusieurs photos en cliquant sur la photo  en cours
+// limit : garder les Nom de DashBoard : update dans l'aide
 
-// check the URLL des images, car elles ne sont valables suelment 30 jours a compter du 15 juin 2020
-// 	=> voir comment les lier directement au repertoire media
-
-// Verifier le cas :
-// -  une base de donne avec un seul field Ok, mais n'apparait pas dans les KPI
+// Test :
+// 	- test : ajouter 1000 items : OK
+//	- different USER : creator to commenter : Ok 
+// 	- une base de donne avec un seul field : OK
+// 	- test avec different nom de table
 // -  faire un test a vide, sans table, sans base
 
-
 // KPI Vlookup creation 
-//	 	- check the INPUT issue : when we write the name, it stock and we have to click again on the input field : FIXED
-//		- change CSS to apply to all the page
-//		- create CONST for all the field : the goal is to rename in the futur
-//		- hide the button is the user is not a creator
+
 //Error: Field 'FIELD_NAME_KPI' does not exist in table 'Dashboard Table VLookup' at Table._  ===> check if we change the name of the table how
 // it will react
 // Error: Rendered more hooks than during the previous render. ===> after the creation of the new table ===> putting the ErrorBoundary :
 //  check in the future if there is another way to solve this issue:
 
 
-//
-// regrouper les CSS dans un fichier separer
-// permettre a l'utilisateur de paramettre le design via une table
-//
-
-
-// 		Here you will find 2 solution to get the select field : 
-//		1- with select where we can personalize the items to be show
-//		2- fieldpicker where all the fields are shower
-//
-
-
-
 function updateKey(key_value) {
 
 	let session_name;
-	let session_id;	
-	let user_exist_in_the_global_var = false;
+	let session_id;
 	
 	if (session.currentUser !== null) {
 			session_name = session.currentUser.name;
@@ -96,28 +86,18 @@ function updateKey(key_value) {
 	}
 	else alert ("Please identify as an user or you cannot access to the information reauested");
 
-
 	global.clear_key = key_value;
-	console.log("Key save !!!");
 
-		
-	console.log("l 128 taille base de cle : " + global.clear_key.length + " ma cle : " + global.clear_key);
 	// update of my clear key for user 
 	for  (let i = 0; i < global.clear_key.length; i++) { 
 		if  (global.clear_key[i].user == session_id){
-			console.log("l127 My user : " + global.clear_key[i].user + " item chosen : " + global.clear_key[i].key);
 		}
 	}
-
-
 }
 
 
 function TableStructureBlock() {
-
-	
     const base = useBase();
-	
 	const [tableName, setTableName] = useState(INVENTORY_WAREHOUSE);
 
 	//   '---------------------------------------------------------------------------------'
@@ -129,16 +109,12 @@ function TableStructureBlock() {
 	//   '---------------------------------------------------------------------------------'
 
 	const table = base.getTableByNameIfExists(tableName);
-	console.log("Ma base : " + table);
-
 
 	// we check the table exist and we transmit element we need in TableSchema
-	
 	if (table) {
         return <TableSchema base={base} table={table} />;
     } else {
         return ( 
-		
 				<div>
 				<h2> List of Stock : </h2>
 				<p> </p>
@@ -158,9 +134,8 @@ function TableStructureBlock() {
 
 function Selec_and_show_table({base,table,item_selected}){
 
-
 //---------------------------  label Select -----------------------------
-	const table_warehouse_stock = base.getTable(INVENTORY_WAREHOUSE);
+	const table_warehouse_stock = base.getTableIfExists(INVENTORY_WAREHOUSE);
 	const selection_value_picker = [];
 
 	for (let i = 0; i < table_warehouse_stock.fields.length; i++) {
@@ -169,7 +144,6 @@ function Selec_and_show_table({base,table,item_selected}){
 		label :  table_warehouse_stock.fields[i].name
 	 });
 	}
-
 	const [value, setValue] = useState(selection_value_picker[item_selected].value);
 
 
@@ -191,10 +165,10 @@ function Selec_and_show_table({base,table,item_selected}){
     records_desc = useRecords(table, {fields: [doneField]});
 	
 	let my_item_description = records_desc ? records_desc.map(record => {
-		let type_const = doneField.type;
-		
+
 	// it is possible to limit select and doesn't authorize some type to be accessibles
 	// to do so, please disable to "//" below until the next "//else { //}"  
+	//	let type_const = doneField.type;	
 	// if (type_const !="multipleAttachments"){
 
 			const my_item_desc_value = record.getCellValueAsString(doneField).substring(0,NUNBER_OF_CHAR_SEEN_IN_STOCK_PER_COLL);
@@ -252,15 +226,13 @@ function TableSchema({base, table}) {
 	const table_warehouse_stock = base.getTable(INVENTORY_WAREHOUSE);
 	
 
-	 // my_item_id recupere lensemble des ID
-
+	 // my_item_id get all the ID
      if (records_id) {
-        console.error(" l 186 :  " + table.description);
-    } else {
+	} 
+	else {
         return <div>Table is deleted! </div>;
     }
 	
-
     // my_item_id get all of the ID
 	const my_item_id = records_id ? records_id.map(record => {
        const my_item_id_value = record.getCellValue(table_warehouse_stock.primaryField.name);

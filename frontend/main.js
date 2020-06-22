@@ -15,32 +15,15 @@ const Index = React.lazy(() => import('./Index'));
 import {loadCSSFromString} from '@airtable/blocks/ui';
 
 import {
-    Box,
-    Heading,
-    initializeBlock,
-    Text,
     useBase,
-    useViewMetadata,
-    useWatchable,
     useRecords,
-    expandRecord,
 } from '@airtable/blocks/ui';
-import {cursor} from '@airtable/blocks';
-import ReactDOM from "react-dom";
-//import React from 'react';
 
-import { Button } from "@airtable/blocks/ui";
 
 import { Loader } from "@airtable/blocks/ui";
 const loaderExample = <Loader scale={0.5}  fillColor="#33bbaa" />
 
 
-// clear_key will be used to know which page is clicked by the user
-// data structure : .user : USER ID , .key : the item ID clicked;
-global.clear_key = [];
-
-
-const Couleur_BBC = "#FF9F1C";
 
 // css list for first page
 loadCSSFromString('body {padding: 20px;  margin: 0;  color: #011627;} h2, p, ul, li {font-family: sans-serif; } h1 {font-family: sans-serif; text-align: center; }');
@@ -50,7 +33,8 @@ loadCSSFromString('.content {  background-color:rgba(250,250,250,0.7);  padding:
 loadCSSFromString('.content li {  margin-bottom: 10px; text-align: left;} a:hover { background: #FF9F1C; border-radius: 25px; border: 2px solid #FF9F1C } ');
 loadCSSFromString('box.tittle {font-size: 25px; text-align: center;  background: #FF9F1C ; border: 15px solid #FF9F1C; border-radius: 25px }' );
 
-// personnalized color 
+// personnalized color for the background
+const Couleur_BBC = "#FF9F1C";
 loadCSSFromString('body {background-color:' + Couleur_BBC);
 
 //css from index 
@@ -66,27 +50,26 @@ loadCSSFromString(' .Select_css1 { background: rgba(0, 0, 0, 0.3); color: #fff; 
 // CSS KPI
 loadCSSFromString(' .column1g{  border-radius: 25px; float: left;   width: 100%;  border: 2px solid #E71D36; padding: 10px;  margin: 20px; position: relative;} .column2g{  border-radius: 25px; float: left;   width: 100%;  border: 2px solid #E71D36; padding: 10px;  margin: 20px; position: relative;}');
 
-
 // FIN CSS KPI
 
-
-//CSS item_information
-//
 // CSS de index.js + item information
 loadCSSFromString('img.displayed {display: block; margin-left: auto; margin-right: auto;} .row { display : flex;} .column1{  float: left;  width: 60%;} .column2{ width:100%; height:100%; display: inline-block} ' );
 loadCSSFromString(' ul.column1{ text-align: left ; display: inline-block; }');
 loadCSSFromString(' ul.bloc { word-wrap: break-word; max-width: 95% ; }');
-//
+// END CSS de index.js + item information
+
+
 // CSS for the scrolling menu
 loadCSSFromString('#demoFont {list-style-type :none ; position: absolute;  font-family: Arial, Helvetica, sans-serif;font-size: 14px;letter-spacing: 0px;word-spacing: 0px;color: #C2281B;font-weight: 400;text-decoration: none solid rgb(68, 68, 68);font-style: normal;font-variant: normal;text-transform: none; min-width: 300px; max-height: 150px;  overflow-y: auto; background-color : white;}');
-//
+// END  CSS for the scrolling menu
+
 // CSS for the input composant 
 loadCSSFromString('#donne_enregistre {min-width : 300px; height : 28px; font-size: 14px;}');
 //
-// FIN CSS item_information
+// END CSS for the input composant
 
 
-
+// fonction test to get image from table and put as background picture
 function Change_background() {
 	const base = useBase()
 	const [tableName, setTableName] = useState('Configuration CSS');
@@ -95,10 +78,8 @@ function Change_background() {
 	if (table_css){ 
 		let records_id = useRecords(table_css, {fields: ['Attachments']});
 		let img = records_id[0].getCellValueAsString('Attachments');
-		
 		let source_image = "";
-		
-		
+			
 			for (let i = 0; i < img.length; i++) {
 					if (img[i] == "("){
 						source_image = "";
@@ -111,7 +92,6 @@ function Change_background() {
 						}
 					}	
 			}	
-		console.log(" l 68 recode " + source_image ); 
 		loadCSSFromString('body { background-image: url(' + source_image+')');
 		
 	}
@@ -122,7 +102,6 @@ function Change_background() {
 }
  
 class Main extends Component {
-	
 	
 
   render() {

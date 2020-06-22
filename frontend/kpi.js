@@ -20,6 +20,7 @@ const NAME_TABLE_KPI_VLOOKUP = "Dashboard Table VLookup";
 
 //--------- const Name of the field for the Dashboard Table Vlookup :
 // TO BE Modified if you want to personalize the field name of NAME_TABLE_KPI_VLOOKUP
+const FIELD_ID = "ID"
 const FIELD_NAME_KPI = "Name KPI";
 const FIELD_NAMETABLE = "NameTable";
 const FIELD_NAMEFIELD = "NameField";
@@ -28,37 +29,48 @@ const FIELD_SELECTCONDITION = "SelectCondition";
 
 //--------- END Const Name of the field for the Dashboard Table Vlookup :
 
+
 // --------   Condition possible for now : ---------------------------
 const VALMAX_COND = "ValMax";
 const VALMIN_COND = "ValMin";
 const VALMEDIAN_COND = "Val_Median";
-// --------   Condition possible for now : ---------------------------
+// --------  END  Condition possible for now : ---------------------------
 
 //--------- Constant to limit the number of caracter of the name of KPI
 const MAX_NB_CHAR_KPI_NAME = 15;
 //------------------------
 
+// ---------------  List of constante : name of the table Inventory List
+const my_const_Check_Stock = "Check Stock";
+const my_const_Threshold_Alarm = "Threshold Alarm";
+const my_const_Total_Stock = "Total Stock";
+const my_const_Product_Code =  "Product Code Serrial Number";
+const my_const_name = "Name";
+const my_const_Threshold_total_Value = "Threshold total Value";
+const my_const_Total_Value = "Total Value";
+const my_const_Check_total_Value = "Check total Value";
+
+// --------------- END List of constante : name of the table Inventory List
+
+// ------------  Const : name of the field to identify the list of users authorize to see the
+//-------------    indicator in his session :
+const KPI_USER_AUTORIZE = "--USER ONLY--"; 
+//
+
+
+
 function kpi() {
 	
-	const my_key = globalConfig.get('key_primary');
-	
-	console.log("Key my_key " + my_key);
-
     const base = useBase();
 
- 
     // useWatchable is used to re-render the block whenever the active table or view changes.
     useWatchable(cursor, ['activeTableId', 'activeViewId']);
 
-
 	const [tableName, setTableName] = useState(INVENTORY_WAREHOUSE);
-
-
 	const table = base.getTableByNameIfExists(tableName);
 
-
     if (table) {
-        return <TableSchema base={base} table={table} item_key_primary={my_key} />;
+        return <TableSchema base={base} />;
     } else {
 
 
@@ -78,24 +90,26 @@ function kpi() {
 }
 
 // implemented indicator base on the "Inventory List" including all the  
-// field 
+// field
+// it is a KPI implemented to the root and not flexibla and configurable
+
 function List_of_log_fonction() {
 	
 	const base = useBase();
-	
-
 	const table_warehouse_stock = base.getTable(INVENTORY_WAREHOUSE);
 	let my_record_historique = useRecords(table_warehouse_stock);
 
-	let compteur_log = 0;
-	let list_of_log_quantity = new Array();
-	let id_log_no_ok = new Array();
-	let name_log_no_ok = new Array();
-	let value_log_no_ok = new Array();
-	let target_nb_item_log_no_ok = new Array();
-	let target_stock_min = new Array();
-	let total_stock = new Array();
-	let list_of_log_value = new Array();
+		let compteur_log = 0;
+		let list_of_log_quantity = new Array();
+		let id_log_no_ok = new Array();
+		let name_log_no_ok = new Array();
+		let value_log_no_ok = new Array();
+		let target_nb_item_log_no_ok = new Array();
+		let target_stock_min = new Array();
+		let total_stock = new Array();
+		let list_of_log_value = new Array();
+
+	// list of var to see if it exist
 		let check_stock_exist = false;
 		let Threshold_Alarm_exist = false;
 		let Total_Stock_exist  = false;
@@ -109,28 +123,28 @@ function List_of_log_fonction() {
 
 for (let i = 0; i < table_warehouse_stock.fields.length; i++) {
 	
-		if (table_warehouse_stock.fields[i].name == "Check Stock"){
+		if (table_warehouse_stock.fields[i].name == my_const_Check_Stock){
 			check_stock_exist = true;
 		}
-		if (table_warehouse_stock.fields[i].name == "Threshold Alarm"){
+		if (table_warehouse_stock.fields[i].name == my_const_Threshold_Alarm){
 			Threshold_Alarm_exist = true;
 		}
-		if (table_warehouse_stock.fields[i].name == "Total Stock"){
+		if (table_warehouse_stock.fields[i].name == my_const_Total_Stock){
 			Total_Stock_exist = true;
 		}
-		if (table_warehouse_stock.fields[i].name == "Product Code Serrial Number"){
+		if (table_warehouse_stock.fields[i].name == my_const_Product_Code){
 			Product_Code_Serrial_exist = true;
 		}
-		if (table_warehouse_stock.fields[i].name == "Name"){
+		if (table_warehouse_stock.fields[i].name == my_const_name){
 			Name_exist = true;
 		}	
-			if (table_warehouse_stock.fields[i].name == "Threshold total Value"){
+			if (table_warehouse_stock.fields[i].name == my_const_Threshold_total_Value){
 			Threshold_total_Value_exist = true;
 		}	
-			if (table_warehouse_stock.fields[i].name == "Total Value"){
+			if (table_warehouse_stock.fields[i].name == my_const_Total_Value){
 			total_value_exist = true;
 		}	
-			if (table_warehouse_stock.fields[i].name == "Check total Value"){
+			if (table_warehouse_stock.fields[i].name == my_const_Check_total_Value){
 			Check_total_Value_exist = true;
 		}	
 }
@@ -139,18 +153,18 @@ if (check_stock_exist && Threshold_Alarm_exist && Total_Stock_exist && Product_C
 
  	for (let i = 0; i < my_record_historique.length; i++) {
 					// check on the stock limitation
-					list_of_log_quantity[compteur_log] = my_record_historique[i].getCellValue("Check Stock");
-					target_stock_min[compteur_log] = my_record_historique[i].getCellValue("Threshold Alarm");
-					total_stock[compteur_log] = my_record_historique[i].getCellValue("Total Stock");
+					list_of_log_quantity[compteur_log] = my_record_historique[i].getCellValue(my_const_Check_Stock);
+					target_stock_min[compteur_log] = my_record_historique[i].getCellValue(my_const_Threshold_Alarm);
+					total_stock[compteur_log] = my_record_historique[i].getCellValue(my_const_Total_Stock);
 					
 					// name and ID
-					id_log_no_ok[compteur_log] = my_record_historique[i].getCellValue("Product Code Serrial Number");
-					name_log_no_ok[compteur_log] = my_record_historique[i].getCellValue("Name");
+					id_log_no_ok[compteur_log] = my_record_historique[i].getCellValue(my_const_Product_Code);
+					name_log_no_ok[compteur_log] = my_record_historique[i].getCellValue(my_const_name);
 					
 					// check on the value
-					target_nb_item_log_no_ok[compteur_log] = my_record_historique[i].getCellValue("Threshold total Value");
-					value_log_no_ok[compteur_log] = my_record_historique[i].getCellValue("Total Value");
-					list_of_log_value [compteur_log] =  my_record_historique[i].getCellValue("Check total Value");
+					target_nb_item_log_no_ok[compteur_log] = my_record_historique[i].getCellValue(my_const_Threshold_total_Value);
+					value_log_no_ok[compteur_log] = my_record_historique[i].getCellValue(my_const_Total_Value);
+					list_of_log_value [compteur_log] =  my_record_historique[i].getCellValue(my_const_Check_total_Value);
 					compteur_log = compteur_log + 1;
 	}
 
@@ -178,15 +192,12 @@ if (check_stock_exist && Threshold_Alarm_exist && Total_Stock_exist && Product_C
 					my_nb_item_log_no_ok : value_log_no_ok[i],
 					my_target : target_nb_item_log_no_ok[i]			
 				});
-			
 			}
 		}
 		
-
 	alert_logv2 = list_log_KO?list_log_KO.map((list_log_KO,index) =>
 								<li key={index}>ID : {list_log_KO.my_id_log_no_ok} - {list_log_KO.my_name_log_no_ok} alarm : {list_log_KO.my_message_log_no_ok} current value : {list_log_KO.my_nb_item_log_no_ok} and limit is {list_log_KO.my_target} </li>
 							) : null;
-
 }
 
 if (compteur_log != 0) {	
@@ -211,15 +222,16 @@ else 	return null;
 
 //
 // function to check the user is authorized to get indicator
+// we parameter that all the user list in field const KPI_USER_AUTORIZE can see the indicator
+// except the indicator for all as List_of_log_fonction()
 function User_check_for_kpi(table,type_field) {
 	let shared_personnalized_kpi = false;
 	let query = table.selectRecords();
 	
 	for (let record of query.records){
-		let collaborators = record.getCellValue("--USER ONLY--");
+		let collaborators = record.getCellValue(KPI_USER_AUTORIZE);
 		if (collaborators){
 			if (session.currentUser) {
-
 					if (type_field == "multipleCollaborators"){
 						for (let collaborator of collaborators) {
 							if (collaborator.id == session.currentUser.id) {
@@ -232,7 +244,6 @@ function User_check_for_kpi(table,type_field) {
 							shared_personnalized_kpi = true;
 						}
 					}
-					else console.log("type : " + type_field);	
 			}			
 			else {
 				alert("you need to be connected to have access to the personalized KPI");
@@ -240,16 +251,15 @@ function User_check_for_kpi(table,type_field) {
 				}
 		}	
 		else {
-			//console.log("No collaborator - error l 199 in the field"); 
+
 			} 
 			
 	}
 	
-	//console.log("204 shared_personnalized_kpi = " + shared_personnalized_kpi);
-	
 	return  shared_personnalized_kpi;
 }
 
+// function used for List_of_VlookUp_indicateur
 // get the maximum value of field_value_max in table and 
 // return the max and the value for the field_value_max linked to the field_value_max
 function ConditionValMax(table, field_value_max, field_target){
@@ -272,11 +282,12 @@ name_field_targeted = my_records_field[0].getCellValue(field_target);
 		}
 	}
 	
-
 return ([max , name_field_targeted]);
 
 }
 
+
+// function used for List_of_VlookUp_indicateur
 // get the minimum value of field_value_min in table and 
 // return the max and the value for the field_value_min linked to the field_value_min
 function ConditionValMin(table, field_value_min, field_target){
@@ -298,13 +309,12 @@ function ConditionValMin(table, field_value_min, field_target){
 				}
 			}
 		}
-		
-	console.log("l 269 - Val Max pour " + field_value_min + " = "  + min + " nom du champ correspondant = " + name_field_targeted);
 	
 	return ([min , name_field_targeted]);
 	
 }
 
+// function used for List_of_VlookUp_indicateur
 // get the value in the middle of the list of value 
 function ConditionMedian(table, field_value_median, field_target){
 
@@ -325,23 +335,22 @@ function ConditionMedian(table, field_value_median, field_target){
 				}
 			}
 		}
-		
-	console.log("l 269 - Val Max pour " + field_value_median + " = "  + med + " nom du champ correspondant = " + name_field_targeted);
 	
 	return ([med , name_field_targeted]);
 	
 }
 
 	
-// personnalized indicators per user 
+// personnalized indicators per user
+// possible to do simple Vlook up with 3 type of condition
+// max , min, and nedian
 function List_of_VlookUp_indicateur() {
 	const base = useBase();
 	let table_Vlookup ;
 
 	const list_VlookUp_KPI = [];
 	let table_Vlookup_KPI_exist = false;
-	
-	
+		
 	// 1 - check if the special field for Vlookup exist
 	// 2 - get the information from Vlookup
 	// 3 - check line by line all the Vlookup before to create the KPI
@@ -353,17 +362,14 @@ function List_of_VlookUp_indicateur() {
 		if (base.tables[i].name == NAME_TABLE_KPI_VLOOKUP){
 			table_Vlookup = base.getTableByNameIfExists(base.tables[i].name);
 			table_Vlookup_KPI_exist = true;
-
 		}
 	}
 
 	if (!table_Vlookup_KPI_exist){
-		console.log("Pas de table au Nom de " + NAME_TABLE_KPI_VLOOKUP)
-
+		// do nothing if table doesn't exit
 			}
 	else{
 		// 1 - check if the special field for Vlookup exist
-
 		//
 
 		let FIELD_NAME_KPI_exist = false;
@@ -390,13 +396,12 @@ function List_of_VlookUp_indicateur() {
 			}
 		}
 
-		// tous les champs existent
+		// all the fields exist
 		if (FIELD_NAME_KPI_exist && FIELD_NAMETABLE_exist &&  FIELD_NAMEFIELD_exist &&
 			FIELD_NAMEFIELD_TARGETED_exist && FIELD_SELECTCONDITION_exist){
 
 				const my_records_field = useRecords(table_Vlookup, {fields: [FIELD_NAME_KPI, FIELD_NAMETABLE, FIELD_NAMEFIELD, FIELD_NAMEFIELD_TARGETED,FIELD_SELECTCONDITION]});
-				
-			
+							
 				// 3 - check line by line all the Vlookup before to create the KPI
 				for (let i = 0; i < my_records_field.length; i++) {
 
@@ -407,7 +412,6 @@ function List_of_VlookUp_indicateur() {
 						let FIELD_FIELD_NAMEFIELD_exist = false;
 						let FIELD_NAMEFIELD_TARGETED_exist = false;
 							for (let j = 0; j < table_selected_ok.fields.length; j++) {
-
 
 								if (table_selected_ok.fields[j].name == my_records_field[i].getCellValue(FIELD_NAMEFIELD)){
 									FIELD_FIELD_NAMEFIELD_exist = true;
@@ -420,6 +424,11 @@ function List_of_VlookUp_indicateur() {
 								if (FIELD_FIELD_NAMEFIELD_exist && FIELD_NAMEFIELD_TARGETED_exist){
 
 									//we check case by case depend on the value of condition
+									//
+									// 3 types of condition :
+									//		-- Max of all the value : VALMAX_COND
+									//		-- Min of all the value : VALMIN_COND
+									//		-- Middle value of all the value : VALMEDIAN_COND
 									if (my_records_field[i].getCellValue(FIELD_SELECTCONDITION).name == VALMAX_COND){
 									
 										let val_max_tagret = ["nothing" ,"nothing"];
@@ -449,10 +458,12 @@ function List_of_VlookUp_indicateur() {
 											field_targeted : val_max_tagret[1]
 											});
 					
-
 									}
-									else if (my_records_field[i].getCellValue(FIELD_SELECTCONDITION).name == VALMEDIAN_COND){
-										
+									else if (my_records_field[i].getCellValue(FIELD_SELECTCONDITION).name == VALMEDIAN_COND){	
+										//
+										//
+										//   not yet implemented
+										//							
 
 									}
 									else {
@@ -469,9 +480,6 @@ function List_of_VlookUp_indicateur() {
 									NAME_TABLE_KPI_VLOOKUP + " in the fields : " + FIELD_NAMEFIELD + " and " 
 									+  FIELD_NAMEFIELD_TARGETED + " . Thank you !");
 
-
-
-
 								}
 
 					
@@ -482,38 +490,26 @@ function List_of_VlookUp_indicateur() {
 
 					}
 
-
-
-
-
-
-					}
+				}
 			}
 
 			else {
-			console.log("l 317 : champs manquant");
 			alert("Some field in " + NAME_TABLE_KPI_VLOOKUP + " doesn't exist. We suggest to delete the complete table of " + NAME_TABLE_KPI_VLOOKUP + " and create new KPI Vlookup. Thank you");
-			
 			}
-
-
 	}
 
-
+	// list of my VKoolup KPI
 	const data_to_show_all_VLOOKUP_KPI =[];
-
 
 		for (let k = 0; k < list_VlookUp_KPI.length; k++) {
 			data_to_show_all_VLOOKUP_KPI.push({
 			titre : (list_VlookUp_KPI[k].name_KPI),
 			valeur_title : <li >  {list_VlookUp_KPI[k].condition_selected} of {list_VlookUp_KPI[k].field_checked} in {list_VlookUp_KPI[k].table_checked} </li>,
-			valeur_unit : <li >  {list_VlookUp_KPI[k].field_targeted} : {list_VlookUp_KPI[k].value_cond} </li>
-			
+			valeur_unit : <li >  {list_VlookUp_KPI[k].field_targeted} : {list_VlookUp_KPI[k].value_cond} </li>		
 			});	
-
 		}
 
-
+		// regroup all the element of VLook up to be rendered
 		const all_element_vlookup = data_to_show_all_VLOOKUP_KPI ? data_to_show_all_VLOOKUP_KPI.map((data_to_show_all_VLOOKUP_KPI,index) => {
 	
 				return (
@@ -533,19 +529,20 @@ function List_of_VlookUp_indicateur() {
 			</div>
 		)
 
-
 }
 	
 
-
 // personnalized indicators per user 
+// create manually indicator that will be show in the KPI dashboard
+// the name of the table is very important and have to start by: "DashBoard"
+// the name can not be parameter for now
+// some of the field can be mute : just need to add "--" at the begining of the nale if the field name
 function List_of_personalize_indicateur() {
 	const base = useBase();	
 	
 	let table ;
 	let my_record;
 	let nb_table_DashBoard_perso = 0;
-	
 
 // regroupe all the value we got and show to the KPI indicator
 const list_KPI = [];
@@ -559,14 +556,13 @@ const list_KPI = [];
 		  && (base.tables[i].name[5] == "o") && (base.tables[i].name[6] == "a") && (base.tables[i].name[7] == "r")&& (base.tables[i].name[8] == "d")) {
 			  table = base.getTableByNameIfExists(base.tables[i].name);
 			  my_record = useRecords(table);	
-
 			
 			for (let j = 0; j < table.fields.length; j++) {
 				
-				// we check the "--USER ONLY--" field exist and if the current user is part of collaborator (user_field_exist):
+				// we check the cosnt KPI_USER_AUTORIZE field exist and if the current user is part of collaborator (user_field_exist):
 				let user_field_exist = false;
 								
-				if (table.fields[j].name == "--USER ONLY--"){
+				if (table.fields[j].name == KPI_USER_AUTORIZE){
 									
 					if (User_check_for_kpi(table,table.fields[j].type)){
 						user_field_exist = true;
@@ -580,29 +576,22 @@ const list_KPI = [];
 										})
 										;					
 							 }
-							
-							
 						}
-						
 					}
 				}
 			}
-		
 			nb_table_DashBoard_perso = nb_table_DashBoard_perso + 1;
 		}
   }
   
 	
-	
 // order the item by alphebetic order
 list_KPI.sort((a, b) => (a.name_variable_indicator > b.name_variable_indicator) ? 1 : -1);
-
 
 let indicateur_perso_a_visualiser = [];
 let a_renvoyer_enssembe_donnees = [];
 let name_table_ref = "";
 
-	
 	for (let i = 0; i < list_KPI.length; i++) {
 		
 		if ((i>0) && (name_table_ref == list_KPI[i-1].name_table)) {
@@ -644,10 +633,8 @@ let name_table_ref = "";
 							name_variable_indicator : list_KPI[k].name_variable_indicator,
 							am_variable_indicator : list_KPI[k].am_variable_indicator
 						});
-						}
-											
-			}
-			
+						}							
+			}		
 				a_renvoyer_enssembe_donnees.push({
 				titre : name_table_ref.substr(9),
 				valeur : indicateur_perso_a_visualiser?indicateur_perso_a_visualiser.map((indicateur_perso_a_visualiser,index) =>			
@@ -658,12 +645,6 @@ let name_table_ref = "";
 		  }
 	}	
 	
-console.log("670 - Taille de a_renvoyer_enssembe_donnees : " + a_renvoyer_enssembe_donnees.length);
-
-for (let k = 0; k < a_renvoyer_enssembe_donnees.length; k++) { 
-	console.log("673 - titre  : " + k + " - " +  a_renvoyer_enssembe_donnees[k].titre);
-	console.log("673 - valeur  : " + k + " - " +  a_renvoyer_enssembe_donnees[k].valeur);
-}
 
 const all_element = a_renvoyer_enssembe_donnees ? a_renvoyer_enssembe_donnees.map((a_renvoyer_enssembe_donnees,index) => {
 	return (
@@ -677,8 +658,6 @@ const all_element = a_renvoyer_enssembe_donnees ? a_renvoyer_enssembe_donnees.ma
 		)
 }) : null;
 
-console.log("670 -all_element : " + all_element.length);
-console.log("670 -all_element : " + all_element[0]);
 
 		return(<div >
 					 {all_element}
@@ -687,6 +666,8 @@ console.log("670 -all_element : " + all_element[0]);
 }
 
 
+// fonction Create_KPI_VLOOKUP in case that the specific table VlookUp_indicateur doesn't exist
+//
 function Create_KPI_VLOOKUP({base}){
 
 // const to manage the dialogue durng the creation of the new KPI:
@@ -696,29 +677,28 @@ function Create_KPI_VLOOKUP({base}){
   base = useBase();
   const table_Lookup = base.getTableByNameIfExists(NAME_TABLE_KPI_VLOOKUP);
 
-  // const with table the name create for the KPI (INPUT)
-  const [name_KPI, setNameKPI] = useState("");
 
   // KPI name
   let name_input ;
 
-   //-----------------------fill the 1nd select button with table name create in Airtable------------------- 
-  const my_table_list = [];
+ //-----------------------fill the 1nd select button with table name create in Airtable------------------- 
+ //
+const my_table_list = [];
   for  (let i = 0; i < base.tables.length; i++) { 
 	my_table_list.push({
 		value : base.tables[i].name, 
 		label : base.tables[i].name
 	 });
   }
-
-   
+  //
   //-----------------------END fill the 1nd select button with table name create in Airtable------------------- 
+
 
   const [my_table_list_value, setmy_table_list_value] = useState(my_table_list[0].value);
  
- 
 
   //-----------------------fill the 2nd select button for the field name base on the previous table name-------------------
+  //
   const my_field_list = [];
   for  (let i = 0; i < base.tables.length; i++) { 
 	if (base.tables[i].name == my_table_list_value){
@@ -730,8 +710,8 @@ function Create_KPI_VLOOKUP({base}){
   			}
 		}
 	}
+  //
   //----------------------- END fill the 2 select button-------------------
-
 
 
  //-----------------------fill the 2nd select button for the field name base on the previous table name-------------------
@@ -754,12 +734,12 @@ function Create_KPI_VLOOKUP({base}){
 			}
 		}
    }
+ //
  //----------------------- END fill the 2 select button-------------------
-
-
 
  const [valuemy_field_list, setmy_field_list] = useState(my_field_list[0].value);
  const [valuemy_field_targeted_list,setvaluemy_field_targeted_list]= useState(my_field_list[0].value);
+
 
  // ------------------------  List of condition possible :------------------------
  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -- - - - -- -- - - - //
@@ -769,7 +749,7 @@ function Create_KPI_VLOOKUP({base}){
 	{ value: VALMIN_COND, label: VALMIN_COND },
 	{ value: VALMEDIAN_COND, label: VALMEDIAN_COND }
   ];
-
+//
 // ------------------------ End  List of condition possible :------------------------
 
   const [value_conditionvalue, setCondition] = useState(condition_list[0].value);
@@ -786,15 +766,17 @@ function Create_KPI_VLOOKUP({base}){
 //----------------- END function to update the value select.
 
 // --------------- Const Select table where the table where the field for the condtion is :
+//
   const Select_table = () => {
 	return (
 	  <Select
 		options={my_table_list}
 		value={my_table_list_value}
-		onChange={newValue => (setmy_table_list_value(newValue), Update_select_field_for_new_table_selected(newValue),console.log("l 444 newValue : " + valuemy_field_list))}
+		onChange={newValue => (setmy_table_list_value(newValue), Update_select_field_for_new_table_selected(newValue),console.log("l newValue : " + valuemy_field_list))}
 	  />
 	);
   };
+//
 // --------------- END Const Select table where the table where the field for the condtion is ----------
 
 // --------------- Const Select Field where the field for the condition is : --------------------
@@ -810,7 +792,8 @@ function Create_KPI_VLOOKUP({base}){
 
 //--------------- END Const Select Field where the field for the condition is : --------------------
 
-// --------------- Const Select Field targeted : the one we will select to see the KPI : --------------------
+ // --------------- Const Select Field targeted : the one we will select to see the KPI : --------------------
+ //
 const Select_field_targeted = () => {
 	return (
 	  <Select
@@ -820,10 +803,12 @@ const Select_field_targeted = () => {
 	  />
 	);
   };
-//--------------- END  Const Select Field targeted : the one we will select to see the KPI : --------------------
+ //
+ //--------------- END  Const Select Field targeted : the one we will select to see the KPI : --------------------
 
 
-// --------------- Const condtion is : --------------------
+ // --------------- Const condition is : --------------------
+ //
   const Selectcondition = () => {
 	return (
 	  <Select
@@ -833,13 +818,18 @@ const Select_field_targeted = () => {
 	  />
 	);
   };
+ //
+ // --------------- END Const condition is : --------------------
 
-// --------------- END Const condtion is : --------------------
-
+ //------------- fct to update the imput name  --------------
   function Update_new_name(newValueSelection){
   name_input = newValueSelection.target.value;
 }
+ //
+ //------------- END fct to update the imput name  --------------
 
+ // -----------------  Input_Name_KPI description :
+ //
   const Input_Name_KPI = () => {
 
 		return (
@@ -850,6 +840,9 @@ const Select_field_targeted = () => {
 			/>
 		);
 	};
+ //
+ // -----------------  END Input_Name_KPI description --------------
+ 
 
 	// create of the KPI vlookup-----------------------------------------------------------------------------------------------
 	// 1- creation of the table if not exist
@@ -889,7 +882,6 @@ const Select_field_targeted = () => {
 				if (table_Lookup.fields[i].name == FIELD_NAME_KPI){
 					if (table_Lookup.fields[i].type == FieldType.SINGLE_LINE_TEXT){
 						field_Name_KPI_table_Lookup_exist = true;
-						console.log("l 758 OK  name found : " + table_Lookup.fields[i].name + " name target : " + FIELD_NAME_KPI );
 					}
 					else {
 						alert("Warning the type of Name_KPI field in your table is not a SINGLE_LINE_TEXT. Please change it before to create a Vlookup KPI. Thank you! ");
@@ -938,7 +930,7 @@ const Select_field_targeted = () => {
 			if (field_Name_KPI_table_Lookup_exist && field_NameTable_table_Lookup_exist &&
 				field_NameField_table_Lookup_exist && field_SelectCondition_table_Lookup_exist && field_NameField_targeted_table_Lookup_exist )
 			{
-				console.log("l 807 all field exist : ");
+				
 		//  2-2 : we check the name of the KPI is filled correctly
 				if ((!name_input) || (name_input=="")){
 					alert(`Please give a name to the KPI you are creating. Thank you`);
@@ -972,7 +964,7 @@ const Select_field_targeted = () => {
 		const name = NAME_TABLE_KPI_VLOOKUP;
 		const fields = [
 			// Name will be the primary field of the table.
-			{name: 'ID', type: FieldType.NUMBER, options: {
+			{name: FIELD_ID, type: FieldType.NUMBER, options: {
 				precision: 1,
 			}},
 			{name: FIELD_NAME_KPI, type: FieldType.SINGLE_LINE_TEXT},
@@ -1061,9 +1053,8 @@ const Select_field_targeted = () => {
 
 
 
-function TableSchema({base, table, item_key_primary}) {
-
-    
+function TableSchema({base}) {
+ 
     return (
 		<ErrorBoundary>
             <Box>
@@ -1086,7 +1077,6 @@ function TableSchema({base, table, item_key_primary}) {
 									<td>
 										<Create_KPI_VLOOKUP base={base} />
 									</td> 
-							
 							</tr>
 						</table>
 						
@@ -1106,6 +1096,5 @@ function TableSchema({base, table, item_key_primary}) {
 		</ErrorBoundary>
     );
 }
- 
  
 export default kpi;

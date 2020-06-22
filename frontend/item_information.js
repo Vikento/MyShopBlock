@@ -1,10 +1,9 @@
 import {
     Box,
     Heading,
-    useBase,
+	useBase,
     useWatchable,
     useRecords,
-	Button,
 	
 } from '@airtable/blocks/ui';
 import {cursor} from '@airtable/blocks';
@@ -13,6 +12,7 @@ import React, {useState} from 'react';
 import {session} from '@airtable/blocks';
 import {FieldType} from '@airtable/blocks/models';
 
+const my_const_name = "Name";
 const my_const_Product_Code_Serrial_Number = "Product Code Serrial Number";
 const my_const_Quantity_Before ="Quantity Before";
 const my_const_Quantity_after = "Quantity after";
@@ -21,9 +21,13 @@ const my_const_OUT = "OUT";
 const my_const_Received_by_given_to = "Received by / given to";
 const my_const_Supply_name = "Supplier Name";
 const INVENTORY_WAREHOUSE = "Inventory List";
-
-
 const History_Movement = "Storage activities";
+
+//Constante from History Movement
+const MATERIAL_IN = "Material IN";
+const RECEIVED_FROM = "received from";
+const MATERIAL_OUT = "Material OUT";
+const GIVEN_TO = "given to";
 
 
 function item_information() {
@@ -38,24 +42,14 @@ function item_information() {
 		session_name = session.currentUser.name;
 		session_id = session.currentUser.id;
 	
-		
-		let key_value ;
-		//key 
-			
-		key_value = global.clear_key;
+		// Global variable to keep the item selected
+		global.clear_key;
  
 		// useWatchable is used to re-render the block whenever the active table or view changes.
 		useWatchable(cursor, ['activeTableId', 'activeViewId']);
 		
 		const [tableName, setTableName] = useState(INVENTORY_WAREHOUSE);
-
-
 		const table = base.getTableByNameIfExists(tableName);
-
-		
-		// We fix the table name
-		console.log("Ma base : " + table);
-
 
 		if (table) {
 			return <TableSchema table={table} />;
@@ -85,7 +79,7 @@ function item_information() {
 }
 
 
-// Presentational header row helper component.
+// My image not used here
 function My_Image({pictures_item,nombre_image}){
     
 	console.log("nb image : " + nombre_image);
@@ -136,14 +130,12 @@ function My_Image({pictures_item,nombre_image}){
 	
 }
 
+// this function list all the operation order from History_Movement
+// and show them for specific item selected
 function Item_historique({key_primary}) {
 	
 	const base = useBase();
-
-
 	const [tableName, setTableName] = useState(History_Movement);
-
-	
 	const table_historique = base.getTableByNameIfExists(tableName);
 
 	if (table_historique){
@@ -157,7 +149,6 @@ function Item_historique({key_primary}) {
 			let supply_name = new Array();	
 			
 			let nb_operation_in_out = 0;
-
 			let quantity_before_field_exist = false;
 			let quantity_after_field_exist = false;
 			let quantity_in_out_date_field_exist = false;
@@ -166,7 +157,6 @@ function Item_historique({key_primary}) {
 			let supply_name_field_exist = false;
 
 			// check of the field in Histo are created :
-
 			for (let j = 0; j < table_historique.fields.length; j++) { 
 				if (table_historique.fields[j].name == my_const_Quantity_Before){
 					quantity_before_field_exist = true;
@@ -207,11 +197,11 @@ function Item_historique({key_primary}) {
 				const list_quantity = [];
 
 				for (let i = 0; i < nb_operation_in_out; i++) {
-					if (in_out_status[i]=="Material IN"){
-						in_out_status[i] = "received from";
+					if (in_out_status[i] == MATERIAL_IN){
+						in_out_status[i] = RECEIVED_FROM;
 					}
-					else if (in_out_status[i]=="Material OUT"){
-						in_out_status[i]= "given to";
+					else if (in_out_status[i] == MATERIAL_OUT){
+						in_out_status[i] = GIVEN_TO;
 					}
 					else {in_out_status[i] = " - "};
 					
@@ -224,8 +214,7 @@ function Item_historique({key_primary}) {
 					});
 				}
 
-
-
+				// case we have operation activities
 				if (nb_operation_in_out != 0) {
 					
 					return (
@@ -252,12 +241,10 @@ function Item_historique({key_primary}) {
 								</div>
 							
 								);
-				
 			}
 			else {
 				
-				return (
-								
+				return (								
 					<div >
 					<h2> Activities component </h2>
 						<ul>
@@ -272,9 +259,6 @@ function Item_historique({key_primary}) {
 					</div>
 				
 					);
-
-
-
 			}
 		}
 			else {
@@ -298,7 +282,10 @@ function Item_historique({key_primary}) {
 			
 }
 
-
+//
+// function which show all the description for a specific item
+// it will ordered by alphabetic order
+// it will render also a input where it is possible to write the name of the items
 function List_items__usestate({table,my_record}){
 
 	const [my_key, setMy_Key] = useState(global.clear_key);
@@ -320,11 +307,11 @@ function List_items__usestate({table,my_record}){
 	//get the Name of item if the field "Name" is created
 	// if exist
 	for (let j = 0; j < table.fields.length; j++) { 
-		if (table.fields[j].name == "Name"){
+		if (table.fields[j].name == my_const_name){
 
 			for (let i = 0; i < my_record.length; i++) {
 				items.push({
-				value : my_record[i].getCellValue("Name") })
+				value : my_record[i].getCellValue(my_const_name) })
 			}
 		}
 	}
@@ -359,27 +346,28 @@ function List_items__usestate({table,my_record}){
 	//				END of update the LIST data in the option - datalist
 	//--------------------------------------------------------------------------------------
 
+
 	//--------------------------------------------------------------------------------------
 	//				List of information of my Key item. The key is in my_key, initiate in the global variable
 
 	let list_item = [];
 	let list_picture = [];
 
-	let my_field_name = table.getFieldByNameIfExists('Name');
+	let my_field_name = table.getFieldByNameIfExists(my_const_name);
 
 	// we check if the Name field exist
 	if (my_field_name !== null) {
-		// ne rien faire, garder my field comme il est configure			
-	} else {
+		// do nothing, keep my as it is			
+	} 
+	else {
 		my_field_name = table.fields[0].name;
-	}
+		}
 
 	if (my_record){ 
 		for (let i = 0; i < my_record.length; i++) {
 		
 			if ((my_record[i].name == my_key) || (my_record[i].getCellValueAsString(my_field_name) == my_key)) {
 			
-
 					for (let j = 0; j < my_record.length; j++) { 	
 						list_item.push({
 									name_variable : table.fields[j].name,
@@ -403,22 +391,34 @@ function List_items__usestate({table,my_record}){
 								if (picture_address[k] == ")" ){
 									start = false ;
 
-									// check the format JPG
+									// check the format JPG, BMP, GIF and PNJ
 									if (
-										((temp_picture_address[temp_picture_address.length-3]).toUpperCase() == "J") &&		
+										(((temp_picture_address[temp_picture_address.length-3]).toUpperCase() == "J") &&		
 										((temp_picture_address[temp_picture_address.length-2]).toUpperCase() == "P") && 			
-										((temp_picture_address[temp_picture_address.length-1]).toUpperCase() == "G")
-										){
+										((temp_picture_address[temp_picture_address.length-1]).toUpperCase() == "G")) 										
+										||
+										(((temp_picture_address[temp_picture_address.length-3]).toUpperCase() == "G") &&		
+										((temp_picture_address[temp_picture_address.length-2]).toUpperCase() == "I") && 			
+										((temp_picture_address[temp_picture_address.length-1]).toUpperCase() == "F")) 
+										||
+										(((temp_picture_address[temp_picture_address.length-3]).toUpperCase() == "B") &&		
+										((temp_picture_address[temp_picture_address.length-2]).toUpperCase() == "M") && 			
+										((temp_picture_address[temp_picture_address.length-1]).toUpperCase() == "P")) 
+										||
+										(((temp_picture_address[temp_picture_address.length-3]).toUpperCase() == "P") &&		
+										((temp_picture_address[temp_picture_address.length-2]).toUpperCase() == "N") && 			
+										((temp_picture_address[temp_picture_address.length-1]).toUpperCase() == "J")) 
+										)					
+										{
 											list_picture.push({
 												img : temp_picture_address	});
 										};
-
-									temp_picture_address = "" ;
+									
+										// once it done, we reset the temp where it save the adrress of the picture
+										temp_picture_address = "" ;
 									}		
 
 							}
-
-
 						}
 				}
 			}
@@ -426,7 +426,7 @@ function List_items__usestate({table,my_record}){
 		}
 	}
 	else {
-		console.log("446 - pas de record"); 
+		console.log("No record"); 
 
 	}
 
@@ -461,7 +461,7 @@ function List_items__usestate({table,my_record}){
 					</form>
 
 					<div class="column1">    										
-						<h2>My items information :  </h2>
+						<h2>My items information  </h2>
 							<ul>	No data : items not found in the list			
 							</ul>									
 					</div>
@@ -499,43 +499,21 @@ function List_items__usestate({table,my_record}){
 			
 			// we collecte the pictures
 			if ((list_picture) && (list_picture.length > 0)){
-				// we check attachement is a picture :
-				let imgArray = new Array();
-
-				for (let k = 0; k < list_picture.length; k++) { 
 	
-					imgArray[k] = new Image();
-					imgArray[k].src = list_picture[k].img;		
+				let imgArray = new Image();
+
+				for (let j = 0; j <list_picture.length; j++) { 
+					imgArray[j] = new Image();
+					imgArray[j].src = list_picture[j].img;
 				}
 
-
-						
-				if ((imgArray[0].width > imgArray[0].height) && (imgArray[0].width > 300)) {
-				
-					my_images_items = <img src={imgArray[0].src} class="displayed" width="300" />;	
-				}
-				else if ((imgArray[0].width > imgArray[0].height) && (imgArray[0].width <= 300)) {
-				
-					my_images_items = <img src={imgArray[0].src} class="displayed" />;	
-				}
-				else if ((imgArray[0].width <= imgArray[0].height) && (imgArray[0].height > 300)) {
-				
-					my_images_items = <img src={imgArray[0].src} class="displayed" height="300" />;	
-				}
-				else if ((imgArray[0].width <= imgArray[0].height) && (imgArray[0].height < 300)) {
-				
-					my_images_items = <img src={imgArray[0].src} class="displayed" />;	
-				}
-
-
-				
+				// we show the first picture for now 
+				my_images_items = <img src={imgArray[0].src} class="displayed" width="90%" vertical-align="middle" />;	
 			}
-
+		
 			const List_of_variable = list_item?list_item.map((list_item,index) =>
 									<li key={index}>{list_item.name_variable} = {list_item.value_variable} </li>
-								) : null;
-
-							
+								) : null;						
 
 		return (
 			<div>
@@ -565,25 +543,23 @@ function List_items__usestate({table,my_record}){
 
 								</div>
 							</div>
-
 						<div>
 							<p></p>
 							<Item_historique key_primary={my_key}/>	
-						
 						</div>
-							
-
 			</div>
 		)
 	}
 }
+
+
+
 
 function TableSchema({table}) {
     // We read the fields from viewMetadata instead of using table.fields because fields are only
     // ordered in the context of a specific view.
     // Also, this allows us to only show the fields visible within the selected view.
 
-	let name_item;
 	let pictures_item;
 	let my_record = useRecords(table);
 		
@@ -601,16 +577,16 @@ function TableSchema({table}) {
 						}
 					}
 				}
-			else console.error("Element image empty : " + pictures_item);
 			
-				// End of the pictures 
+		// End of the pictures 
 //-----------------------------------------------------------------------		
 
 			return (
+				<ErrorBoundary>
 					<Box>
 						<Box padding={3} borderBottom="thick" className="H1">
 							<h1><Heading size="small" margin={0}>
-							  <box  className="tittle">  Item information : {name_item} </box>
+							  <box  className="tittle">  Item information </box>
 							</Heading></h1>
 						</Box>
 
@@ -627,11 +603,12 @@ function TableSchema({table}) {
 										<p></p>									
 									</div>
 								</div>
+
 							</div>	
 							}					
 						</Box>
 					</Box>
-					
+				</ErrorBoundary>	
 			);
 
 }
