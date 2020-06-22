@@ -10,13 +10,8 @@ import {
 import {cursor} from '@airtable/blocks';
 import ErrorBoundary from "./ErrorBoundary";
 import React, {useState} from 'react';
-import {
-  Route,
-  NavLink,} from "react-router-dom";
-import Home from "./Home";
-import {globalConfig} from '@airtable/blocks';
 import {session} from '@airtable/blocks';
-import { controlSizePropType } from '@airtable/blocks/dist/types/src/ui/control_sizes';
+import {FieldType} from '@airtable/blocks/models';
 
 const my_const_Product_Code_Serrial_Number = "Product Code Serrial Number";
 const my_const_Quantity_Before ="Quantity Before";
@@ -26,6 +21,7 @@ const my_const_OUT = "OUT";
 const my_const_Received_by_given_to = "Received by / given to";
 const my_const_Supply_name = "Supplier Name";
 const INVENTORY_WAREHOUSE = "Inventory List";
+
 
 const History_Movement = "Storage activities";
 
@@ -211,7 +207,6 @@ function Item_historique({key_primary}) {
 				const list_quantity = [];
 
 				for (let i = 0; i < nb_operation_in_out; i++) {
-					console.log("IN out avant : " + in_out_status[i]);
 					if (in_out_status[i]=="Material IN"){
 						in_out_status[i] = "received from";
 					}
@@ -227,7 +222,6 @@ function Item_historique({key_primary}) {
 						supplier : in_out_status[i],
 						given_or_received : supply_name[i]
 					});
-					console.log("IN out apres : " + in_out_status[i]);
 				}
 
 
@@ -309,10 +303,13 @@ function List_items__usestate({table,my_record}){
 
 	const [my_key, setMy_Key] = useState(global.clear_key);
 
-//-----------------------------------------------------------------------------------
-//					LIST data in the option - datalist
-
+	//-----------------------------------------------------------------------------------
+	//					LIST data in the option - datalist
+	//					List data will be used to input  form
 	const items = [];
+
+	//list of picture from attachment
+	let my_images_items ;
 
 	//get all the code
 	for (let i = 0; i < my_record.length; i++) {
@@ -320,14 +317,11 @@ function List_items__usestate({table,my_record}){
 		value : my_record[i].name})
 	}
 	
-
-	//
-	//   SUPPRIMER ------------------- Name ---------------------------
-	//
 	//get the Name of item if the field "Name" is created
+	// if exist
 	for (let j = 0; j < table.fields.length; j++) { 
 		if (table.fields[j].name == "Name"){
-			console.log(" Champs " + j + " : " + my_record[i].getCellValue("Name") + " - type : " + table.fields[j].type);
+
 			for (let i = 0; i < my_record.length; i++) {
 				items.push({
 				value : my_record[i].getCellValue("Name") })
@@ -362,13 +356,14 @@ function List_items__usestate({table,my_record}){
 	<option key={index} value={items.value} />
 	 ) : null;
 
-//				END of update the LIST data in the option - datalist
-//--------------------------------------------------------------------------------------
+	//				END of update the LIST data in the option - datalist
+	//--------------------------------------------------------------------------------------
 
-//--------------------------------------------------------------------------------------
-//				List of information of my Key item. The key is in my_key, initiate in the global variable
+	//--------------------------------------------------------------------------------------
+	//				List of information of my Key item. The key is in my_key, initiate in the global variable
 
 	let list_item = [];
+	let list_picture = [];
 
 	let my_field_name = table.getFieldByNameIfExists('Name');
 
@@ -389,7 +384,42 @@ function List_items__usestate({table,my_record}){
 						list_item.push({
 									name_variable : table.fields[j].name,
 									value_variable : my_record[i].getCellValueAsString(table.fields[j].name),
-						})	
+						});
+
+						// we collect the attachement and we save in the list_picture
+						// we will use it after to show the pictures
+						if (table.fields[j].type == FieldType.MULTIPLE_ATTACHMENTS){
+							let picture_address = my_record[i].getCellValueAsString(table.fields[j].name);
+							let temp_picture_address = "";
+							let start = false ;
+
+							for (let k = 0; k < picture_address.length; k++) { 
+								if ((picture_address[k] == "(" ) && (start == false)) {
+									start = true ;
+								}
+								if ((start == true ) && (picture_address[k] != ")" ) && (picture_address[k] != "(")) {
+									temp_picture_address = temp_picture_address + picture_address[k];
+								}
+								if (picture_address[k] == ")" ){
+									start = false ;
+
+									// check the format JPG
+									if (
+										((temp_picture_address[temp_picture_address.length-3]).toUpperCase() == "J") &&		
+										((temp_picture_address[temp_picture_address.length-2]).toUpperCase() == "P") && 			
+										((temp_picture_address[temp_picture_address.length-1]).toUpperCase() == "G")
+										){
+											list_picture.push({
+												img : temp_picture_address	});
+										};
+
+									temp_picture_address = "" ;
+									}		
+
+							}
+
+
+						}
 				}
 			}
 		
@@ -400,49 +430,49 @@ function List_items__usestate({table,my_record}){
 
 	}
 
-//				END ---> My list of information for my key is upto date (if not empty)	
-//--------------------------------------------------------------------------------------
+	//				END ---> My list of information for my key is upto date (if not empty)	
+	//--------------------------------------------------------------------------------------
 
 
-// case there is no field and information for my items 
+	// case there is no field and information for my items 
 
-	if (list_item.length==0){
-		//	list vide
+		if (list_item.length==0){
+			//	list vide
 
-		return (
-			<div>
-				<form>
-					<label>
-					Item needed : 
+			return (
+				<div>
+					<form>
+						<label>
+						Item needed : 
 
-						<input
-							type="text"
-							value={my_key}
-							list="data"
-							onChange={e => setMy_Key(e.target.value)}
-						/>
-									
-						<datalist id="data">
-							{my_data_list}
-						</datalist>
+							<input
+								type="text"
+								value={my_key}
+								list="data"
+								onChange={e => setMy_Key(e.target.value)}
+							/>
+										
+							<datalist id="data">
+								{my_data_list}
+							</datalist>
 
-					</label>
-					<p></p>
-				</form>
+						</label>
+						<p></p>
+					</form>
 
-				<div class="column1">    										
-					<h2>My items information :  </h2>
-						<ul>	No data : items not found in the list			
-						</ul>									
-				</div>
-			</div> 
-					);
-				
-		}
+					<div class="column1">    										
+						<h2>My items information :  </h2>
+							<ul>	No data : items not found in the list			
+							</ul>									
+					</div>
+				</div> 
+						);
+					
+			}
 
-//------------------ END case there is no field and information for my items 
+	//------------------ END case there is no field and information for my items 
 
-//--------------- case there IS field and ALL the information for my items 
+	//--------------- case there IS field and ALL the information for my items 
 		else {
 
 				//order by name the list of item name and ID
@@ -467,40 +497,83 @@ function List_items__usestate({table,my_record}){
 				return 0;
 					});
 			
+			// we collecte the pictures
+			if ((list_picture) && (list_picture.length > 0)){
+				// we check attachement is a picture :
+				let imgArray = new Array();
+
+				for (let k = 0; k < list_picture.length; k++) { 
+	
+					imgArray[k] = new Image();
+					imgArray[k].src = list_picture[k].img;		
+				}
+
+
+						
+				if ((imgArray[0].width > imgArray[0].height) && (imgArray[0].width > 300)) {
+				
+					my_images_items = <img src={imgArray[0].src} class="displayed" width="300" />;	
+				}
+				else if ((imgArray[0].width > imgArray[0].height) && (imgArray[0].width <= 300)) {
+				
+					my_images_items = <img src={imgArray[0].src} class="displayed" />;	
+				}
+				else if ((imgArray[0].width <= imgArray[0].height) && (imgArray[0].height > 300)) {
+				
+					my_images_items = <img src={imgArray[0].src} class="displayed" height="300" />;	
+				}
+				else if ((imgArray[0].width <= imgArray[0].height) && (imgArray[0].height < 300)) {
+				
+					my_images_items = <img src={imgArray[0].src} class="displayed" />;	
+				}
+
+
+				
+			}
 
 			const List_of_variable = list_item?list_item.map((list_item,index) =>
 									<li key={index}>{list_item.name_variable} = {list_item.value_variable} </li>
 								) : null;
 
+							
+
 		return (
-				<div>
-							<form>
-								<label>
-								My items needed : 
-										<input
-									type="text"
-									value={my_key}
-									list="data"
-									onChange={e => setMy_Key(e.target.value)}
-								/>
-								<datalist id="data">
-									{my_data_list}
-								</datalist>
+			<div>
+						<form>
+							<label>
+							My items needed : 
+									<input
+								type="text"
+								value={my_key}
+								list="data"
+								onChange={e => setMy_Key(e.target.value)}
+							/>
+							<datalist id="data">
+								{my_data_list}
+							</datalist>
 
-								</label>
-								<p></p>
-							</form>
+							</label>
+							<p></p>
+						</form>
+							<div class="row" >
+								<div class="column1">    																	
+										<h2>My items information :  </h2>
+											<ul class="bloc">	{List_of_variable}	</ul>									
+								</div>
+								<div  class="bloc" display="table-cell" vertical-align="middle" >
+									{my_images_items}
 
-						<div class="column1">    																	
-								<h2>My items information :  </h2>
-									<ul>	{List_of_variable}	</ul>									
+								</div>
+							</div>
+
+						<div>
+							<p></p>
+							<Item_historique key_primary={my_key}/>	
+						
 						</div>
-					<div>
-					<p></p>
-					<Item_historique key_primary={my_key}/>	
-					
-					</div>
-				</div>
+							
+
+			</div>
 		)
 	}
 }
@@ -534,7 +607,6 @@ function TableSchema({table}) {
 //-----------------------------------------------------------------------		
 
 			return (
-				<ErrorBoundary>
 					<Box>
 						<Box padding={3} borderBottom="thick" className="H1">
 							<h1><Heading size="small" margin={0}>
@@ -546,15 +618,12 @@ function TableSchema({table}) {
 							{
 							<div>
 								<div class="absolu">								
-									<div class="row" >
-									
+										
 										<List_items__usestate  table={table} my_record={my_record} />
 										<p></p>																						
-										</div>
+										
 										<div class="row"  >
-											<div class="column2" display="table-cell" vertical-align="middle" >
-												< My_Image pictures_item={pictures_item} nb_imag={nombre_image} /> 					
-											</div>
+
 										<p></p>									
 									</div>
 								</div>
@@ -562,7 +631,7 @@ function TableSchema({table}) {
 							}					
 						</Box>
 					</Box>
-					</ErrorBoundary>
+					
 			);
 
 }
