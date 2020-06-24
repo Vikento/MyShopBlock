@@ -203,9 +203,11 @@ function ConditionValMax(table, field_value_max, field_target){
                             // the type of KPI_USER_AUTORIZE can be MULTIPLE_COLLABORATORS or SINGLE_COLLABORATOR
                             // case 1 MULTIPLE_COLLABORATORS, we check one among the set is the user id
                             if (table_Vlookup.getFieldIfExists(KPI_USER_AUTORIZE).type == FieldType.MULTIPLE_COLLABORATORS) {
-                                for (let k = 0; k < myRecord_USER[i].getCellValue(KPI_USER_AUTORIZE).length; k++){
-                                    if (session.currentUser.id== myRecord_USER[i].getCellValue(KPI_USER_AUTORIZE)[k].id){
-                                        user_authorize = true;
+                                if (myRecord_USER[i].getCellValue(KPI_USER_AUTORIZE) != null){
+                                    for (let k = 0; k < myRecord_USER[i].getCellValue(KPI_USER_AUTORIZE).length; k++){
+                                        if (session.currentUser.id== myRecord_USER[i].getCellValue(KPI_USER_AUTORIZE)[k].id){
+                                            user_authorize = true;
+                                        }
                                     }
                                 }
                             }
@@ -287,20 +289,20 @@ function ConditionValMax(table, field_value_max, field_target){
     
                                                 }
                                                 else {
-                                                    alert("The field " + FIELD_SELECTCONDITION + 
+                                                    alert("The field " + FIELD_SELECTCONDITION + " row " + i + 
                                                 " hasn't a good value. You need to have in the field " + FIELD_SELECTCONDITION + " the selected Value " +
                                                 VALMAX_COND + " or " + VALMIN_COND + " or " + VALMEDIAN_COND + " . Thank you");
                                                 }
                                             }
                                             else {
-                                                alert("One or both field " + FIELD_NAMEFIELD + " and " +  FIELD_NAMEFIELD_TARGETED + 
-                                                "doesn't exist. You need to change and put a correct field name in the table " + 
+                                                alert("One or both field " + FIELD_NAMEFIELD + " and " +  FIELD_NAMEFIELD_TARGETED + " row " + i + 
+                                                " doesn't exist. You need to change and put a correct field name in the table " + 
                                                 NAME_TABLE_KPI_VLOOKUP + " in the fields : " + FIELD_NAMEFIELD + " and " 
                                                 +  FIELD_NAMEFIELD_TARGETED + " . Thank you !");
                                             }
                                 }
                                 else {
-                                    alert("The table " + FIELD_NAMETABLE + " doesn't exist. You need to change and put a correct table in the table " + 
+                                    alert("The table " + FIELD_NAMETABLE + " row " + i + " doesn't exist. You need to change and put a correct table in the table " + 
                                     NAME_TABLE_KPI_VLOOKUP + " in the field : " + FIELD_NAMETABLE);
                                 }
                             }
@@ -319,10 +321,7 @@ function ConditionValMax(table, field_value_max, field_target){
                 }
     
             else {
-            console.log("l 662 NAME_TABLE_KPI_VLOOKUP : " + NAME_TABLE_KPI_VLOOKUP + " - NAME_TABLE_KPI_VLOOKUP : " + NAME_TABLE_KPI_VLOOKUP);
-            console.log(FIELD_NAME_KPI_exist + " " + FIELD_NAMETABLE_exist + " " + FIELD_NAMEFIELD_exist + " " + FIELD_NAMEFIELD_TARGETED_exist
-            + " " + FIELD_SELECTCONDITION_exist + " " + FIELD_USER_ID_exist);
-        //	alert("Some fields in " + NAME_TABLE_KPI_VLOOKUP + " doesn't exist. We suggest to delete the complete table of " + NAME_TABLE_KPI_VLOOKUP + " and create new KPI Vlookup. Thank you");
+        	alert("Some fields in your table " + NAME_TABLE_KPI_VLOOKUP + " doesn't exist. We suggest you put the correct name or to delete the complete table of " + NAME_TABLE_KPI_VLOOKUP + " and create new KPI Vlookup. Thank you");
     
             }
         

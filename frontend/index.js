@@ -73,11 +73,9 @@ const INVENTORY_WAREHOUSE = "Inventory List";
 
 function updateKey(key_value) {
 
-	let session_name;
 	let session_id;
 	
 	if (session.currentUser !== null) {
-			session_name = session.currentUser.name;
 			session_id = session.currentUser.id;
 	}
 	else alert ("Please identify as an user or you cannot access to the information reauested");
