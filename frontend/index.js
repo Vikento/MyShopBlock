@@ -35,16 +35,12 @@ const INVENTORY_WAREHOUSE = "Inventory List";
 //		- meme non d article pour 2 ID differents
 //
 //
-
 //	Feature :
 //  - Dans ItemInformation
 //		 1/ dans le fichier item information gerer clicker sur images pour les faire defiler si on en trouve
 //
-//	- Dans KPI
-//		1/ cacher le bouton create KPI Vlookup si ce n'est pas le creator
-//		2/ faire afficher correctement les unites currency et autres pour les dashboard vlookup
-//		3/ finaliser la fonction ConditionMedian
-//		4/ Add limit of user for VLookup indicator 		
+//	- Dans KPI	
+//		2/ faire afficher correctement les unites currency et autres pour les dashboard vlookup	
 //
 //	- dans aide utilisateur GitHub + index
 //		1/ check the URLL des images, car elles ne sont valables suelment 30 jours a compter du 15 juin 2020
