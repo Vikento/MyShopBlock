@@ -50,9 +50,25 @@ block Run
 - When the block is running, you can put the URL shared by your terminal on the airtable windows
 - your block is installed !
 
-### 2. Best Practices  : creation of the Tables
+### 2. Best Practices : creation of the Tables
 
-   It is possible to personnalize the table In this part it is the recommandation that you can follow
+   It is possible to personnalize the table : name the table, the base and the fields. Some of the table and field name have to be
+   configurated directly in the code.
+   
+#### A/ Table usefull
+   
+   There is 2 different table very important for the management of the stock : "Inventory List" and "Storage activities"
+   
+   - "Inventory List" : list all the items existing in the stock.
+   - "Storage activities" : is the list of movement of all the items. It can be received or delivery.
+
+### 3. Installation and configuration of your block
+
+   In the follwing part we will describe the creation of the different tables and fields in order to optimize your table .
+   We assume that the step 1 Integration of My Block Stock in Airtable is done and work.
+
+ ### a. Installation and configuration of your block  
+
 
 
 #### 1 List of tables and fields to create

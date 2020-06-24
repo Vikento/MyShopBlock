@@ -111,22 +111,20 @@ class Main extends Component {
 			  <h1>My Stock Block</h1>
 			 
 			  <ul className="header">
-				<li className="home_h"><NavLink to="/">Home</NavLink></li>
 				<li className="stock_h"><NavLink to="/index">My Stock</NavLink></li>
 				<li className="iteem_h"><NavLink to="/item_information">Item information</NavLink></li>
 				<li className="dash_board_h"><NavLink to="/kpi">My Dash Board</NavLink></li>
-				<li className="InitBase"><NavLink to="/InitBase">Initialization</NavLink></li>			
-				<li className="help_h"><NavLink to="/contact">Contact</NavLink></li>
+				<li className="InitBase"><NavLink to="/InitBase">Help and Support</NavLink></li>			
+
 			  </ul>
 			  <div className="content">
 					<React.Suspense fallback={loaderExample} >
 						<Change_background />
-						<Route exact path="/" component={Home}/>
-						<Route path="/index" component={Index}/>
+						<Route exact path="/" component={Index}/>
 						<Route path="/item_information" component={item_information} />
 						<Route path="/kpi" component={kpi}/>
 						<Route path="/InitBase" component={InitBase}/>
-						<Route path="/contact" component={Contact}/>
+
 					</React.Suspense>
 			  </div>
 
