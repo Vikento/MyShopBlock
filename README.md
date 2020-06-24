@@ -14,42 +14,54 @@ The Project offer :
 ### Integration of My Block Stock
 
    1. Importation of the Block from GitHub
-   First how  to integrate the module Block Stock from GitHub
-   Connect to Airtable, and create a new base clicking "Add a base"
-   It is possible to create from scratch or to start with a template. To facilitate the exercice we will assume we start with a template. We will look for the template "Lemonade Stand Inventory". WWe just write Inventory and we can find it.
-   Once you have chose your template you can personalize it.
-   Then open you new base. We can already start to use the block. To do so, you need to go at your right and click on "Blocks"
-   Install a Block (you can check : [Digital video production template](https://airtable.com/templates/content-production/expKOGNEdcF0gmFW3/digital-video-production). You can also use an existing base or a different template: this block doesn't depend on any specific attributes from that template. Or Create a new block in your new base (see
+  - First how to integrate the module Block Stock from GitHub
+  - Connect to Airtable, and create a new base clicking "Add a base"
+  - It is possible to create from scratch or to start with a template. To facilitate the exercice we will assume we start with a template. We will look for the template "Lemonade Stand Inventory". WWe just write Inventory and we can find it.
+  - Once you have chose your template you can personalize it.
+  - Then open you new base. We can already start to use the block. To do so, you need to go at your right and click on "Blocks"
+  - Install a Block (you can check : [Digital video production template](https://airtable.com/templates/content-production/expKOGNEdcF0gmFW3/digital-video-production). You can also use an existing base or a different template: this block doesn't depend on any specific attributes from that template. Or Create a new block in your new base (see
    [Create a new block](https://airtable.com/developers/blocks/guides/hello-world-tutorial#create-a-new-block),    selecting "Table structure" as your template.
-   Build a custom block
-   Name your Block
-   Choose the option "Remix from GitHub"
-. Add the GitHub repository : https://github.com/Vikento/MyShopBlock
-. And validate clicking on Create Block
-. You need to follow the instruction :
-. Open a terminal
-. Install CLI taping "npm install -g @airtable/blocks-cli"
-. Set up the block on your computer : the commande start by "block init ...."
-. Navigate to your block directory: cd+name_of_your_block
-. Run the block : block Run .
-. When the block is running, you can put the URL shared by your terminal on the airtable windows
-. your block is installed !
+  - Build a custom block
+  - Name your Block
+  - Choose the option "Remix from GitHub"
+- Add the GitHub repository : https://github.com/Vikento/MyShopBlock
+- And validate clicking on Create Block
+- You need to follow the instruction :
+- Open a terminal
+- Install CLI taping 
+```bash
+"npm install -g @airtable/blocks-cli"
+```
+- Set up the block on your computer : the commande start by 
+```bash
+"block init ...."
+```
+- Navigate to your block directory: 
+```bash
+cd name_of_your_block
+```
+- Run the block : 
+```bash
+block Run .
+```
+- When the block is running, you can put the URL shared by your terminal on the airtable windows
+- your block is installed !
 
    2. Creation of the Table for the best use
 
    In this part it is the recommandation that you can follow
 
-1.. List of tables and fields to create
+#### 1 List of tables and fields to create
 
-2.. Rules to respect
+#### 2 Rules to respect
 
-3.. Personalyzed the Block       
+#### 3 Personalyzed the Block   
+    
+### For further
 
-4.. For further
+  In order to personnalize the block, it is possible to change the line of the code. This part will describe quickly what can be modify easily without damaging th code.
 
-        In order to personnalize the block, it is possible to change the line of the code. This part will describe quickly what can be modify easily without damaging th code.
-
-5. Color background
+1. Personalized Color background
 
 
 ## Utility and User
