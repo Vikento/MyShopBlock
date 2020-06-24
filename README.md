@@ -9,9 +9,9 @@ The Project offer :
 -   How to add user, and create personalized KPI for each user
 -   Personnalized the design to 
 
-## How to run my Block Stock
+## I How to run my Block Stock
 
-### Integration of My Block Stock
+### 1 Integration of My Block Stock
 
    1. Importation of the Block from GitHub
   - First how to integrate the module Block Stock from GitHub
@@ -34,7 +34,7 @@ The Project offer :
 ```
 - Set up the block on your computer : the commande start by 
 ```bash
-"block init ...."
+"block init " ....
 ```
 - Navigate to your block directory: 
 ```bash
@@ -42,7 +42,7 @@ cd name_of_your_block
 ```
 - Run the block : 
 ```bash
-block Run .
+block Run 
 ```
 - When the block is running, you can put the URL shared by your terminal on the airtable windows
 - your block is installed !
@@ -64,7 +64,7 @@ block Run .
 1. Personalized Color background
 
 
-## Utility and User
+## II Utility and User
 After seen a lot of message in Airtable on warehouse table and stock management I decide to create a block in order to help the users.
 The block was designed for a small business, a store or a warehouse. All of the following users have access to the block and to the database with specific rights. The users are for example:
 - the store manager to check the stocks, update the inventory, add the items received and given to the supplier and customer
@@ -74,15 +74,15 @@ The block was designed for a small business, a store or a warehouse. All of the 
 - the manager of the company or project manager, who can configure the application in order to personalize the block according to his teams: give rights to users, follow all movements, coordinate between different users if necessary.
 
 
-## Dev
+## III Dev
 
 The Stock Block was created with the template offered by Airtable : blocks-todo-list : (https://github.com/Airtable/blocks-todo-list) .
 
-## See the block running
+## IV See the block running
 
 ![Block that shows information about the selected table and its fields](media/Block creation/PresentationBlock.gif)
 
 
-## Definition
+## V Definition
 
 - Storage Activities or Store activities : place managed by the store responsible and where all the items are kept. The items can be received or distributed to a third party.
