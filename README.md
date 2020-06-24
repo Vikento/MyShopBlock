@@ -67,7 +67,17 @@ block Run
    In the follwing part we will describe the creation of the different tables and fields in order to optimize your table .
    We assume that the step 1 Integration of My Block Stock in Airtable is done and work.
 
- ### a. Installation and configuration of your block  
+ #### a. Installation and configuration of your block  
+
+Currently you have 3 tables : Inventory List , Sales and Suppliers. We will configure the Inventory list
+
+First "Inventory List" table :
+   - The fields Items, Quantity in stock, Unit Price, Next Delivery, Notes, Pictures are alreaday created. 
+   - It is possible to add more fields to get more information. For instance : name, color, size, description, total value, last inventory date, last inventory quantity, last inventory 
+   value...
+   - You are free to create any field you need. 
+   - For the full usage of some module it is recommanded to create the following field in "Inventory List" :  
+      - 
 
 
 

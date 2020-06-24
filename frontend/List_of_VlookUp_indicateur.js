@@ -147,6 +147,7 @@ function ConditionValMax(table, field_value_max, field_target){
     
         if (!table_Vlookup_KPI_exist){
             // do nothing if table doesn't exit
+            return <div> </div>;
                 }
         else{
             // 1 - check if the special field for Vlookup exist
