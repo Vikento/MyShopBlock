@@ -6,8 +6,6 @@ import {
   NavLink,
   HashRouter
 } from "react-router-dom";
-import Home from "./Home";
-import Contact from "./Contact";
 import kpi from "./kpi";
 import InitBase from "./InitBase";
 import item_information from "./item_information";
