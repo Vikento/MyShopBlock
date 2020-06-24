@@ -1,17 +1,20 @@
 # My-Stock-Block
 Manage the stock of items for a Shop or a Warehouse utility including creation of alert and personnalized KPI
 
-This block work with Airtable. It is description bellow how to install and configure your block
+This block works with Airtable. The language used for the development of the tools is Javascript with REACt.
 
-The Project offer :
+The Blocks offer the possibility :
+-   To check your stocks
+-   To get items information
+-   To follow the movement
+-   To create and check the personnalized KPI
+-   To manage user based on his ability and position
 
--   How to check the stock
--   How to add user, and create personalized KPI for each user
--   Personnalized the design to 
+You have also the possibility to personnalized the design of your Blocks. 
 
 ## I How to run my Block Stock
 
-### 1 Integration of My Block Stock
+### 1 Integration of My Block Stock in Airtable
 
    1. Importation of the Block from GitHub
   - First how to integrate the module Block Stock from GitHub
@@ -47,9 +50,10 @@ block Run
 - When the block is running, you can put the URL shared by your terminal on the airtable windows
 - your block is installed !
 
-   2. Creation of the Table for the best use
+### 2. Best Practices  : creation of the Tables
 
-   In this part it is the recommandation that you can follow
+   It is possible to personnalize the table In this part it is the recommandation that you can follow
+
 
 #### 1 List of tables and fields to create
 
