@@ -71,7 +71,7 @@ block Run
 
 Currently you have 3 tables : Inventory List , Sales and Suppliers. We will configure the Inventory list.
 
-***/!\ *** If you have not created your block with the template "Lemonade Stand Inventory" , you need to name one of the table **"Inventory List"**.
+**/!\'** If you have not created your block with the template "Lemonade Stand Inventory" , you need to name one of the table **"Inventory List"**.
 
 - **"Inventory List" table** :
    - The fields *"Items"*, *"Quantity in stock"*, *"Unit Price"*, *"Next Delivery"*, *"Notes"*, *"Pictures"* are alreaday created with the template **"Lemonade Stand Inventory"**. 
@@ -185,7 +185,7 @@ Currently you have 3 tables : Inventory List , Sales and Suppliers. We will conf
 
   - update all the items : when the previous fine tunning is done, it is time to update all the items in your table *"Inventory List"*
 
-  - adapt color and css file : to match with your company, it is possible to modify the code and modify the CSS information. The current version was adapted for African Product Saler. It is free to use. All the information CSS 
+  - adapt color and css : to match with your company, it is possible to modify the code and modify the CSS information. The current version was adapted for African Product Saler. It is free to use. All the information CSS are in main.js
 
 
 ### 4. Using your block
@@ -195,13 +195,32 @@ There is 3 modules created : My Stock, Item Information, My Dash Board. They hav
        // change the value to the number of char you want to print in the table
     export const NUNBER_OF_CHAR_SEEN_IN_STOCK_PER_COLL = 10;
   ```
+
     - To get access to more information on the item it is possible to click on the item (ITEM ID - PRIMARY KEY // first column). It will open the second module : **"Item Information"**. If you want to update information, you can click on the second or third column. It will open a window with sumary information of the items
 
  - Item Information : this module show all the information relative to a specific item. 
     - If you have clicked on the item ID from the module **"My Stock"**, it will show the information from this item. If you need to look for another item you can click on the input field, be sure there is not item already writen (you can delete), and type the item you are looking for. The search will target the *"Items"* field. If you have create *"Name"* field, it will all check on this part. In order to facilitate, it will autosuggest the list of item during you write the name or ID of the item. With this version the Item Information will show you on the right part the picture you added in your table. The format .gif, .png, .bmp and .jpg are supported. 
     - If the table **"Storage activities"** is created with all the information fields listed in the previous chapter, it will list all the operations : item received and given from the store. If the fields or the table doesn't exist, you will get message it is not created
 
+  - My Dash Board : this module will show all the KPI you are authorize to see. The user is detected and the KPI is shower base on the user ID. There is 3 types of KPI that can be seen :
+      - **KPI on the alert** : it is a fixed KPI which depend on the recommanded fields name configurated in the previous chapter. It is important to have all the fields in **"Inventory List" table** (check chap **3. Installation and configuration of your block** and **a. List of tables and fields to create**). The KPI will list all the alert on the quantity, when it is lower than the threshold and the value when it is higher than the value configurated. It will show until 2 alerts by items.
 
+      - **Personnalized KPI** : the module **"My Dash Board"** will check all the table starting by **"DashBoard"** and it will show the information for each field. 
+        - all the take which doesn't start by **"DashBoard"** will not take in account in the Dash Board module
+        - The field name will be the name of the KPI, and in the first line, the value filled will be the value. 
+        - If you plan to add column to link the others tables or if you don't need to show some fields, it is possible to ignore them. On the field name, you add "--" and it will ignore the field.
+        - the field is accessible to the user only if the field "--USER ONLY--" is created. In this field (first row), all the users need to see the field have to be added. 
+        - only the first row is taken in account for the creation of the KPI.
+        - the name of the KPI can be give : in the name of the table , after **"DashBoard"** you can add the name of your field. For instance, you can name it : **"DashBoard My best Sales"** and the KPI **"My best Sales will"** be added
+
+      - **VLook Up KPI** : this KPI is usefull to create indicor which is relative the highest, the lowest or the medium value. 
+        - It will give the value based on what you need (max value, min value or median value) and will apply to the field of your selection. Then based on your need it will show which field relative to the result you want to show. For instance you need to check the item name of the highest stocks from all the items : you will choose the table where you have the field *"number of stock"*, you choose the condition (Value maximum), and the field you want to see *"Name of the item"*. 
+        - Only for numeric field it is applicable.
+        - The field you want to show should be in the same table
+        - Only Creator user and Editor user can create  **VLook Up KPI** .
+        - the creation can be done directly with the button **"Create Vlookup indicator"** . The user who create the table will be added automatically. To add more user, it is possible to do it using the field **"--USER ONLY--"** : you add the collaborators line by line where you want the user get access to the **VLook Up KPI**
+        - the creation of this type of KPI can be also done using the field **"Dashboard Table VLookup"**. All the KPI relative to the "Create Vlookup indicator" are listed in this table. The risk to do it manually is to make a mistake on the name of the table and fields. At this moment you will get alert and you will not see the KPI desired
+        - it is recommanded to not change the type of the field
 
 
 
