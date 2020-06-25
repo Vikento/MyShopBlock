@@ -1,12 +1,9 @@
 import {
-    Box,
-    Heading,
     useBase,
-    useWatchable,
     useRecords,
 } from '@airtable/blocks/ui';
 
-import React, {useState} from 'react';
+import React from 'react';
 
 
 const INVENTORY_WAREHOUSE = "Inventory List";

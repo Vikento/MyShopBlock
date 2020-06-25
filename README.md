@@ -69,16 +69,34 @@ block Run
 
  #### a. Installation and configuration of your block  
 
-Currently you have 3 tables : Inventory List , Sales and Suppliers. We will configure the Inventory list
+Currently you have 3 tables : Inventory List , Sales and Suppliers. We will configure the Inventory list.
 
-First "Inventory List" table :
-   - The fields Items, Quantity in stock, Unit Price, Next Delivery, Notes, Pictures are alreaday created. 
+***/!\*** If you have not created your block with the template "Lemonade Stand Inventory" , you need to name your the first base **"Inventory List"**.
+
+- *"Inventory List" table* :
+   - The fields Items, Quantity in stock, Unit Price, Next Delivery, Notes, Pictures are alreaday created with the template "Lemonade Stand Inventory". 
    - It is possible to add more fields to get more information. For instance : name, color, size, description, total value, last inventory date, last inventory quantity, last inventory 
    value...
-   - You are free to create any field you need. 
-   - For the full usage of some module it is recommanded to create the following field in "Inventory List" :  
-      - 
+   - You are free to create any additional field you need. All the fields you have will be automaticaly reach in the different modules :
+         - the Stock
+         - Item information 
+         - KPI 
+   - For the full usage of some the modules it is recommanded to create the following field in "Inventory List" :  
+      - "Name": he will describe your item (simple line text). It is different from the fields "Items" which is also the primary key. For instance some items can have the same name, but the color can change. So the field "Items" will have 2 differents values. The Name of the field will be used by the function "List_items__usestate" and will autosuggest the items with the name when the user start typing the item. If no field Name exist, the reference will be the primary key (here "Items" for the template choosen)
 
+      - "Product Code Serrial Number" : it is the primary key to define a item. It is a unique ID that can help to get the exact items. It is an option for the KPI module : it will permit to activate the KPI on the alarm on the stock (function List_of_log_fonction). Others indicators mention here are needed. 
+      - "Threshold Alarm" : it is the threshold on the number of item and it will trigger the warning. It is a number defined by the managers to have in time the information that the level of a specific item is low. It is an option for the KPI module : it will permit to activate the KPI on the alarm on the stock (function List_of_log_fonction). Others indicators mention here are needed. 
+      - "Threshold total Value" :  it is the threshold on the value of items and it will trigger the warning. It is a number defined by the managers to have in time the information that the value of a specific item is high. It is an option for the KPI module : it will permit to activate the KPI on the alarm on the stock (function List_of_log_fonction). Others indicators mention here are needed.
+      - "Total Stock" : it is the stock total for one item . It is an option for the KPI module : it will permit to activate the KPI on the alarm on the stock (function List_of_log_fonction). Others indicators mention here are needed. 
+      - "Total Value" : it is the total value in the stock for a specific item. It is an option for the KPI module : it will permit to activate the KPI on the alarm on the stock (function List_of_log_fonction). Others indicators mention here are needed.
+      - "Check Stock" : he give indicator in the state of the stock : low stock, stock OK... It is an option for the KPI module : it will permit to activate the KPI on the alarm on the stock (function List_of_log_fonction). Others indicators mention here are needed. 
+      - "Check total Value" : he give indicator in the value of the stock : value ok, stock high... It helps the warehouse manager and finance team that the stock value of the items are high. It will help to take decision and mitigate the risk of lost if something happen in the warehouse. It is an option for the KPI module : it will permit to activate the KPI on the alarm on the stock (function List_of_log_fonction). Others indicators mention here are needed. 
+ 
+
+
+- *"Storage activities" table* :
+   - The table "Storage activities" will record all the mouvement of the item to and from the warehouse. It is a tracker which help the Warehouse Manager on the actity of stock. With formula it is possible to link the *"Inventory List" table* to *"Storage activities" table* : then you can see the current stock based on the activities
+   - In order to get the history of item in the module "Item information" and see the KPI  in Iem Infomration KPI ( )
 
 
 #### 1 List of tables and fields to create

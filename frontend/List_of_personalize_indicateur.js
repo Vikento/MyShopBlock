@@ -7,8 +7,6 @@ import React from 'react';
 import {session} from '@airtable/blocks';
 
 
-const INVENTORY_WAREHOUSE = "Inventory List";
-const NAME_TABLE_KPI_VLOOKUP = "Dashboard Table VLookup";
 
 //--------- const Name of the field for the Dashboard Table Vlookup :
 // TO BE Modified if you want to personalize the field name of NAME_TABLE_KPI_VLOOKUP

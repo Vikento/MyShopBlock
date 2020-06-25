@@ -12,6 +12,11 @@ import React, {useState} from 'react';
 import {session} from '@airtable/blocks';
 import {FieldType} from '@airtable/blocks/models';
 
+// list of table
+const INVENTORY_WAREHOUSE = "Inventory List";
+const History_Movement = "Storage activities";
+
+// List of field
 const my_const_name = "Name";
 const my_const_Product_Code_Serrial_Number = "Product Code Serrial Number";
 const my_const_Quantity_Before ="Quantity Before";
@@ -20,8 +25,7 @@ const my_const_Date_IN_OUT = "Date IN OUT";
 const my_const_OUT = "OUT";
 const my_const_Received_by_given_to = "Received by / given to";
 const my_const_Supply_name = "Supplier Name";
-const INVENTORY_WAREHOUSE = "Inventory List";
-const History_Movement = "Storage activities";
+
 
 //Constante from History Movement
 const MATERIAL_IN = "Material IN";
