@@ -373,7 +373,7 @@ function List_items__usestate({table,my_record}){
 								if (picture_address[k] == ")" ){
 									start = false ;
 
-									// check the format JPG, BMP, GIF and PNJ
+									// check the format JPG, BMP, GIF and PNG
 									if (
 										(((temp_picture_address[temp_picture_address.length-3]).toUpperCase() == "J") &&		
 										((temp_picture_address[temp_picture_address.length-2]).toUpperCase() == "P") && 			
@@ -389,7 +389,7 @@ function List_items__usestate({table,my_record}){
 										||
 										(((temp_picture_address[temp_picture_address.length-3]).toUpperCase() == "P") &&		
 										((temp_picture_address[temp_picture_address.length-2]).toUpperCase() == "N") && 			
-										((temp_picture_address[temp_picture_address.length-1]).toUpperCase() == "J")) 
+										((temp_picture_address[temp_picture_address.length-1]).toUpperCase() == "G")) 
 										)					
 										{
 											list_picture.push({

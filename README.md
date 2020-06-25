@@ -167,14 +167,43 @@ Currently you have 3 tables : Inventory List , Sales and Suppliers. We will conf
 
 
 - **"KPI" table** :
-   It is possible to create your own table to give KPI information. Currently you can have 2 type of KPI table : 
-    - one personallized where all the information will be show how it is
-    - one with VLookup rule which permet to give information based on 3 conditions : the value maximum, the value minimum and the median value
+   It is possible to create your own table to give KPI information. Currently you can have 2 types of KPI table : 
+    - one table personallized where all the informations will be showed how it is. Only the first line is taken in account
+    - one table with VLookup rule which permit to give information based on 3 conditions : the value maximum, the value minimum and the median value
 
-    The KPI table is describe in the next chapter.
+    The KPI table is described in the next chapter.
+
+ #### b. Customizing
+
+  Once you have created the table and field, it is time to customize and add all the missing table and field. 
+
+  - Order your item : in the module Item information you will see the field information ordered by alphabetic. So to have a better classication, you need to rename the field. For instance you can use 1/ , 2/, 3/ ... to get the exact order need.
+
+  - create user with authorization : not all the functionnality is reachable by all type of user. So when the table and fields are created, you can give access to the users. 
+      - The *read only user* and *commenter user* can have access to the list of items (module *"My Stock"*), the description of the items (Module *"Items Information"*) and some KPI (Module *"My DashBoard"*). 
+      - the *Editor user* and *the creator* have access to all the module and they have the possibility to create Vlookup KPI. It is the responsability to the creator and editor user to update the table
+
+  - update all the items : when the previous fine tunning is done, it is time to update all the items in your table *"Inventory List"*
+
+  - adapt color and css file : to match with your company, it is possible to modify the code and modify the CSS information. The current version was adapted for African Product Saler. It is free to use. All the information CSS 
 
 
-#### 2 Rules to respect
+### 4. Using your block
+There is 3 modules created : My Stock, Item Information, My Dash Board. They have all a specific usage and can be accessible to all the users.
+  - My Stock : it is the list of all the items in the stock. It is create with 3 colums : the primary Key and 2 others column showing 2 fields from the table **"Inventory List"**. You can chose the field you need to see quickly. To avoid table not adapted the name of the item and information was truncated. It will write **"NUNBER_OF_CHAR_SEEN_IN_STOCK_PER_COLL"** chars (10 chars if you have not change anything). It is possible to change this integer in the file myConstClass.js :
+  ```javascript
+       // change the value to the number of char you want to print in the table
+    export const NUNBER_OF_CHAR_SEEN_IN_STOCK_PER_COLL = 10;
+  ```
+    - To get access to more information on the item it is possible to click on the item (ITEM ID - PRIMARY KEY // first column). It will open the second module : **"Item Information"**. If you want to update information, you can click on the second or third column. It will open a window with sumary information of the items
+
+ - Item Information : this module show all the information relative to a specific item. 
+    - If you have clicked on the item ID from the module **"My Stock"**, it will show the information from this item. If you need to look for another item you can click on the input field, be sure there is not item already writen (you can delete), and type the item you are looking for. The search will target the *"Items"* field. If you have create *"Name"* field, it will all check on this part. In order to facilitate, it will autosuggest the list of item during you write the name or ID of the item. With this version the Item Information will show you on the right part the picture you added in your table. The format .gif, .png, .bmp and .jpg are supported. 
+    - If the table **"Storage activities"** is created with all the information fields listed in the previous chapter, it will list all the operations : item received and given from the store. If the fields or the table doesn't exist, you will get message it is not created
+
+
+
+
 
 #### 3 Personalyzed the Block   
     
