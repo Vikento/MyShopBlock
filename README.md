@@ -12,7 +12,7 @@ The Blocks offer the possibility :
 
 You have also the possibility to personnalized the design of your Blocks. 
 
-## I Utility and Users
+## I/ Utility and Users
 After seeing messages and messages in Airtable on warehouse table and stock/store management I decided to create a block that will help the users.
 
 The block was designed for a small and medium business, a store or a warehouse. All of the following users have access to the block and to the database with specific rights. The users are for example:
@@ -23,7 +23,7 @@ The block was designed for a small and medium business, a store or a warehouse. 
 - the manager of the company or project manager, who can configure the application in order to personalize the block according to his teams: give rights to users, follow all movements, coordinate between different users if necessary.
 This block is build for the Storage Activities or Store activities, or any place managed by the store responsible and where all the items are kept. The items can be received or distributed to a third party.
 
-## II How to run my Block Stock
+## II/ How to run my Block Stock
 
 ### 1 Integration of My Block Stock in Airtable
 
@@ -202,13 +202,13 @@ Currently you have 3 tables : Inventory List , Sales and Suppliers. We will conf
 
 ### 4. Using your block
 There is 3 modules created : My Stock, Item Information, My Dash Board. They have all a specific usage and can be accessible to all the users.
-  - My Stock : it is the list of all the items in the stock. It is create with 3 colums : the primary Key and 2 others column showing 2 fields from the table **"Inventory List"**. You can chose the field you need to see quickly. To avoid table not adapted the name of the item and information was truncated. It will write **"NUNBER_OF_CHAR_SEEN_IN_STOCK_PER_COLL"** chars (10 chars if you have not change anything). It is possible to change this integer in the file myConstClass.js :
-  ```javascript
-       // change the value to the number of char you want to print in the table
-    export const NUNBER_OF_CHAR_SEEN_IN_STOCK_PER_COLL = 10;
-  ```
-
-    - To get access to more information on the item it is possible to click on the item (ITEM ID - PRIMARY KEY // first column). It will open the second module : **"Item Information"**. If you want to update information, you can click on the second or third column. It will open a window with sumary information of the items
+  - My Stock : it is the list of all the items in the stock. It is create with 3 colums : the primary Key and 2 others column showing 2 fields from the table **"Inventory List"**. 
+    - To get access to more information on the item it is possible to click on the item (ITEM ID - PRIMARY KEY // first column). It will open the second module : **"Item Information"**. If you want to update information, you can click on the second or the third column. It will open a window with summary information of the items.
+    - You can chose the fields of your need. To avoid table not adapted the name and information of the items were limited and truncated. It will write 10 chars if you have not changed anything . It is possible to change the numbner of char keep to have optimized view of your table changing the default value of **"NUNBER_OF_CHAR_SEEN_IN_STOCK_PER_COLL"** . This constant is in the file myConstClass.js :
+    ```javascript
+        // change the value to the number of char you want to print in the table
+      export const NUNBER_OF_CHAR_SEEN_IN_STOCK_PER_COLL = 10;
+    ```
 
  - Item Information : this module show all the information relative to a specific item. 
     - If you have clicked on the item ID from the module **"My Stock"**, it will show the information from this item. If you need to look for another item you can click on the input field, be sure there is not item already writen (you can delete), and type the item you are looking for. The search will target the *"Items"* field. If you have create *"Name"* field, it will all check on this part. In order to facilitate, it will autosuggest the list of item during you write the name or ID of the item. With this version the Item Information will show you on the right part the picture you added in your table. The format .gif, .png, .bmp and .jpg are supported. 
@@ -237,11 +237,11 @@ There is 3 modules created : My Stock, Item Information, My Dash Board. They hav
 
 
 
-## III Dev
+## III/ Dev
 
 The Stock Block was created with the template offered by Airtable like blocks-todo-list and accessible in (https://github.com/Airtable/blocks-todo-list) .
 
-## IV See the block running
+## IV/ See the block running
 
 ![Block that shows information about the selected table and its fields](media/Block creation/PresentationBlock.gif)
 
