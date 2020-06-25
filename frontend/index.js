@@ -40,6 +40,7 @@ const loaderExample = <Loader scale={0.5}  fillColor="#33bbaa" />;
 //
 //	- Dans KPI	
 //		2/ faire afficher correctement les unites currency et autres pour les dashboard vlookup	
+//		3/ a la creation de de la table : pas de creation de la ligne pour le nouvel indicateur
 //
 //	- dans aide utilisateur GitHub + index
 //		1/ check the URLL des images, car elles ne sont valables suelment 30 jours a compter du 15 juin 2020
@@ -60,7 +61,7 @@ const loaderExample = <Loader scale={0.5}  fillColor="#33bbaa" />;
 			//	'--USER ONLY--' : [user_id],
 			//	}
 
-			
+
 // ajout dans l'aide le nom de la table INVENTORY_WAREHOUSE
 			// a l interieur de la table on doit avoir le nom de la base Name pour decricre au user facilement le nom de l item
 	

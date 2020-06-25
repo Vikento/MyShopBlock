@@ -43,7 +43,9 @@ export const my_const_Received_by_given_to = "Received by / given to";
 export const my_const_Supply_name = "Supplier Name";
 
 
-// def : List of fields in the table History_MovementConstante from History Movement to see the move of item
+// def : word used in the field OUT to give the status of the item. It can be material received or material give
+// the constant RECEIVED_FROM and GIVEN_TO will be used as a word in the item_information.js , for the list
+// of operation and it will give the information if the material is given or taken from the supplier
 // Usage : Module "Item Information" 
 // file :  item_information.js 
 export const MATERIAL_IN = "Material IN";

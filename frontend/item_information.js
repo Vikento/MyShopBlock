@@ -134,7 +134,6 @@ function Item_historique({key_primary}) {
 			let quantity_after = new Array();
 			let quantity_in_out_date = new Array();
 			let in_out_status = new Array();
-			let give_receive_from = new Array();
 			let supply_name = new Array();	
 			
 			let nb_operation_in_out = 0;
@@ -142,7 +141,6 @@ function Item_historique({key_primary}) {
 			let quantity_after_field_exist = false;
 			let quantity_in_out_date_field_exist = false;
 			let in_out_status_field_exist =  false;
-			let give_receive_from_field_exist = false;
 			let supply_name_field_exist = false;
 
 			// check of the field in Histo are created :
@@ -159,16 +157,13 @@ function Item_historique({key_primary}) {
 				if (table_historique.fields[j].name == myConstClass.my_const_OUT){
 					in_out_status_field_exist = true;
 				}
-				if (table_historique.fields[j].name == myConstClass.my_const_Received_by_given_to){
-					give_receive_from_field_exist = true;
-				}
 				if (table_historique.fields[j].name == myConstClass.my_const_Supply_name){
 					supply_name_field_exist = true;
 				}
 			}
 
 			if (quantity_before_field_exist && quantity_after_field_exist && quantity_in_out_date_field_exist &&
-				in_out_status_field_exist && give_receive_from_field_exist && supply_name_field_exist) {
+				in_out_status_field_exist && supply_name_field_exist) {
 			
 				for (let i = 0; i < my_record_historique.length; i++) {
 					if (my_record_historique[i].getCellValue(myConstClass.my_const_Product_Code_Serrial_Number) == key_primary){
@@ -176,7 +171,6 @@ function Item_historique({key_primary}) {
 						quantity_after[nb_operation_in_out] =  my_record_historique[i].getCellValue(myConstClass.my_const_Quantity_after);
 						quantity_in_out_date[nb_operation_in_out] =  my_record_historique[i].getCellValue(myConstClass.my_const_Date_IN_OUT);
 						in_out_status[nb_operation_in_out] =  my_record_historique[i].getCellValue(myConstClass.my_const_OUT);
-						give_receive_from[nb_operation_in_out] =  my_record_historique[i].getCellValue(myConstClass.my_const_Received_by_given_to);
 						supply_name[nb_operation_in_out] = my_record_historique[i].getCellValue(myConstClass.my_const_Supply_name);
 						nb_operation_in_out = nb_operation_in_out + 1;
 					}
@@ -242,7 +236,6 @@ function Item_historique({key_primary}) {
 								<p>{myConstClass.my_const_Quantity_Before}</p>
 								<p>{myConstClass.my_const_Quantity_after}</p>
 								<p>{myConstClass.my_const_Date_IN_OUT}</p>
-								<p>{myConstClass.my_const_Received_by_given_to}</p>
 								<p>{myConstClass.my_const_Supply_name}</p>
 						</ul>
 					</div>
