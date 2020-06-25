@@ -10,33 +10,12 @@ import { Select } from "@airtable/blocks/ui";
 import { Input } from "@airtable/blocks/ui";
 import {FieldType} from '@airtable/blocks/models';
 
-const NAME_TABLE_KPI_VLOOKUP = "Dashboard Table VLookup";
 
-//--------- const Name of the field for the Dashboard Table Vlookup :
-// TO BE Modified if you want to personalize the field name of NAME_TABLE_KPI_VLOOKUP
-const FIELD_ID = "ID"
-const FIELD_NAME_KPI = "Name KPI";
-const FIELD_NAMETABLE = "NameTable";
-const FIELD_NAMEFIELD = "NameField";
-const FIELD_NAMEFIELD_TARGETED = "NameField targeted";
-const FIELD_SELECTCONDITION = "SelectCondition";
-const KPI_USER_AUTORIZE = "--USER ONLY--"; 
+// importation of the all my const
+// to change some table name, field, dimension, it is possible to change the 
+// the file myConstClass
+import * as myConstClass from "./myConstClass.js";
 
-//--------- END Const Name of the field for the Dashboard Table Vlookup :
-
-
-// --------   Condition possible for now : ---------------------------
-const VALMAX_COND = "ValMax";
-const VALMIN_COND = "ValMin";
-const VALMEDIAN_COND = "Val_Median";
-// --------  END  Condition possible for now : ---------------------------
-
-
-
-// ------------  Const : name of the field to identify the list of users authorize to see the
-//-------------    indicator in his session :
-
-//
 
 
  // fonction Create_KPI_VLOOKUP to create a new VLookup indicator
@@ -58,7 +37,7 @@ const VALMEDIAN_COND = "Val_Median";
            const [isDialogOpen, setIsDialogOpen] = useState(false);
    
            base = useBase();
-           const table_Lookup = base.getTableByNameIfExists(NAME_TABLE_KPI_VLOOKUP);
+           const table_Lookup = base.getTableByNameIfExists(myConstClass.NAME_TABLE_KPI_VLOOKUP);
    
    
            // KPI name
@@ -128,9 +107,9 @@ const VALMEDIAN_COND = "Val_Median";
            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -- - - - -- -- - - - //
            //   In the futur possible to create new condition.
            const condition_list = [
-               { value: VALMAX_COND, label: VALMAX_COND },
-               { value: VALMIN_COND, label: VALMIN_COND },
-               { value: VALMEDIAN_COND, label: VALMEDIAN_COND }
+               { value: myConstClass.VALMAX_COND, label: myConstClass.VALMAX_COND },
+               { value: myConstClass.VALMIN_COND, label: myConstClass.VALMIN_COND },
+               { value: myConstClass.VALMEDIAN_COND, label: myConstClass.VALMEDIAN_COND }
            ];
            //
            // ------------------------ End  List of condition possible :------------------------
@@ -274,7 +253,7 @@ const VALMEDIAN_COND = "Val_Median";
                            
    
                            for  (let i = 0; i < table_Lookup.fields.length; i++) {
-                                   if (table_Lookup.fields[i].name == FIELD_NAME_KPI){
+                                   if (table_Lookup.fields[i].name == myConstClass.FIELD_NAME_KPI){
                                        if (table_Lookup.fields[i].type == FieldType.SINGLE_LINE_TEXT){
                                            field_Name_KPI_table_Lookup_exist = true;
                                        }
@@ -283,7 +262,7 @@ const VALMEDIAN_COND = "Val_Median";
                                            setIsDialogOpen(false);
                                            }
                                    }
-                                   if (table_Lookup.fields[i].name == FIELD_NAMETABLE){
+                                   if (table_Lookup.fields[i].name == myConstClass.FIELD_NAMETABLE){
                                        if (table_Lookup.fields[i].type == FieldType.SINGLE_LINE_TEXT){
                                            field_NameTable_table_Lookup_exist = true;
                                        }
@@ -292,7 +271,7 @@ const VALMEDIAN_COND = "Val_Median";
                                            setIsDialogOpen(false);
                                            }
                                    }
-                                   if (table_Lookup.fields[i].name == FIELD_NAMEFIELD){
+                                   if (table_Lookup.fields[i].name == myConstClass.FIELD_NAMEFIELD){
                                        if (table_Lookup.fields[i].type == FieldType.SINGLE_LINE_TEXT){
                                            field_NameField_table_Lookup_exist = true;
                                        }
@@ -301,7 +280,7 @@ const VALMEDIAN_COND = "Val_Median";
                                            setIsDialogOpen(false);
                                            }
                                    }
-                                   if (table_Lookup.fields[i].name == FIELD_NAMEFIELD_TARGETED){
+                                   if (table_Lookup.fields[i].name == myConstClass.FIELD_NAMEFIELD_TARGETED){
    
                                        if (table_Lookup.fields[i].type == FieldType.SINGLE_LINE_TEXT){
                                            field_NameField_targeted_table_Lookup_exist = true;
@@ -311,7 +290,7 @@ const VALMEDIAN_COND = "Val_Median";
                                            setIsDialogOpen(false);
                                            }
                                    }
-                                   if (table_Lookup.fields[i].name == FIELD_SELECTCONDITION){
+                                   if (table_Lookup.fields[i].name == myConstClass.FIELD_SELECTCONDITION){
                                        if (table_Lookup.fields[i].type == FieldType.SINGLE_SELECT){
                                            field_SelectCondition_table_Lookup_exist = true;
                                        }
@@ -320,7 +299,7 @@ const VALMEDIAN_COND = "Val_Median";
                                            setIsDialogOpen(false);
                                            }
                                        }
-                                   if (table_Lookup.fields[i].name == KPI_USER_AUTORIZE){
+                                   if (table_Lookup.fields[i].name == myConstClass.KPI_USER_AUTORIZE){
    
                                        if ((table_Lookup.fields[i].type == FieldType.MULTIPLE_COLLABORATORS) || 
                                            (table_Lookup.fields[i].type == FieldType.SINGLE_COLLABORATOR)){
@@ -380,24 +359,24 @@ const VALMEDIAN_COND = "Val_Median";
    
                //---------------  function to create the base if is it not exist------------------------
                async function CreateNewTable() {
-                   const name = NAME_TABLE_KPI_VLOOKUP;
+                   const name = myConstClass.NAME_TABLE_KPI_VLOOKUP;
                    const fields = [
                        // Name will be the primary field of the table.
-                       {name: FIELD_ID, type: FieldType.NUMBER, options: {
+                       {name: myConstClass.FIELD_ID, type: FieldType.NUMBER, options: {
                            precision: 1,
                        }},
-                       {name: FIELD_NAME_KPI, type: FieldType.SINGLE_LINE_TEXT},
-                       {name: FIELD_NAMETABLE, type: FieldType.SINGLE_LINE_TEXT},
-                       {name: FIELD_NAMEFIELD, type: FieldType.SINGLE_LINE_TEXT},
-                       {name: FIELD_NAMEFIELD_TARGETED, type: FieldType.SINGLE_LINE_TEXT},
-                       {name: FIELD_SELECTCONDITION, type: FieldType.SINGLE_SELECT, options: {
+                       {name: myConstClass.FIELD_NAME_KPI, type: FieldType.SINGLE_LINE_TEXT},
+                       {name: myConstClass.FIELD_NAMETABLE, type: FieldType.SINGLE_LINE_TEXT},
+                       {name: myConstClass.FIELD_NAMEFIELD, type: FieldType.SINGLE_LINE_TEXT},
+                       {name: myConstClass.FIELD_NAMEFIELD_TARGETED, type: FieldType.SINGLE_LINE_TEXT},
+                       {name: myConstClass.FIELD_SELECTCONDITION, type: FieldType.SINGLE_SELECT, options: {
                            choices: [
-                               {name: VALMAX_COND},
-                               {name: VALMIN_COND},
-                               {name: VALMEDIAN_COND},
+                               {name: myConstClass.VALMAX_COND},
+                               {name: myConstClass.VALMIN_COND},
+                               {name: myConstClass.VALMEDIAN_COND},
                            ],
                        }},
-                       {name: KPI_USER_AUTORIZE, type: FieldType.MULTIPLE_COLLABORATORS}
+                       {name: myConstClass.KPI_USER_AUTORIZE, type: FieldType.MULTIPLE_COLLABORATORS}
                    ];
                    //	1-1 : check if the user can create the table
                    if (base.unstable_hasPermissionToCreateTable(name, fields)) {

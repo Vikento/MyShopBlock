@@ -22,7 +22,6 @@ import { Loader } from "@airtable/blocks/ui";
 const loaderExample = <Loader scale={0.5}  fillColor="#33bbaa" />
 
 
-
 // css list for first page
 loadCSSFromString('body {padding: 20px;  margin: 0;  color: #011627;} h2, p, ul, li {font-family: sans-serif; } h1 {font-family: sans-serif; text-align: center; }');
 loadCSSFromString('ul.header li {  display: inline-block;  list-style-type: none;  margin: auto;  } ul.header { border-radius: 25px; border: 5px solid #E71D36; background-color: #2EC4B6;  padding: 0; text-align: center;}'); 
@@ -31,9 +30,12 @@ loadCSSFromString('.content {  background-color:rgba(250,250,250,0.7);  padding:
 loadCSSFromString('.content li {  margin-bottom: 10px; text-align: left;} a:hover { background: #FF9F1C; border-radius: 25px; border: 2px solid #FF9F1C } ');
 loadCSSFromString('box.tittle {font-size: 25px; text-align: center;  background: #FF9F1C ; border: 15px solid #FF9F1C; border-radius: 25px }' );
 
-// personnalized color for the background
-const Couleur_BBC = "#FF9F1C";
-loadCSSFromString('body {background-color:' + Couleur_BBC);
+// importation of the const from myConstClass
+// to change some table name, field, dimension, it is possible to change the 
+// the file myConstClass
+import * as myConstClass from "./myConstClass.js";
+
+loadCSSFromString('body {background-color:' + myConstClass.Couleur_BBC);
 
 //css from index 
 // CSS de index.js

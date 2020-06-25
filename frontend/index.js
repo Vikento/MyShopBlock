@@ -8,6 +8,12 @@ import {
 import { NavLink} from "react-router-dom";
 
 
+// importation of the all my const
+// to change some table name, field, dimension, it is possible to change the 
+// the file myConstClass
+import * as myConstClass from "./myConstClass.js";
+
+
 //import React from 'react';
 import React, {useState} from 'react';
 import {session} from '@airtable/blocks';
@@ -18,13 +24,6 @@ const loaderExample = <Loader scale={0.5}  fillColor="#33bbaa" />;
 
 
 // FIN CSS
-
-const FIELD_ID_WIDTH_PERCENTAGE = '35%';
-const FIELD_DESCRIPTION_WIDTH_PERCENTAGE = '35%';
-const FIELD_QUANTITY_WIDTH_PERCENTAGE = '30%';
-const NUNBER_OF_CHAR_SEEN_IN_STOCK_PER_COLL = 10;
-const INVENTORY_WAREHOUSE = "Inventory List";
-
 
 
 //  Amelioration
@@ -50,6 +49,18 @@ const INVENTORY_WAREHOUSE = "Inventory List";
 //		1/ change CSS to apply to all the page + create a specific page for the CSS
 //		2/ create CONST for all the field : the goal is to rename in the futur
 //
+//	- dans le fichier des constante : myConstClass
+//			1/ check if we can fix  const "recordFields" from
+			//const recordFields = {
+			//	'Name KPI' : name_input,
+			//	'NameTable' : my_table_list_value,
+			//	'NameField' : valuemy_field_list,
+			//	'NameField targeted' : valuemy_field_targeted_list,
+			//	'SelectCondition' : {name: value_conditionvalue },
+			//	'--USER ONLY--' : [user_id],
+			//	}
+
+			
 // ajout dans l'aide le nom de la table INVENTORY_WAREHOUSE
 			// a l interieur de la table on doit avoir le nom de la base Name pour decricre au user facilement le nom de l item
 	
@@ -92,7 +103,7 @@ function updateKey(key_value) {
 
 function TableStructureBlock() {
     const base = useBase();
-	const [tableName, setTableName] = useState(INVENTORY_WAREHOUSE);
+	const [tableName, setTableName] = useState(myConstClass.INVENTORY_WAREHOUSE);
 
 	//   '---------------------------------------------------------------------------------'
 	//
@@ -129,7 +140,7 @@ function TableStructureBlock() {
 function Selec_and_show_table({base,table,item_selected}){
 
 //---------------------------  label Select -----------------------------
-	const table_warehouse_stock = base.getTableIfExists(INVENTORY_WAREHOUSE);
+	const table_warehouse_stock = base.getTableIfExists(myConstClass.INVENTORY_WAREHOUSE);
 	const selection_value_picker = [];
 
 	for (let i = 0; i < table_warehouse_stock.fields.length; i++) {
@@ -165,7 +176,7 @@ function Selec_and_show_table({base,table,item_selected}){
 	//	let type_const = doneField.type;	
 	// if (type_const !="multipleAttachments"){
 
-			const my_item_desc_value = record.getCellValueAsString(doneField).substring(0,NUNBER_OF_CHAR_SEEN_IN_STOCK_PER_COLL);
+			const my_item_desc_value = record.getCellValueAsString(doneField).substring(0,myConstClass.NUNBER_OF_CHAR_SEEN_IN_STOCK_PER_COLL);
 				return(
 					<div style={{fontSize: 18, padding: 12, borderBottom: '1px solid #ddd'}}>
 						<a
@@ -217,7 +228,7 @@ function TableSchema({base, table}) {
  
     // Returns all records in the table
 
-	const table_warehouse_stock = base.getTable(INVENTORY_WAREHOUSE);
+	const table_warehouse_stock = base.getTable(myConstClass.INVENTORY_WAREHOUSE);
 	
 
 	 // my_item_id get all the ID
@@ -261,17 +272,17 @@ function TableSchema({base, table}) {
 				<div  class="height_defin">
 						<table  width="100%">
 							<tr hasThickBorderBottom={true}  >
-								<td width={FIELD_ID_WIDTH_PERCENTAGE}>
+								<td width={myConstClass.FIELD_ID_WIDTH_PERCENTAGE}>
 								<div  className="Select_css">ITEM ID - PRIMARY KEY </div>
 									{my_item_id}
 								</td>
 						
-								<td width={FIELD_DESCRIPTION_WIDTH_PERCENTAGE}>	
+								<td width={myConstClass.FIELD_DESCRIPTION_WIDTH_PERCENTAGE}>	
 									<Selec_and_show_table base={base} table={table} item_selected={1} />	
 									
 								</td>
 
-								<td width={FIELD_QUANTITY_WIDTH_PERCENTAGE}>
+								<td width={myConstClass.FIELD_QUANTITY_WIDTH_PERCENTAGE}>
 									<Selec_and_show_table base={base} table={table} item_selected={2}  />					
 								</td>
 

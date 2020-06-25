@@ -8,11 +8,10 @@ import {session} from '@airtable/blocks';
 
 
 
-//--------- const Name of the field for the Dashboard Table Vlookup :
-// TO BE Modified if you want to personalize the field name of NAME_TABLE_KPI_VLOOKUP
-const KPI_USER_AUTORIZE = "--USER ONLY--"; 
-//--------- END Const Name of the field for the Dashboard Table Vlookup :
-
+// importation of the all my const
+// to change some table name, field, dimension, it is possible to change the 
+// the file myConstClass
+import * as myConstClass from "./myConstClass.js";
 
 
 //
@@ -24,7 +23,7 @@ function User_check_for_kpi(table,type_field) {
 	let query = table.selectRecords();
 	
 	for (let record of query.records){
-		let collaborators = record.getCellValue(KPI_USER_AUTORIZE);
+		let collaborators = record.getCellValue(myConstClass.KPI_USER_AUTORIZE);
 		if (collaborators){
 			if (session.currentUser) {
 					if (type_field == "multipleCollaborators"){
@@ -85,7 +84,7 @@ const list_KPI = [];
 				// we check the cosnt KPI_USER_AUTORIZE field exist and if the current user is part of collaborator (user_field_exist):
 				let user_field_exist = false;
 								
-				if (table.fields[j].name == KPI_USER_AUTORIZE){
+				if (table.fields[j].name == myConstClass.KPI_USER_AUTORIZE){
 									
 					if (User_check_for_kpi(table,table.fields[j].type)){
 						user_field_exist = true;

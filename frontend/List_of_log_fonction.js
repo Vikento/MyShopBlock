@@ -6,37 +6,22 @@ import {
 import React from 'react';
 
 
-const INVENTORY_WAREHOUSE = "Inventory List";
+// importation of the all my const
+// to change some table name, field, dimension, it is possible to change the 
+// the file myConstClass
+import * as myConstClass from "./myConstClass.js";
 
-
-
-// ---------------  List of constante : name of the table Inventory List
-const my_const_Check_Stock = "Check Stock";
-const my_const_Threshold_Alarm = "Threshold Alarm";
-const my_const_Total_Stock = "Total Stock";
-const my_const_Product_Code =  "Product Code Serrial Number";
-const my_const_name = "Name";
-const my_const_Threshold_total_Value = "Threshold total Value";
-const my_const_Total_Value = "Total Value";
-const my_const_Check_total_Value = "Check total Value";
-
-// --------------- END List of constante : name of the table Inventory List
-
-// ------------  Const : name of the field to identify the list of users authorize to see the
-//-------------    indicator in his session :
-
-//
 
 
 
 // implemented indicator base on the "Inventory List" including all the  
 // field
-// it is a KPI implemented to the root and not flexibla and configurable
-
+// it is a KPI implemented to the root and not flexible and configurable 
+// if one of the fields doesn't exist the Module KPi can work
 function List_of_log_fonction() {
 	
 	const base = useBase();
-	const table_warehouse_stock = base.getTable(INVENTORY_WAREHOUSE);
+	const table_warehouse_stock = base.getTable(myConstClass.INVENTORY_WAREHOUSE);
 	let my_record_historique = useRecords(table_warehouse_stock);
 
 		let compteur_log = 0;
@@ -63,28 +48,28 @@ function List_of_log_fonction() {
 
 for (let i = 0; i < table_warehouse_stock.fields.length; i++) {
 	
-		if (table_warehouse_stock.fields[i].name == my_const_Check_Stock){
+		if (table_warehouse_stock.fields[i].name == myConstClass.my_const_Check_Stock){
 			check_stock_exist = true;
 		}
-		if (table_warehouse_stock.fields[i].name == my_const_Threshold_Alarm){
+		if (table_warehouse_stock.fields[i].name ==myConstClass.my_const_Threshold_Alarm){
 			Threshold_Alarm_exist = true;
 		}
-		if (table_warehouse_stock.fields[i].name == my_const_Total_Stock){
+		if (table_warehouse_stock.fields[i].name == myConstClass.my_const_Total_Stock){
 			Total_Stock_exist = true;
 		}
-		if (table_warehouse_stock.fields[i].name == my_const_Product_Code){
+		if (table_warehouse_stock.fields[i].name == myConstClass.my_const_Product_Code){
 			Product_Code_Serrial_exist = true;
 		}
-		if (table_warehouse_stock.fields[i].name == my_const_name){
+		if (table_warehouse_stock.fields[i].name == myConstClass.my_const_name){
 			Name_exist = true;
 		}	
-			if (table_warehouse_stock.fields[i].name == my_const_Threshold_total_Value){
+			if (table_warehouse_stock.fields[i].name == myConstClass.my_const_Threshold_total_Value){
 			Threshold_total_Value_exist = true;
 		}	
-			if (table_warehouse_stock.fields[i].name == my_const_Total_Value){
+			if (table_warehouse_stock.fields[i].name == myConstClass.my_const_Total_Value){
 			total_value_exist = true;
 		}	
-			if (table_warehouse_stock.fields[i].name == my_const_Check_total_Value){
+			if (table_warehouse_stock.fields[i].name == myConstClass.my_const_Check_total_Value){
 			Check_total_Value_exist = true;
 		}	
 }
@@ -93,18 +78,18 @@ if (check_stock_exist && Threshold_Alarm_exist && Total_Stock_exist && Product_C
 
  	for (let i = 0; i < my_record_historique.length; i++) {
 					// check on the stock limitation
-					list_of_log_quantity[compteur_log] = my_record_historique[i].getCellValue(my_const_Check_Stock);
-					target_stock_min[compteur_log] = my_record_historique[i].getCellValue(my_const_Threshold_Alarm);
-					total_stock[compteur_log] = my_record_historique[i].getCellValue(my_const_Total_Stock);
+					list_of_log_quantity[compteur_log] = my_record_historique[i].getCellValue(myConstClass.my_const_Check_Stock);
+					target_stock_min[compteur_log] = my_record_historique[i].getCellValue(myConstClass.my_const_Threshold_Alarm);
+					total_stock[compteur_log] = my_record_historique[i].getCellValue(myConstClass.my_const_Total_Stock);
 					
 					// name and ID
-					id_log_no_ok[compteur_log] = my_record_historique[i].getCellValue(my_const_Product_Code);
-					name_log_no_ok[compteur_log] = my_record_historique[i].getCellValue(my_const_name);
+					id_log_no_ok[compteur_log] = my_record_historique[i].getCellValue(myConstClass.my_const_Product_Code);
+					name_log_no_ok[compteur_log] = my_record_historique[i].getCellValue(myConstClass.my_const_name);
 					
 					// check on the value
-					target_nb_item_log_no_ok[compteur_log] = my_record_historique[i].getCellValue(my_const_Threshold_total_Value);
-					value_log_no_ok[compteur_log] = my_record_historique[i].getCellValue(my_const_Total_Value);
-					list_of_log_value [compteur_log] =  my_record_historique[i].getCellValue(my_const_Check_total_Value);
+					target_nb_item_log_no_ok[compteur_log] = my_record_historique[i].getCellValue(myConstClass.my_const_Threshold_total_Value);
+					value_log_no_ok[compteur_log] = my_record_historique[i].getCellValue(myConstClass.my_const_Total_Value);
+					list_of_log_value [compteur_log] =  my_record_historique[i].getCellValue(myConstClass.my_const_Check_total_Value);
 					compteur_log = compteur_log + 1;
 	}
 

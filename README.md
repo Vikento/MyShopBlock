@@ -71,10 +71,10 @@ block Run
 
 Currently you have 3 tables : Inventory List , Sales and Suppliers. We will configure the Inventory list.
 
-***/!\*** If you have not created your block with the template "Lemonade Stand Inventory" , you need to name your the first base **"Inventory List"**.
+***/!\ *** If you have not created your block with the template "Lemonade Stand Inventory" , you need to name your the first base **"Inventory List"**.
 
-- *"Inventory List" table* :
-   - The fields Items, Quantity in stock, Unit Price, Next Delivery, Notes, Pictures are alreaday created with the template "Lemonade Stand Inventory". 
+- **"Inventory List" table** :
+   - The fields *"Items"*, *"Quantity in stock"*, *"Unit Price"*, *"Next Delivery"*, *"Notes"*, *"Pictures"* are alreaday created with the template **"Lemonade Stand Inventory"**. 
    - It is possible to add more fields to get more information. For instance : name, color, size, description, total value, last inventory date, last inventory quantity, last inventory 
    value...
    - You are free to create any additional field you need. All the fields you have will be automaticaly reach in the different modules :
@@ -94,8 +94,8 @@ Currently you have 3 tables : Inventory List , Sales and Suppliers. We will conf
  
 
 
-- *"Storage activities" table* :
-   - The table "Storage activities" will record all the mouvement of the item to and from the warehouse. It is a tracker which help the Warehouse Manager on the actity of stock. With formula it is possible to link the *"Inventory List" table* to *"Storage activities" table* : then you can see the current stock based on the activities
+- **"Storage activities" table** :
+   - The table "Storage activities" will record all the mouvement of the item to and from the warehouse. It is a tracker which help the Warehouse Manager on the actity of stock. With formula it is possible to link the **"Inventory List" table** to **"Storage activities" table** : then you can see the current stock based on the activities
    - In order to get the history of item in the module "Item information" and see the KPI  in Iem Infomration KPI ( )
 
 

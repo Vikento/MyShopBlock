@@ -13,8 +13,10 @@ import List_of_log_fonction from "./List_of_log_fonction";
 import List_of_VlookUp_indicateur from "./List_of_VlookUp_indicateur";
 import List_of_personalize_indicateur from "./List_of_personalize_indicateur";
 
-const INVENTORY_WAREHOUSE = "Inventory List";
-
+// importation of the all my const
+// to change some table name, field, dimension, it is possible to change the 
+// the file myConstClass
+import * as myConstClass from "./myConstClass.js";
 
 function kpi() {
 	
@@ -23,7 +25,7 @@ function kpi() {
     // useWatchable is used to re-render the block whenever the active table or view changes.
     useWatchable(cursor, ['activeTableId', 'activeViewId']);
 
-	const [tableName, setTableName] = useState(INVENTORY_WAREHOUSE);
+	const [tableName, setTableName] = useState(myConstClass.INVENTORY_WAREHOUSE);
 	const table = base.getTableByNameIfExists(tableName);
 
     if (table) {

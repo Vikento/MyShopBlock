@@ -12,26 +12,11 @@ import React, {useState} from 'react';
 import {session} from '@airtable/blocks';
 import {FieldType} from '@airtable/blocks/models';
 
-// list of table
-const INVENTORY_WAREHOUSE = "Inventory List";
-const History_Movement = "Storage activities";
+// importation of the all my const
+// to change some table name, field, dimension, it is possible to change the 
+// the file myConstClass
+import * as myConstClass from "./myConstClass.js";
 
-// List of field
-const my_const_name = "Name";
-const my_const_Product_Code_Serrial_Number = "Product Code Serrial Number";
-const my_const_Quantity_Before ="Quantity Before";
-const my_const_Quantity_after = "Quantity after";
-const my_const_Date_IN_OUT = "Date IN OUT";
-const my_const_OUT = "OUT";
-const my_const_Received_by_given_to = "Received by / given to";
-const my_const_Supply_name = "Supplier Name";
-
-
-//Constante from History Movement
-const MATERIAL_IN = "Material IN";
-const RECEIVED_FROM = "received from";
-const MATERIAL_OUT = "Material OUT";
-const GIVEN_TO = "given to";
 
 
 function item_information() {
@@ -52,7 +37,7 @@ function item_information() {
 		// useWatchable is used to re-render the block whenever the active table or view changes.
 		useWatchable(cursor, ['activeTableId', 'activeViewId']);
 		
-		const [tableName, setTableName] = useState(INVENTORY_WAREHOUSE);
+		const [tableName, setTableName] = useState(myConstClass.INVENTORY_WAREHOUSE);
 		const table = base.getTableByNameIfExists(tableName);
 
 		if (table) {
@@ -139,7 +124,7 @@ function My_Image({pictures_item,nombre_image}){
 function Item_historique({key_primary}) {
 	
 	const base = useBase();
-	const [tableName, setTableName] = useState(History_Movement);
+	const [tableName, setTableName] = useState(myConstClass.History_Movement);
 	const table_historique = base.getTableByNameIfExists(tableName);
 
 	if (table_historique){
@@ -162,22 +147,22 @@ function Item_historique({key_primary}) {
 
 			// check of the field in Histo are created :
 			for (let j = 0; j < table_historique.fields.length; j++) { 
-				if (table_historique.fields[j].name == my_const_Quantity_Before){
+				if (table_historique.fields[j].name == myConstClass.my_const_Quantity_Before){
 					quantity_before_field_exist = true;
 				}
-				if (table_historique.fields[j].name == my_const_Quantity_after){
+				if (table_historique.fields[j].name == myConstClass.my_const_Quantity_after){
 					quantity_after_field_exist = true;
 				}
-				if (table_historique.fields[j].name == my_const_Date_IN_OUT){
+				if (table_historique.fields[j].name == myConstClass.my_const_Date_IN_OUT){
 					quantity_in_out_date_field_exist = true;
 				}
-				if (table_historique.fields[j].name == my_const_OUT){
+				if (table_historique.fields[j].name == myConstClass.my_const_OUT){
 					in_out_status_field_exist = true;
 				}
-				if (table_historique.fields[j].name == my_const_Received_by_given_to){
+				if (table_historique.fields[j].name == myConstClass.my_const_Received_by_given_to){
 					give_receive_from_field_exist = true;
 				}
-				if (table_historique.fields[j].name == my_const_Supply_name){
+				if (table_historique.fields[j].name == myConstClass.my_const_Supply_name){
 					supply_name_field_exist = true;
 				}
 			}
@@ -186,13 +171,13 @@ function Item_historique({key_primary}) {
 				in_out_status_field_exist && give_receive_from_field_exist && supply_name_field_exist) {
 			
 				for (let i = 0; i < my_record_historique.length; i++) {
-					if (my_record_historique[i].getCellValue(my_const_Product_Code_Serrial_Number) == key_primary){
-						quantity_before[nb_operation_in_out] = my_record_historique[i].getCellValue(my_const_Quantity_Before);
-						quantity_after[nb_operation_in_out] =  my_record_historique[i].getCellValue(my_const_Quantity_after);
-						quantity_in_out_date[nb_operation_in_out] =  my_record_historique[i].getCellValue(my_const_Date_IN_OUT);
-						in_out_status[nb_operation_in_out] =  my_record_historique[i].getCellValue(my_const_OUT);
-						give_receive_from[nb_operation_in_out] =  my_record_historique[i].getCellValue(my_const_Received_by_given_to);
-						supply_name[nb_operation_in_out] = my_record_historique[i].getCellValue(my_const_Supply_name);
+					if (my_record_historique[i].getCellValue(myConstClass.my_const_Product_Code_Serrial_Number) == key_primary){
+						quantity_before[nb_operation_in_out] = my_record_historique[i].getCellValue(myConstClass.my_const_Quantity_Before);
+						quantity_after[nb_operation_in_out] =  my_record_historique[i].getCellValue(myConstClass.my_const_Quantity_after);
+						quantity_in_out_date[nb_operation_in_out] =  my_record_historique[i].getCellValue(myConstClass.my_const_Date_IN_OUT);
+						in_out_status[nb_operation_in_out] =  my_record_historique[i].getCellValue(myConstClass.my_const_OUT);
+						give_receive_from[nb_operation_in_out] =  my_record_historique[i].getCellValue(myConstClass.my_const_Received_by_given_to);
+						supply_name[nb_operation_in_out] = my_record_historique[i].getCellValue(myConstClass.my_const_Supply_name);
 						nb_operation_in_out = nb_operation_in_out + 1;
 					}
 				}
@@ -201,11 +186,11 @@ function Item_historique({key_primary}) {
 				const list_quantity = [];
 
 				for (let i = 0; i < nb_operation_in_out; i++) {
-					if (in_out_status[i] == MATERIAL_IN){
-						in_out_status[i] = RECEIVED_FROM;
+					if (in_out_status[i] == myConstClass.MATERIAL_IN){
+						in_out_status[i] = myConstClass.RECEIVED_FROM;
 					}
-					else if (in_out_status[i] == MATERIAL_OUT){
-						in_out_status[i] = GIVEN_TO;
+					else if (in_out_status[i] == myConstClass.MATERIAL_OUT){
+						in_out_status[i] = myConstClass.GIVEN_TO;
 					}
 					else {in_out_status[i] = " - "};
 					
@@ -253,12 +238,12 @@ function Item_historique({key_primary}) {
 					<h2> Activities component </h2>
 						<ul>
 							<v1 color="red" > To have a full functionnality with Storage Activities you need to create all the following field in Histoire table </v1>
-								<p>{my_const_Product_Code_Serrial_Number}</p>
-								<p>{my_const_Quantity_Before}</p>
-								<p>{my_const_Quantity_after}</p>
-								<p>{my_const_Date_IN_OUT}</p>
-								<p>{my_const_Received_by_given_to}</p>
-								<p>{my_const_Supply_name}</p>
+								<p>{myConstClass.my_const_Product_Code_Serrial_Number}</p>
+								<p>{myConstClass.my_const_Quantity_Before}</p>
+								<p>{myConstClass.my_const_Quantity_after}</p>
+								<p>{myConstClass.my_const_Date_IN_OUT}</p>
+								<p>{myConstClass.my_const_Received_by_given_to}</p>
+								<p>{myConstClass.my_const_Supply_name}</p>
 						</ul>
 					</div>
 				
@@ -271,10 +256,10 @@ function Item_historique({key_primary}) {
 					<div>
 						<h2> Storage Activities : </h2>
 						<p> </p>
-						No storage activitis because : No base with the table name "{History_Movement}" . For the full functionnality you have to create a Table with the name of "{History_Movement}" :
+						No storage activitis because : No base with the table name "{myConstClass.History_Movement}" . For the full functionnality you have to create a Table with the name of "{myConstClass.History_Movement}" :
 						<p> </p>
 						
-						When you create the "{History_Movement}", you can reload or refresh the page.
+						When you create the "{myConstClass.History_Movement}", you can reload or refresh the page.
 						<p> </p>
 						If it is still not working, please contact the dev team. Thank you !
 			
@@ -311,11 +296,11 @@ function List_items__usestate({table,my_record}){
 	//get the Name of item if the field "Name" is created
 	// if exist
 	for (let j = 0; j < table.fields.length; j++) { 
-		if (table.fields[j].name == my_const_name){
+		if (table.fields[j].name == myConstClass.my_const_name){
 
 			for (let i = 0; i < my_record.length; i++) {
 				items.push({
-				value : my_record[i].getCellValue(my_const_name) })
+				value : my_record[i].getCellValue(myConstClass.my_const_name) })
 			}
 		}
 	}
@@ -357,7 +342,7 @@ function List_items__usestate({table,my_record}){
 	let list_item = [];
 	let list_picture = [];
 
-	let my_field_name = table.getFieldByNameIfExists(my_const_name);
+	let my_field_name = table.getFieldByNameIfExists(myConstClass.my_const_name);
 
 	// we check if the Name field exist
 	if (my_field_name !== null) {
