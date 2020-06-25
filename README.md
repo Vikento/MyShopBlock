@@ -239,7 +239,7 @@ There is 3 modules created : My Stock, Item Information, My Dash Board. They hav
 
 ## III Dev
 
-The Stock Block was created with the template offered by Airtable : blocks-todo-list : (https://github.com/Airtable/blocks-todo-list) .
+The Stock Block was created with the template offered by Airtable like blocks-todo-list and accessible in (https://github.com/Airtable/blocks-todo-list) .
 
 ## IV See the block running
 
