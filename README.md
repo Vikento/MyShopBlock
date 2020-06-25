@@ -12,7 +12,18 @@ The Blocks offer the possibility :
 
 You have also the possibility to personnalized the design of your Blocks. 
 
-## I How to run my Block Stock
+## I Utility and Users
+After seeing messages and messages in Airtable on warehouse table and stock/store management I decided to create a block that will help the users.
+
+The block was designed for a small and medium business, a store or a warehouse. All of the following users have access to the block and to the database with specific rights. The users are for example:
+- the store manager to check the stocks, update the inventory, add the items received and given to the supplier and customer
+- the buyer to follow the state of stocks and anticipate an order of material
+- the commercial to know the products he can use in his project for his client and his region. He can also configure the tool to know the cost of the product and the margins
+- the financier, to monitor the state of stocks and know the value of its assets.
+- the manager of the company or project manager, who can configure the application in order to personalize the block according to his teams: give rights to users, follow all movements, coordinate between different users if necessary.
+This block is build for the Storage Activities or Store activities, or any place managed by the store responsible and where all the items are kept. The items can be received or distributed to a third party.
+
+## II How to run my Block Stock
 
 ### 1 Integration of My Block Stock in Airtable
 
@@ -50,17 +61,17 @@ block Run
 - When the block is running, you can put the URL shared by your terminal on the airtable windows
 - your block is installed !
 
-### 2. Best Practices : creation of the Tables
+### 2. Creation of the Tables and Fields
 
    It is possible to personnalize the table : name the table, the base and the fields. Some of the table and field name have to be
    configurated directly in the code.
    
-#### A/ Table usefull
-   
-   There is 2 different table very important for the management of the stock : "Inventory List" and "Storage activities"
-   
+  Before to start : there are two different table very important for the management of the stock : **"Inventory List"** and **"Storage activities"**
+  
    - "Inventory List" : list all the items existing in the stock.
+
    - "Storage activities" : is the list of movement of all the items. It can be received or delivery.
+
 
 ### 3. Installation and configuration of your block
 
@@ -185,7 +196,8 @@ Currently you have 3 tables : Inventory List , Sales and Suppliers. We will conf
 
   - update all the items : when the previous fine tunning is done, it is time to update all the items in your table *"Inventory List"*
 
-  - adapt color and css : to match with your company, it is possible to modify the code and modify the CSS information. The current version was adapted for African Product Saler. It is free to use. All the information CSS are in main.js
+  - adapt color and css : to match with your company, it is possible to modify the code and modify the CSS information. The current version was adapted for African Product Saler. It is free to use. All the information CSS are in main.js.
+  Personalized Color background
 
 
 ### 4. Using your block
@@ -221,26 +233,8 @@ There is 3 modules created : My Stock, Item Information, My Dash Board. They hav
         - the creation can be done directly with the button **"Create Vlookup indicator"** . The user who create the table will be added automatically. To add more user, it is possible to do it using the field **"--USER ONLY--"** : you add the collaborators line by line where you want the user get access to the **VLook Up KPI**
         - the creation of this type of KPI can be also done using the field **"Dashboard Table VLookup"**. All the KPI relative to the "Create Vlookup indicator" are listed in this table. The risk to do it manually is to make a mistake on the name of the table and fields. At this moment you will get alert and you will not see the KPI desired
         - it is recommanded to not change the type of the field
+        - to delete one *VLook Up KPI* go on the table **"Dashboard Table VLookup"** . Select the row of the KPI you don't need and delete it. All the user will not have access to the KPI. 
 
-
-
-#### 3 Personalyzed the Block   
-    
-### For further
-
-  In order to personnalize the block, it is possible to change the line of the code. This part will describe quickly what can be modify easily without damaging th code.
-
-1. Personalized Color background
-
-
-## II Utility and User
-After seen a lot of message in Airtable on warehouse table and stock management I decide to create a block in order to help the users.
-The block was designed for a small business, a store or a warehouse. All of the following users have access to the block and to the database with specific rights. The users are for example:
-- the store manager to check the stocks, update the inventory, add the items received and given to the supplier and customer
-- the buyer to follow the state of stocks and anticipate an order of material
-- the commercial to know the products he can use in his project for his client and his region. He can also configure the tool to know the cost of the product and the margins
-- the financier, to monitor the state of stocks and know the value of its assets.
-- the manager of the company or project manager, who can configure the application in order to personalize the block according to his teams: give rights to users, follow all movements, coordinate between different users if necessary.
 
 
 ## III Dev
@@ -251,7 +245,3 @@ The Stock Block was created with the template offered by Airtable : blocks-todo-
 
 ![Block that shows information about the selected table and its fields](media/Block creation/PresentationBlock.gif)
 
-
-## V Definition
-
-- Storage Activities or Store activities : place managed by the store responsible and where all the items are kept. The items can be received or distributed to a third party.
