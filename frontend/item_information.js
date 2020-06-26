@@ -2,11 +2,9 @@ import {
     Box,
     Heading,
 	useBase,
-    useWatchable,
     useRecords,
 	
 } from '@airtable/blocks/ui';
-import {cursor} from '@airtable/blocks';
 import ErrorBoundary from "./ErrorBoundary";
 import React, {useState} from 'react';
 import {session} from '@airtable/blocks';
@@ -30,12 +28,7 @@ function item_information() {
 
 		session_name = session.currentUser.name;
 		session_id = session.currentUser.id;
-	
-		// Global variable to keep the item selected
-		global.clear_key;
- 
-		// useWatchable is used to re-render the block whenever the active table or view changes.
-		useWatchable(cursor, ['activeTableId', 'activeViewId']);
+	 
 		
 		const [tableName, setTableName] = useState(myConstClass.INVENTORY_WAREHOUSE);
 		const table = base.getTableByNameIfExists(tableName);
@@ -62,7 +55,7 @@ function item_information() {
 		}
 	}
 	else {
-		alert ("/!\Please identify as an user or you cannot access to the information reauested");
+		alert (" !!! Please identify as an user or you cannot access to the information requested !!!");
 		return null;
 	}
 }
@@ -71,13 +64,13 @@ function item_information() {
 // My image not used here
 function My_Image({pictures_item,nombre_image}){
     
-	console.log("nb image : " + nombre_image);
+//	console.log("nb image : " + nombre_image);
 	if (pictures_item){
 		let imgArray = new Array();
 		let t = 0; 
 		let source_image = "";
 		
-		console.log("pictures_item dans my image : " + pictures_item);
+//		console.log("pictures_item dans my image : " + pictures_item);
 		
 		for (let i = 0; i < pictures_item.length; i++) {
 				if (pictures_item[i] == "("){
@@ -95,7 +88,7 @@ function My_Image({pictures_item,nombre_image}){
 					console.log("image " + t + " " + source_image);
 				}		
 		}
-		console.log("lien : " + imgArray[0].src);
+	//	console.log("lien : " + imgArray[0].src);
 
 
 		if ((imgArray[0].width > imgArray[0].height) && (imgArray[0].width > 300)) {
@@ -125,11 +118,11 @@ function Item_historique({key_primary}) {
 	
 	const base = useBase();
 	const [tableName, setTableName] = useState(myConstClass.History_Movement);
+
 	const table_historique = base.getTableByNameIfExists(tableName);
+	const my_record_historique = useRecords(table_historique);
 
 	if (table_historique){
-
-			let my_record_historique = useRecords(table_historique);
 			let quantity_before = new Array();
 			let quantity_after = new Array();
 			let quantity_in_out_date = new Array();
@@ -145,6 +138,7 @@ function Item_historique({key_primary}) {
 
 			// check of the field in Histo are created :
 			for (let j = 0; j < table_historique.fields.length; j++) { 
+
 				if (table_historique.fields[j].name == myConstClass.my_const_Quantity_Before){
 					quantity_before_field_exist = true;
 				}
@@ -166,7 +160,7 @@ function Item_historique({key_primary}) {
 				in_out_status_field_exist && supply_name_field_exist) {
 			
 				for (let i = 0; i < my_record_historique.length; i++) {
-					if (my_record_historique[i].getCellValue(myConstClass.my_const_Product_Code_Serrial_Number) == key_primary){
+					if (my_record_historique[i].getCellValue(table_historique.primaryField.name) == key_primary){
 						quantity_before[nb_operation_in_out] = my_record_historique[i].getCellValue(myConstClass.my_const_Quantity_Before);
 						quantity_after[nb_operation_in_out] =  my_record_historique[i].getCellValue(myConstClass.my_const_Quantity_after);
 						quantity_in_out_date[nb_operation_in_out] =  my_record_historique[i].getCellValue(myConstClass.my_const_Date_IN_OUT);
@@ -175,7 +169,6 @@ function Item_historique({key_primary}) {
 						nb_operation_in_out = nb_operation_in_out + 1;
 					}
 				}
-
 
 				const list_quantity = [];
 
@@ -259,9 +252,7 @@ function Item_historique({key_primary}) {
 				</div>
 				)
 
-
-			}
-			
+			}		
 }
 
 //
@@ -285,7 +276,7 @@ function List_items__usestate({table,my_record}){
         items.push({
 		value : my_record[i].name})
 	}
-	
+
 	//get the Name of item if the field "Name" is created
 	// if exist
 	for (let j = 0; j < table.fields.length; j++) { 
@@ -297,6 +288,7 @@ function List_items__usestate({table,my_record}){
 			}
 		}
 	}
+
 
 	//order by name the list of item name and ID	
 	items.sort(function(a, b) {
@@ -344,7 +336,7 @@ function List_items__usestate({table,my_record}){
 	else {
 		my_field_name = table.fields[0].name;
 		}
-
+	
 	if (my_record){ 
 		for (let i = 0; i < my_record.length; i++) {
 		
@@ -411,7 +403,7 @@ function List_items__usestate({table,my_record}){
 		console.log("No record"); 
 
 	}
-
+	
 	//				END ---> My list of information for my key is upto date (if not empty)	
 	//--------------------------------------------------------------------------------------
 
@@ -420,7 +412,7 @@ function List_items__usestate({table,my_record}){
 
 		if (list_item.length==0){
 			//	list vide
-
+			
 			return (
 				<div>
 					<form>
@@ -456,7 +448,7 @@ function List_items__usestate({table,my_record}){
 
 	//--------------- case there IS field and ALL the information for my items 
 		else {
-
+			
 				//order by name the list of item name and ID
 				list_item.sort(function(a, b) {
 					if (a.name_variable==null){
@@ -478,7 +470,7 @@ function List_items__usestate({table,my_record}){
 
 				return 0;
 					});
-			
+					
 			// we collecte the pictures
 			if ((list_picture) && (list_picture.length > 0)){
 	
@@ -492,11 +484,11 @@ function List_items__usestate({table,my_record}){
 				// we show the first picture for now 
 				my_images_items = <img src={imgArray[0].src} class="displayed" width="90%" vertical-align="middle" />;	
 			}
-		
+			
 			const List_of_variable = list_item?list_item.map((list_item,index) =>
 									<li key={index}>{list_item.name_variable} : {list_item.value_variable|| 'No data'} </li>
 								) : null;						
-
+							
 		return (
 			<div>
 						<form>
@@ -538,14 +530,14 @@ function List_items__usestate({table,my_record}){
 
 
 function TableSchema({table}) {
-    // We read the fields from viewMetadata instead of using table.fields because fields are only
+
     // ordered in the context of a specific view.
     // Also, this allows us to only show the fields visible within the selected view.
 
 	let pictures_item;
 	let my_record = useRecords(table);
 		
-	
+
 //-----------------------------------------------------------------------				
 		// for the futur for the pictures
 		// Get the pictures of the table 
@@ -564,7 +556,7 @@ function TableSchema({table}) {
 //-----------------------------------------------------------------------		
 
 			return (
-				<ErrorBoundary> 
+				<ErrorBoundary>
 					<Box>
 						<Box padding={3} borderBottom="thick" className="H1">
 							<h1><Heading size="small" margin={0}>
@@ -590,7 +582,7 @@ function TableSchema({table}) {
 							}					
 						</Box>
 					</Box>
-				</ErrorBoundary> 
+			</ErrorBoundary>
 			);
 
 }

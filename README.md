@@ -144,6 +144,8 @@ Currently you have 3 tables : Inventory List , Sales and Suppliers. We will conf
 
 - **"Storage activities" table** :
    - The table **"Storage Activities"** will record all the mouvement of the items to and from the warehouse. It is a item tracker which help the Warehouse Manager on the actities of the warehouse stock. With formula it is possible to link the **"Inventory List" table** to **"Storage Activities" table** : then you can see the current stock based on the activities
+   - In the primaryField, you need to add the primaryfield of Inventory List table. The date will reconigne the name are identical to show the information on the activities
+
    - In order to get the history of items in the module "Item information" and to see the KPI in the module Dashboard, it is recommanded the create specific fields in Storage activities. As it is the case for the table **"Inventory List"**, all the following fields are not mandatory but it will give more powerfull to your Block Stock
      
       - **"Quantity Before"** : it is the quantity of one specific item counted during the inventory or the quantity get before any move. It must be always positive. It can be personnalized in the myConstClass.js :
