@@ -82,7 +82,7 @@ block Run
 
 Currently you have 3 tables : Inventory List , Sales and Suppliers. We will configure the Inventory list.
 
-**/!\'** If you have not created your block with the template "Lemonade Stand Inventory" , you need to name one of the table **"Inventory List"**.
+:warning: If you have not created your block with the template "Lemonade Stand Inventory" , you need to name one of the table **"Inventory List"**.
 
 - **"Inventory List" table** :
    - The fields *"Items"*, *"Quantity in stock"*, *"Unit Price"*, *"Next Delivery"*, *"Notes"*, *"Pictures"* are alreaday created with the template **"Lemonade Stand Inventory"**. 

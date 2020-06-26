@@ -25,7 +25,6 @@ const loaderExample = <Loader scale={0.5}  fillColor="#33bbaa" />;
 
 // FIN CSS
 
-
 //  Amelioration
 //
 // - recuperer l'ID du champs a la place du nom
