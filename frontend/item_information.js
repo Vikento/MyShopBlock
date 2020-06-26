@@ -349,8 +349,8 @@ function List_items__usestate({table,my_record}){
 		for (let i = 0; i < my_record.length; i++) {
 		
 			if ((my_record[i].name == my_key) || (my_record[i].getCellValueAsString(my_field_name) == my_key)) {
-			
-					for (let j = 0; j < my_record.length; j++) { 	
+
+					for (let j = 0; j < table.fields.length; j++) { 	
 						list_item.push({
 									name_variable : table.fields[j].name,
 									value_variable : my_record[i].getCellValueAsString(table.fields[j].name),
@@ -494,7 +494,7 @@ function List_items__usestate({table,my_record}){
 			}
 		
 			const List_of_variable = list_item?list_item.map((list_item,index) =>
-									<li key={index}>{list_item.name_variable} = {list_item.value_variable} </li>
+									<li key={index}>{list_item.name_variable} : {list_item.value_variable|| 'No data'} </li>
 								) : null;						
 
 		return (
