@@ -564,7 +564,7 @@ function TableSchema({table}) {
 //-----------------------------------------------------------------------		
 
 			return (
-			
+				<ErrorBoundary> 
 					<Box>
 						<Box padding={3} borderBottom="thick" className="H1">
 							<h1><Heading size="small" margin={0}>
@@ -590,7 +590,7 @@ function TableSchema({table}) {
 							}					
 						</Box>
 					</Box>
-	
+				</ErrorBoundary> 
 			);
 
 }

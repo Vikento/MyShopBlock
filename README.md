@@ -12,7 +12,7 @@ The Blocks offer the possibility :
 
 You have also the possibility to personnalized the design of your Blocks. 
 
-## I/ Utility and Users
+## I/ Why My-Stock-Block ? Who can be interested ?
 After seeing messages and messages in Airtable on warehouse table and stock/store management I decided to create a block that will help the users.
 
 The block was designed for a small and medium business, a store or a warehouse. All of the following users have access to the block and to the database with specific rights. The users are for example:
@@ -66,11 +66,11 @@ block Run
    It is possible to personnalize the table : name the table, the base and the fields. Some of the table and field name have to be
    configurated directly in the code.
    
-  Before to start : there are two different table very important for the management of the stock : **"Inventory List"** and **"Storage activities"**
+  Before to start : there are two different table very important for the management of the stock : **"Inventory List"** and **"Storage Activities"**
   
    - "Inventory List" : list all the items existing in the stock.
 
-   - "Storage activities" : is the list of movement of all the items. It can be received or delivery.
+   - "Storage Activities" : is the list of movement of all the items. It can be received or delivery.
 
 
 ### 3. Installation and configuration of your block
@@ -143,7 +143,7 @@ Currently you have 3 tables : Inventory List , Sales and Suppliers. We will conf
  
 
 - **"Storage activities" table** :
-   - The table **"Storage activities"** will record all the mouvement of the items to and from the warehouse. It is a item tracker which help the Warehouse Manager on the actities of the warehouse stock. With formula it is possible to link the **"Inventory List" table** to **"Storage activities" table** : then you can see the current stock based on the activities
+   - The table **"Storage Activities"** will record all the mouvement of the items to and from the warehouse. It is a item tracker which help the Warehouse Manager on the actities of the warehouse stock. With formula it is possible to link the **"Inventory List" table** to **"Storage Activities" table** : then you can see the current stock based on the activities
    - In order to get the history of items in the module "Item information" and to see the KPI in the module Dashboard, it is recommanded the create specific fields in Storage activities. As it is the case for the table **"Inventory List"**, all the following fields are not mandatory but it will give more powerfull to your Block Stock
      
       - **"Quantity Before"** : it is the quantity of one specific item counted during the inventory or the quantity get before any move. It must be always positive. It can be personnalized in the myConstClass.js :
@@ -158,7 +158,7 @@ Currently you have 3 tables : Inventory List , Sales and Suppliers. We will conf
       export const my_const_Quantity_after ="Quantity after";
       ```
 
-      - **""Date IN OUT"** : it is the date of the move of the specified items. It can be personnalized in the myConstClass.js :
+      - **"Date IN OUT"** : it is the date of the move of the specified items. It can be personnalized in the myConstClass.js :
       ```javascript
         // change the "Date IN OUT" to personnalize
       export const my_const_Date_IN_OUT = "Date IN OUT";
@@ -204,6 +204,7 @@ Currently you have 3 tables : Inventory List , Sales and Suppliers. We will conf
 There is 3 modules created : My Stock, Item Information, My Dash Board. They have all a specific usage and can be accessible to all the users.
   - My Stock : it is the list of all the items in the stock. It is create with 3 colums : the primary Key and 2 others column showing 2 fields from the table **"Inventory List"**. 
     - To get access to more information on the item it is possible to click on the item (ITEM ID - PRIMARY KEY // first column). It will open the second module : **"Item Information"**. If you want to update information, you can click on the second or the third column. It will open a window with summary information of the items.
+    - The items are classify ordered by the creation. It is not possible for now to order by alphabetic order.
     - You can chose the fields of your need. To avoid table not adapted the name and information of the items were limited and truncated. It will write 10 chars if you have not changed anything . It is possible to change the numbner of char keep to have optimized view of your table changing the default value of **"NUNBER_OF_CHAR_SEEN_IN_STOCK_PER_COLL"** . This constant is in the file myConstClass.js :
     ```javascript
         // change the value to the number of char you want to print in the table
@@ -212,7 +213,7 @@ There is 3 modules created : My Stock, Item Information, My Dash Board. They hav
 
  - Item Information : this module show all the information relative to a specific item. 
     - If you have clicked on the item ID from the module **"My Stock"**, it will show the information from this item. If you need to look for another item you can click on the input field, be sure there is not item already writen (you can delete), and type the item you are looking for. The search will target the *"Items"* field. If you have create *"Name"* field, it will all check on this part. In order to facilitate, it will autosuggest the list of item during you write the name or ID of the item. With this version the Item Information will show you on the right part the picture you added in your table. The format .gif, .png, .bmp and .jpg are supported. 
-    - If the table **"Storage activities"** is created with all the information fields listed in the previous chapter, it will list all the operations : item received and given from the store. If the fields or the table doesn't exist, you will get message it is not created
+    - If the table **"Storage Activities"** is created with all the information fields listed in the previous chapter, it will list all the operations : item received and given from the store. If the fields or the table doesn't exist, you will get message it is not created
 
   - My Dash Board : this module will show all the KPI you are authorize to see. The user is detected and the KPI is shower base on the user ID. There is 3 types of KPI that can be seen :
       - **KPI on the alert** : it is a fixed KPI which depend on the recommanded fields name configurated in the previous chapter. It is important to have all the fields in **"Inventory List" table** (check chap **3. Installation and configuration of your block** and **a. List of tables and fields to create**). The KPI will list all the alert on the quantity, when it is lower than the threshold and the value when it is higher than the value configurated. It will show until 2 alerts by items.

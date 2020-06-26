@@ -6,7 +6,7 @@ import {
     expandRecord,
 } from '@airtable/blocks/ui';
 import { NavLink} from "react-router-dom";
-
+import ErrorBoundary from "./ErrorBoundary";
 
 // importation of the all my const
 // to change some table name, field, dimension, it is possible to change the 
@@ -30,10 +30,14 @@ const loaderExample = <Loader scale={0.5}  fillColor="#33bbaa" />;
 // - recuperer l'ID du champs a la place du nom
 // - correction :
 //      - tester avec 1 images, avec 100 image, avec d'autre type de fichier		
-//		- meme non d article pour 2 ID differents
 //
 //
 //	Feature :
+//
+//  - Dans index
+//		1/ when we delete on line / row, it is create the probleme "Record missing in table "
+//
+//
 //  - Dans ItemInformation
 //		 1/ dans le fichier item information gerer clicker sur images pour les faire defiler si on en trouve
 //
@@ -137,7 +141,7 @@ function TableStructureBlock() {
 }
 
 
-function Selec_and_show_table({base,table,item_selected}){
+function Selec_and_show_table({base,item_selected}){
 
 //---------------------------  label Select -----------------------------
 	const table_warehouse_stock = base.getTableIfExists(myConstClass.INVENTORY_WAREHOUSE);
@@ -149,6 +153,8 @@ function Selec_and_show_table({base,table,item_selected}){
 		label :  table_warehouse_stock.fields[i].name
 	 });
 	}
+
+
 	const [value, setValue] = useState(selection_value_picker[item_selected].value);
 
 
@@ -157,19 +163,15 @@ function Selec_and_show_table({base,table,item_selected}){
 //---------------------information selected item------------------------------
 // 	it is the information it will see when you select the label with the "Select" button
 
-	let records_desc;
-	let doneFieldId = value;
-
 	//
 	//
 	// 	Change Name by a general value if exist
 	// 
 
-	const doneField = table ? table.getFieldIfExists(doneFieldId) : "Name";
+	const doneField = table_warehouse_stock ? table_warehouse_stock.getFieldIfExists(value) : table_warehouse_stock.getFieldIfExists(table_warehouse_stock.primaryField.name);
+    const records_desc = useRecords(table_warehouse_stock, {fields: [table_warehouse_stock.getFieldIfExists(value)]});
 
-    records_desc = useRecords(table, {fields: [doneField]});
-	
-	let my_item_description = records_desc ? records_desc.map(record => {
+	const my_item_description = records_desc ? records_desc.map(record => {
 
 	// it is possible to limit select and doesn't authorize some type to be accessibles
 	// to do so, please disable to "//" below until the next "//else { //}"  
@@ -198,7 +200,7 @@ function Selec_and_show_table({base,table,item_selected}){
 				
 		}) : null;
 		
-
+		console.log("l 197");
 	//-----------------END information selected item------------------
 
 	return (
@@ -221,15 +223,16 @@ function Selec_and_show_table({base,table,item_selected}){
 
 function TableSchema({base, table}) {
    
-    let records_id;
-		
-	records_id = useRecords(table);
 
- 
+
+//	const [records_id, setRecord_Id] = useRecords(table);
     // Returns all records in the table
 
-	const table_warehouse_stock = base.getTable(myConstClass.INVENTORY_WAREHOUSE);
-	
+
+	const table_warehouse_stock = base.getTableIfExists(myConstClass.INVENTORY_WAREHOUSE);
+	const records_id = useRecords(table_warehouse_stock , {fields : table.primaryField ? [table.primaryField] : [], });
+
+
 
 	 // my_item_id get all the ID
      if (records_id) {
@@ -240,7 +243,8 @@ function TableSchema({base, table}) {
 	
     // my_item_id get all of the ID
 	const my_item_id = records_id ? records_id.map(record => {
-       const my_item_id_value = record.getCellValue(table_warehouse_stock.primaryField.name);
+	   const my_item_id_value = record.getCellValue(table_warehouse_stock.primaryField.name);
+	   
         return(
         
         <div style={{fontSize: 18, padding: 12, borderBottom: '1px solid #ddd'}}>
@@ -248,52 +252,53 @@ function TableSchema({base, table}) {
                 style={{cursor: 'pointer'}}
                 onClick={() => updateKey(my_item_id_value)}
             >
-            <NavLink to="/item_information" > {my_item_id_value || "NA or no information"}  </NavLink>
+            <NavLink to="/item_information" > {my_item_id_value || "No information"}  </NavLink>
            </a>
         </div>
-
         )
       
     }) : null;
 	
-
+	console.log("l 258");
        
     return (
 		<React.Suspense fallback={loaderExample} >
-        <Box>
-            <Box padding={3} borderBottom="thick" className="H1">
-                <h1 ><Heading size="small" margin={0}>
-				<box className="tittle">
-                    My Stock
-					</box >
-                </Heading></h1>
-            </Box>
-            <Box margin={3} className="core_list">
-				<div  class="height_defin">
-						<table  width="100%">
-							<tr hasThickBorderBottom={true}  >
-								<td width={myConstClass.FIELD_ID_WIDTH_PERCENTAGE}>
-								<div  className="Select_css">ITEM ID - PRIMARY KEY </div>
-									{my_item_id}
-								</td>
+			<ErrorBoundary> 
+				<Box>
+					<Box padding={3} borderBottom="thick" className="H1">
+						<h1 ><Heading size="small" margin={0}>
+						<box className="tittle">
+							My Stock
+							</box >
+						</Heading></h1>
+					</Box>
+					<Box margin={3} className="core_list">
+						<div  class="height_defin">
+								<table  width="100%">
+									<tr hasThickBorderBottom={true}  >
+										<td width={myConstClass.FIELD_ID_WIDTH_PERCENTAGE}>
+										<div  className="Select_css">ITEM ID - PRIMARY KEY </div>
+											{my_item_id}
+										</td>
+								
+										<td width={myConstClass.FIELD_DESCRIPTION_WIDTH_PERCENTAGE}>	
+											<Selec_and_show_table base={base} item_selected={1} />	
+											
+										</td>
+
+										<td width={myConstClass.FIELD_QUANTITY_WIDTH_PERCENTAGE}>
+											<Selec_and_show_table base={base} item_selected={2}  />					
+										</td>
+
+									</tr>
+								</table>
+							</div>
 						
-								<td width={myConstClass.FIELD_DESCRIPTION_WIDTH_PERCENTAGE}>	
-									<Selec_and_show_table base={base} table={table} item_selected={1} />	
-									
-								</td>
-
-								<td width={myConstClass.FIELD_QUANTITY_WIDTH_PERCENTAGE}>
-									<Selec_and_show_table base={base} table={table} item_selected={2}  />					
-								</td>
-
-							</tr>
-						</table>
-					</div>
-                
-            </Box>
+					</Box>
 
 
-        </Box>
+				</Box>
+		</ErrorBoundary>
 		</React.Suspense>
     );
 }

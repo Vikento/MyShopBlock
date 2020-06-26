@@ -22,7 +22,7 @@ export const INVENTORY_WAREHOUSE = "Inventory List";
 // Def : name of the table
 // Usage : Module "Item Information" 
 // file : item_information.js
-export const History_Movement = "Storage activities";
+export const History_Movement = "Storage Activities";
 
 
 // Def : List of fields in the table INVENTORY_WAREHOUSE
