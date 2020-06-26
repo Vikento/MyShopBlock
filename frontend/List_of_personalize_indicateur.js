@@ -56,7 +56,7 @@ function User_check_for_kpi(table,type_field) {
 
 // personnalized indicators per user 
 // create manually indicator that will be show in the KPI dashboard
-// the name of the table is very important and have to start by: "DashBoard"
+// the name of the table is very important and have to start by: "DashBoard" KPI_DASHBOARD_NAME
 // the name can not be parameter for now
 // some of the field can be mute : just need to add "--" at the begining of the nale if the field name
 function List_of_personalize_indicateur() {
@@ -64,7 +64,7 @@ function List_of_personalize_indicateur() {
 	
 	let table ;
 	let my_record;
-	let nb_table_DashBoard_perso = 0;
+
 
 // regroupe all the value we got and show to the KPI indicator
 const list_KPI = [];
@@ -73,9 +73,7 @@ const list_KPI = [];
   
 	 // We look for the Table name starting by DashBoard :
  	 // then we save the table
- 
-	  if ((base.tables[i].name[0] == "D") && (base.tables[i].name[1] == "a") && (base.tables[i].name[2] == "s") && (base.tables[i].name[3] == "h") && (base.tables[i].name[4] == "B") 
-		  && (base.tables[i].name[5] == "o") && (base.tables[i].name[6] == "a") && (base.tables[i].name[7] == "r")&& (base.tables[i].name[8] == "d")) {
+	  if (base.tables[i].name.substring(0,9) == myConstClass.KPI_DASHBOARD_NAME) {
 			  table = base.getTableByNameIfExists(base.tables[i].name);
 			  my_record = useRecords(table);	
 			
@@ -90,7 +88,7 @@ const list_KPI = [];
 						user_field_exist = true;
 					
 						for (let j = 0; j < table.fields.length; j++) {
-								if (((base.tables[i].fields[j].name[0])!= "-") && ((base.tables[i].fields[j].name[1])!= "-") && (user_field_exist == true)){
+								if (((base.tables[i].fields[j].name.substring(0,2))!= myConstClass.KPI_IGNORE_FIELD_CHAR) && (user_field_exist == true)){
 									list_KPI.push({
 										name_variable_indicator : table.fields[j].name,
 										am_variable_indicator : my_record[0].getCellValueAsString(table.fields[j].name),
@@ -102,7 +100,7 @@ const list_KPI = [];
 					}
 				}
 			}
-			nb_table_DashBoard_perso = nb_table_DashBoard_perso + 1;
+
 		}
   }
   

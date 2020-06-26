@@ -59,6 +59,12 @@ export const GIVEN_TO = "given to";
 // file :  List_of_personalize_indicateur.js , List_of_VlookUp_indicateur.js , Create_KPI_VLOOKUP.js"
 export const KPI_USER_AUTORIZE = "--USER ONLY--"; 
 
+// def : Word to take in account for the creation of the KPI
+// Usage : Module "My DashBoard" 
+// file :  List_of_personalize_indicateur.js 
+export const KPI_DASHBOARD_NAME = "DashBoard"; 
+export const KPI_IGNORE_FIELD_CHAR = "--"; 
+
 // Def : table name specific to VLookup KPI
 // Usage : Module DashBoard 
 // file :  List_of_VlookUp_indicateur.js", Create_KPI_VLOOKUP.js

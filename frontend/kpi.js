@@ -53,7 +53,7 @@ function kpi() {
 function TableSchema({base}) {
  
     return (
-		<ErrorBoundary>
+	
             <Box>
                 <Box padding={3} borderBottom="thick" className="H1">
                     <h1><Heading size="small" margin={0}>
@@ -90,7 +90,7 @@ function TableSchema({base}) {
                     }              
                 </Box>
             </Box>
-		</ErrorBoundary>
+		
     );
 }
  
