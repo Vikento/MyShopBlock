@@ -211,16 +211,21 @@ There is 3 modules created : My Stock, Item Information, My Dash Board. They hav
 
  - Item Information : this module show all the information relative to a specific item. 
     - If you have clicked on the item ID from the module **"My Stock"**, it will show the information from this item. If you need to look for another item you can click on the input field, be sure there is not item already writen (you can delete), and type the item you are looking for. The search will target the *"Items"* field. If you have create *"Name"* field, it will all check on this part. In order to facilitate, it will autosuggest the list of item during you write the name or ID of the item. With this version the Item Information will show you on the right part the picture you added in your table. The format .gif, .png, .bmp and .jpg are supported. 
-    - If the table **"Storage Activities"** is created with all the information fields listed in the previous chapter, it will list all the operations : item received and given from the store. If the fields or the table doesn't exist, you will get message it is not created
+    - If the table **"Storage Activities"** is created with all the information fields listed in the previous chapter, it will list all the operations : item received and given from the store. If the fields or the table doesn't exist, you will get message it is not created. If you don't create the table and all the fields needed, you will get a message to inform you need the data cannot be show. To avoid this message, you have the constante **"STORAGE_ACTIVITY_LOG_ACTIVATED"** that you can change the value (in myConstClass.js) to false :
+     ```javascript
+        // change the value to true if you want to activate the log or false if not
+      export const STORAGE_ACTIVITY_LOG_ACTIVATED = true;
+      ```
+
 
   - My Dash Board : this module will show all the KPI you are authorize to see. The user is detected and the KPI is shower base on the user ID. There is 3 types of KPI that can be seen :
-      - **KPI on the alert** : it is a fixed KPI which depend on the recommanded fields name configurated in the previous chapter. It is important to have all the fields in **"Inventory List" table** (check chap **3. Installation and configuration of your block** and **a. List of tables and fields to create**). The KPI will list all the alert on the quantity, when it is lower than the threshold and the value when it is higher than the value configurated. It will show until 2 alerts by items.
+      - **KPI on the alert** : it is a fixed KPI which depend on the recommanded fields name configurated in the previous chapter. It is important to have all the fields in **"Inventory List" table** (check chap **3. Installation and configuration of your block** and **a. List of tables and fields to create**). The KPI will list all the alert on the quantity, when it is lower than the threshold and the value when it is higher than the value configurated. It will show 2 alerts by items. If one of the fields or the table are not present, the KPi will not show. If you need to see all the table and fields, but you dont want to have the KPI, you can desastivated the option in myConstClass puting false in front of constant **"LIST_OF_LOG_FUNCTION_ACTIVATED"**.
 
       - **Personnalized KPI** : the module **"My Dash Board"** will check all the table starting by **"DashBoard"** and it will show the information for each field. 
         - all the take which doesn't start by **"DashBoard"** will not take in account in the Dash Board module
         - The field name will be the name of the KPI, and in the first line, the value filled will be the value. 
-        - If you plan to add column to link the others tables or if you don't need to show some fields, it is possible to ignore them. On the field name, you add "--" and it will ignore the field.
-        - the field is accessible to the user only if the field "--USER ONLY--" is created. In this field (first row), all the users need to see the field have to be added. 
+        - If you plan to add column to link the others tables or if you don't need to show some fields, it is possible to ignore them. On the field name, you add "--" (const KPI_IGNORE_FIELD_CHAR) and it will ignore the field.
+        - the field is accessible to the user only if the field "--USER ONLY--" (const KPI_USER_AUTORIZE) is created. In this field (first row), all the users need to see the field have to be added. 
         - only the first row is taken in account for the creation of the KPI.
         - the name of the KPI can be give : in the name of the table , after **"DashBoard"** you can add the name of your field. For instance, you can name it : **"DashBoard My best Sales"** and the KPI **"My best Sales will"** be added
 
@@ -233,6 +238,7 @@ There is 3 modules created : My Stock, Item Information, My Dash Board. They hav
         - the creation of this type of KPI can be also done using the field **"Dashboard Table VLookup"**. All the KPI relative to the "Create Vlookup indicator" are listed in this table. The risk to do it manually is to make a mistake on the name of the table and fields. At this moment you will get alert and you will not see the KPI desired
         - it is recommanded to not change the type of the field
         - to delete one *VLook Up KPI* go on the table **"Dashboard Table VLookup"** . Select the row of the KPI you don't need and delete it. All the user will not have access to the KPI. 
+
 
 
 

@@ -24,6 +24,16 @@ export const INVENTORY_WAREHOUSE = "Inventory List";
 // file : item_information.js
 export const History_Movement = "Storage Activities";
 
+// Def : activation of Storage Activities and History of operation
+// Usage : Module "Item Information" 
+// file : item_information.js
+export const STORAGE_ACTIVITY_LOG_ACTIVATED = true;
+
+// Def : activation of Storage Activities and History of operation
+// Usage : Module Dash Board / KPI
+// file : List_of_log_fonction.js
+export const LIST_OF_LOG_FUNCTION_ACTIVATED = false;
+
 
 // Def : List of fields in the table INVENTORY_WAREHOUSE
 // Usage : Module "Item Information" 

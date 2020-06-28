@@ -233,7 +233,6 @@ function TableSchema({base, table}) {
 	const records_id = useRecords(table_warehouse_stock , {fields : table.primaryField ? [table.primaryField] : [], });
 
 
-
 	 // my_item_id get all the ID
      if (records_id) {
 	} 

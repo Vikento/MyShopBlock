@@ -115,6 +115,8 @@ function My_Image({pictures_item,nombre_image}){
 // this function list all the operation order from History_Movement
 // and show them for specific item selected
 function Item_historique({key_primary,table}) {
+
+	if (myConstClass.STORAGE_ACTIVITY_LOG_ACTIVATED){
 	
 	const base = useBase();
 
@@ -124,7 +126,6 @@ function Item_historique({key_primary,table}) {
 	let my_field_name = table.getFieldByNameIfExists(myConstClass.my_const_name);
 	let my_field_primary_key = table.getFieldByNameIfExists(table.primaryField.name);
 	const my_record_inventory = useRecords(table, {fields: [my_field_name,my_field_primary_key]});
-
 
 	if (table_historique){
 			let quantity_before = new Array();
@@ -269,7 +270,11 @@ function Item_historique({key_primary,table}) {
 				</div>
 				)
 
-			}		
+			}	
+		}
+		else	{
+			return (<div></div>);
+		}
 }
 
 //
@@ -359,11 +364,14 @@ function List_items__usestate({table,my_record}){
 		
 			if ((my_record[i].name == my_key) || (my_record[i].getCellValueAsString(my_field_name) == my_key)) {
 
-					for (let j = 0; j < table.fields.length; j++) { 	
-						list_item.push({
-									name_variable : table.fields[j].name,
-									value_variable : my_record[i].getCellValueAsString(table.fields[j].name),
-						});
+					for (let j = 0; j < table.fields.length; j++) {
+						
+						if (table.fields[j].name.substring(0,2) != myConstClass.KPI_IGNORE_FIELD_CHAR){
+							list_item.push({
+										name_variable : table.fields[j].name,
+										value_variable : my_record[i].getCellValueAsString(table.fields[j].name),
+							});
+						}
 
 						// we collect the attachement and we save in the list_picture
 						// we will use it after to show the pictures
