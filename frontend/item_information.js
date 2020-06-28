@@ -114,13 +114,17 @@ function My_Image({pictures_item,nombre_image}){
 
 // this function list all the operation order from History_Movement
 // and show them for specific item selected
-function Item_historique({key_primary}) {
+function Item_historique({key_primary,table}) {
 	
 	const base = useBase();
-	const [tableName, setTableName] = useState(myConstClass.History_Movement);
 
-	const table_historique = base.getTableByNameIfExists(tableName);
+	const table_historique = base.getTableByNameIfExists(myConstClass.History_Movement);
 	const my_record_historique = useRecords(table_historique);
+
+	let my_field_name = table.getFieldByNameIfExists(myConstClass.my_const_name);
+	let my_field_primary_key = table.getFieldByNameIfExists(table.primaryField.name);
+	const my_record_inventory = useRecords(table, {fields: [my_field_name,my_field_primary_key]});
+
 
 	if (table_historique){
 			let quantity_before = new Array();
@@ -158,6 +162,19 @@ function Item_historique({key_primary}) {
 
 			if (quantity_before_field_exist && quantity_after_field_exist && quantity_in_out_date_field_exist &&
 				in_out_status_field_exist && supply_name_field_exist) {
+
+
+			// ------ check the key : it can be "Name" or "Primary Key"; if it is from "Name", we need to transform as "Primary Key"
+			// we check if the Name field exist
+			if (my_field_name !== null) {	
+				
+				for (let i = 0; i < my_record_inventory.length; i++) {
+					if (my_record_inventory[i].getCellValue(my_field_name) == key_primary){
+						key_primary = my_record_inventory[i].getCellValue(my_field_primary_key) ;
+					}
+				}
+			}		
+			// ------ END key transformed--------------
 			
 				for (let i = 0; i < my_record_historique.length; i++) {
 					if (my_record_historique[i].getCellValue(table_historique.primaryField.name) == key_primary){
@@ -519,7 +536,7 @@ function List_items__usestate({table,my_record}){
 							</div>
 						<div>
 							<p></p>
-							<Item_historique key_primary={my_key}/>	
+							<Item_historique key_primary={my_key} table={table}/>	
 						</div>
 			</div>
 		)
