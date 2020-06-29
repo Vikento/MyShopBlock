@@ -46,7 +46,7 @@ function ConditionValMax(table, field_value_max, field_target){
     // function used for List_of_VlookUp_indicateur
     // get the minimum value of field_value_min in table and 
     // return the max and the value for the field_value_min linked to the field_value_min
-    function ConditionValMin(table, field_value_min, field_target){
+function ConditionValMin(table, field_value_min, field_target){
     
         let min;
         let name_field_targeted;
@@ -72,7 +72,7 @@ function ConditionValMax(table, field_value_max, field_target){
     
     // function used for List_of_VlookUp_indicateur
     // get the value in the middle of the list of value 
-    function ConditionMedian(table, field_value_median, field_target){
+function ConditionMedian(table, field_value_median, field_target){
     
         let med;
         let name_field_targeted;
@@ -107,7 +107,7 @@ function ConditionValMax(table, field_value_max, field_target){
     // personnalized indicators per user
     // possible to do simple Vlook up with 3 type of condition
     // max , min, and nedian
-    function List_of_VlookUp_indicateur() {
+function List_of_VlookUp_indicateur() {
         const base = useBase();
         let table_Vlookup ;
     
@@ -131,7 +131,7 @@ function ConditionValMax(table, field_value_max, field_target){
     
         if (!table_Vlookup_KPI_exist){
             // do nothing if table doesn't exit
-            return <div> </div>;
+            return null;
                 }
         else{
             // 1 - check if the special field for Vlookup exist
@@ -176,7 +176,6 @@ function ConditionValMax(table, field_value_max, field_target){
                     if (session.currentUser) {
                         user_id = session.currentUser.id;
                         
-                
                         const my_records_field = useRecords(table_Vlookup, {fields: [myConstClass.FIELD_NAME_KPI, myConstClass.FIELD_NAMETABLE, myConstClass.FIELD_NAMEFIELD, myConstClass.FIELD_NAMEFIELD_TARGETED,myConstClass.FIELD_SELECTCONDITION,myConstClass.KPI_USER_AUTORIZE]});
                         const myRecord_USER = useRecords(table_Vlookup, {fields: [myConstClass.KPI_USER_AUTORIZE]});
                     
@@ -206,19 +205,30 @@ function ConditionValMax(table, field_value_max, field_target){
                             if (user_authorize)
                             {
     
-                                if (base.getTableByNameIfExists(my_records_field[i].getCellValue(myConstClass.FIELD_NAMETABLE))){
-                                    let table_selected_ok = base.getTableByNameIfExists(my_records_field[i].getCellValue(myConstClass.FIELD_NAMETABLE));
+                                if (base.getTableByIdIfExists(my_records_field[i].getCellValue(myConstClass.FIELD_NAMETABLE))){
+                                    let table_selected_ok = base.getTableByIdIfExists(my_records_field[i].getCellValue(myConstClass.FIELD_NAMETABLE));
                                     
-                                    //		3.1 - check if the name of table indicate in the Vlookup table exist. If not STOP
+                                    //		3.1 - check if the id of table indicate in the Vlookup table exist. If not STOP
                                     let FIELD_FIELD_NAMEFIELD_exist = false;
+                                    let FIELD_FIELD_NAMEFIELD_name ="";
                                     let FIELD_NAMEFIELD_TARGETED_exist = false;
+                                    let FIELD_FIELD_TARGETED_name = "";
+                                    let FIELD_FIELD_NAMEFIELD_type = "";
                                         for (let j = 0; j < table_selected_ok.fields.length; j++) {
     
-                                            if (table_selected_ok.fields[j].name == my_records_field[i].getCellValue(myConstClass.FIELD_NAMEFIELD)){
+                                            if (table_selected_ok.fields[j].id == my_records_field[i].getCellValue(myConstClass.FIELD_NAMEFIELD)){
                                                 FIELD_FIELD_NAMEFIELD_exist = true;
+                                                FIELD_FIELD_NAMEFIELD_name = table_selected_ok.fields[j].name;
+
+                                                // we keep the type of currency if exist in FIELD_FIELD_NAMEFIELD_type
+                                                if (table_selected_ok.fields[j].type == FieldType.CURRENCY) {
+                                                  FIELD_FIELD_NAMEFIELD_type = table_selected_ok.fields[j].options.symbol;
+                                                }
                                             }
-                                            if (table_selected_ok.fields[j].name == my_records_field[i].getCellValue(myConstClass.FIELD_NAMEFIELD_TARGETED)){
+                                            
+                                            if (table_selected_ok.fields[j].id == my_records_field[i].getCellValue(myConstClass.FIELD_NAMEFIELD_TARGETED)){
                                                 FIELD_NAMEFIELD_TARGETED_exist = true;
+                                                FIELD_FIELD_TARGETED_name  = table_selected_ok.fields[j].name;
                                             }
                                         }
                                             if (FIELD_FIELD_NAMEFIELD_exist && FIELD_NAMEFIELD_TARGETED_exist){
@@ -229,47 +239,54 @@ function ConditionValMax(table, field_value_max, field_target){
                                                 //		-- Max of all the value : myConstClass.VALMAX_COND
                                                 //		-- Min of all the value : myConstClass.VALMIN_COND
                                                 //		-- Middle value of all the value : myConstClass.VALMEDIAN_COND
+
+                                                // 1-- -- >> Val MAx :
                                                 if (my_records_field[i].getCellValue(myConstClass.FIELD_SELECTCONDITION).name == myConstClass.VALMAX_COND){
                                                 
                                                     let val_max_target = ["nothingValMax" ,"nothingValMax"];
                                                     val_max_target = ConditionValMax(table_selected_ok,my_records_field[i].getCellValue(myConstClass.FIELD_NAMEFIELD),  my_records_field[i].getCellValue(myConstClass.FIELD_NAMEFIELD_TARGETED));
-                                                    
+                                       
                                                     list_VlookUp_KPI.push({
                                                         name_KPI : my_records_field[i].getCellValue(myConstClass.FIELD_NAME_KPI),
                                                         condition_selected : my_records_field[i].getCellValue(myConstClass.FIELD_SELECTCONDITION).name,
-                                                        table_checked : my_records_field[i].getCellValue(myConstClass.FIELD_NAMETABLE),
-                                                        field_checked : my_records_field[i].getCellValue(myConstClass.FIELD_NAMEFIELD),
+                                                        table_checked : [base.getTableByIdIfExists(my_records_field[i].getCellValue(myConstClass.FIELD_NAMETABLE)).name],
+                                                        field_checked : FIELD_FIELD_NAMEFIELD_name,
                                                         value_cond : val_max_target[0],
-                                                        field_targeted : val_max_target[1]
+                                                        field_targeted : val_max_target[1],
+                                                        currency_if_exist : FIELD_FIELD_NAMEFIELD_type,
                                                         });
     
                                                 }
+                                                 // 2-- -- >> Val Min :
                                                 else if (my_records_field[i].getCellValue(myConstClass.FIELD_SELECTCONDITION).name == myConstClass.VALMIN_COND){
     
                                                     let val_min_target = ["nothingValMin" ,"nothingValMin"];
                                                     val_min_target = ConditionValMin(table_selected_ok,my_records_field[i].getCellValue(myConstClass.FIELD_NAMEFIELD),  my_records_field[i].getCellValue(myConstClass.FIELD_NAMEFIELD_TARGETED));
-                                                                                        
+                                                                            
                                                     list_VlookUp_KPI.push({
                                                         name_KPI : my_records_field[i].getCellValue(myConstClass.FIELD_NAME_KPI),
                                                         condition_selected : my_records_field[i].getCellValue(myConstClass.FIELD_SELECTCONDITION).name,
-                                                        table_checked : my_records_field[i].getCellValue(myConstClass.FIELD_NAMETABLE),
-                                                        field_checked : my_records_field[i].getCellValue(myConstClass.FIELD_NAMEFIELD),
+                                                        table_checked : [base.getTableByIdIfExists(my_records_field[i].getCellValue(myConstClass.FIELD_NAMETABLE)).name],
+                                                        field_checked : FIELD_FIELD_NAMEFIELD_name,
                                                         value_cond : val_min_target[0],
-                                                        field_targeted : val_min_target[1]
+                                                        field_targeted : val_min_target[1],
+                                                        currency_if_exist : FIELD_FIELD_NAMEFIELD_type,
                                                         });
                                                 }
+                                                // 3-- -- >> Val Min :
                                                 else if (my_records_field[i].getCellValue(myConstClass.FIELD_SELECTCONDITION).name == myConstClass.VALMEDIAN_COND){	
                                                 
                                                     let val_med_target = ["nothingMed" ,"nothingMed"];
                                                     val_med_target = ConditionMedian(table_selected_ok,my_records_field[i].getCellValue(myConstClass.FIELD_NAMEFIELD),  my_records_field[i].getCellValue(myConstClass.FIELD_NAMEFIELD_TARGETED));
-                                                                                        
+                                                                              
                                                     list_VlookUp_KPI.push({
                                                         name_KPI : my_records_field[i].getCellValue(myConstClass.FIELD_NAME_KPI),
                                                         condition_selected : my_records_field[i].getCellValue(myConstClass.FIELD_SELECTCONDITION).name,
-                                                        table_checked : my_records_field[i].getCellValue(myConstClass.FIELD_NAMETABLE),
-                                                        field_checked : my_records_field[i].getCellValue(myConstClass.FIELD_NAMEFIELD),
+                                                        table_checked : [base.getTableByIdIfExists(my_records_field[i].getCellValue(myConstClass.FIELD_NAMETABLE)).name],
+                                                        field_checked : FIELD_FIELD_NAMEFIELD_name,
                                                         value_cond : val_med_target[0],
-                                                        field_targeted : val_med_target[1]
+                                                        field_targeted : val_med_target[1],
+                                                        currency_if_exist : FIELD_FIELD_NAMEFIELD_type,
                                                         });							
     
                                                 }
@@ -318,7 +335,7 @@ function ConditionValMax(table, field_value_max, field_target){
                 data_to_show_all_VLOOKUP_KPI.push({
                 titre : (list_VlookUp_KPI[k].name_KPI),
                 valeur_title : <li >  {list_VlookUp_KPI[k].condition_selected} of {list_VlookUp_KPI[k].field_checked} in {list_VlookUp_KPI[k].table_checked} </li>,
-                valeur_unit : <li >  {list_VlookUp_KPI[k].field_targeted} : {list_VlookUp_KPI[k].value_cond} </li>		
+                valeur_unit : <li >  {list_VlookUp_KPI[k].field_targeted} : {list_VlookUp_KPI[k].value_cond} {list_VlookUp_KPI[k].currency_if_exist} </li>		
                 });	
             }
     

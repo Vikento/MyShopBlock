@@ -2,10 +2,9 @@ import {
     Box,
     Heading,
     useBase,
-    useWatchable,
 } from '@airtable/blocks/ui';
-import {cursor} from '@airtable/blocks';
-import React, {useState} from 'react';
+
+import React from 'react';
 import ErrorBoundary from "./ErrorBoundary";
 
 import Create_KPI_VLOOKUP from "./Create_KPI_VLOOKUP";
@@ -22,22 +21,17 @@ function kpi() {
 	
     const base = useBase();
 
-    // useWatchable is used to re-render the block whenever the active table or view changes.
-    useWatchable(cursor, ['activeTableId', 'activeViewId']);
-
-	const [tableName, setTableName] = useState(myConstClass.INVENTORY_WAREHOUSE);
-	const table = base.getTableByNameIfExists(tableName);
+	const table = base.getTableByNameIfExists(myConstClass.INVENTORY_WAREHOUSE);
 
     if (table) {
         return <TableSchema base={base} />;
     } else {
 
-
         return ( 
 			<div>
 				<h2> My KPI : </h2>
 				<p> </p>
-				Error : No base with the name "Inventory List" . For the full functionnality you have to create a Table with the name of "Inventory List" as following :
+				Error : No base with the name "{myConstClass.INVENTORY_WAREHOUSE}". For the full functionnality you have to create a Table with the name of "Inventory List" as following :
 				<p> </p>
 				<img src="https://i.postimg.cc/52P43k6F/Change-Name-Table.gif" width="100%" />
 				When you create the "Inventory List", you can reload or refresh the page.

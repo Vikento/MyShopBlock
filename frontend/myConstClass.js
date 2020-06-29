@@ -1,6 +1,14 @@
 // All my constant configurable by the user
 
 
+// Def : table name where a list the main CSS to personalize the Block
+// Usage : Module Stock, Dash board and item, for all the block
+// file : main.js
+export const CONFIG_CSS_TABLE_NAME = "Configuration CSS"; 
+export const BACKGROUND_IMAGE_FIELD_NAME = "Background Image"; 
+export const CHANGE_COLOR_HOVER_FIELD_NAME = "Color Hover"; 
+export const CHANGE_RADIUS_BORDER_HOVER = "Border radius Hover";
+
 // Def : % of the 3 columns space
 // Usage : Module "My Stock"
 // file : index.js
