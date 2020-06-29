@@ -231,7 +231,7 @@ There is 3 modules created : My Stock, Item Information, My Dash Board. They hav
 
       - **VLook Up KPI** : this KPI is usefull to create indicor which is relative the highest, the lowest or the medium value. 
         - It will give the value based on what you need (max value, min value or median value) and will apply to the field of your selection. Then based on your need it will show which field relative to the result you want to show. For instance you need to check the item name of the highest stocks from all the items : you will choose the table where you have the field *"number of stock"*, you choose the condition (Value maximum), and the field you want to see *"Name of the item"*. 
-        - Only for numeric field it is applicable.
+        - Only for numeric field it is applicable (Types : COUNT, CURRENCY, DATE, DATE_TIME, DURATION, FORMULA, NUMBER, PERCENT, RATING
         - The field you want to show should be in the same table
         - Only Creator user and Editor user can create  **VLook Up KPI** .
         - the creation can be done directly with the button **"Create Vlookup indicator"** . The user who create the table will be added automatically. To add more user, it is possible to do it using the field **"--USER ONLY--"** : you add the collaborators line by line where you want the user get access to the **VLook Up KPI**
@@ -245,6 +245,29 @@ There is 3 modules created : My Stock, Item Information, My Dash Board. They hav
 ## III/ Dev
 
 The Stock Block was created with the template offered by Airtable like blocks-todo-list and accessible in (https://github.com/Airtable/blocks-todo-list) .
+
+
+### Modification of the 3 modules
+  The 3 modules are managed by **main.js**. It will pass from one module to another. It call the CSS file at the begining 
+
+#### Module My Stock
+  - The module is managed by **index.js**
+
+#### Module Item Information
+  - The module is managed by **item_information.js**
+
+#### Module Dash Board
+  - The module is managed by **kpi.js**. KPI need :
+      - **List_of_log_fonction.js** : manage the implemented KPI Log depending of some field you must create
+      - **List_of_personalize_indicateur.js** : manage the possibility for the user to create any KPI
+      - **Create_KPI_VLOOKUP.js** : manage the creation of the KPi Vlookup indicator
+      - **List_of_VlookUp_indicateur.js** : manage the KPi Vlookup indicator
+
+### Constantes
+  - All the main constant, specialy the one to personalize the user interface are in **myConstClass.js**
+
+### CSS 
+  - All the CSS loaded are in the file **Apply_CSS.js** . It is call by main.js when the block is started
 
 ## IV/ See the block running
 

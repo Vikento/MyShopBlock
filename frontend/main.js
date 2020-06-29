@@ -18,14 +18,13 @@ const loader_main = <Loader scale={0.5}  fillColor="#33bbaa" />
 
 
 
-
 class Main extends Component {
 	
 
   render() {
 	    return (
 	<HashRouter>
-	
+		<ErrorBoundary>
 			<div >
 			  <h1>My Stock Block</h1>
 			 
@@ -49,7 +48,7 @@ class Main extends Component {
 			  </div>
 
 			</div>
-	
+		</ErrorBoundary>
 	</HashRouter>
     );
   }

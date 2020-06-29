@@ -61,57 +61,6 @@ function item_information() {
 }
 
 
-// My image not used here
-function My_Image({pictures_item,nombre_image}){
-    
-//	console.log("nb image : " + nombre_image);
-	if (pictures_item){
-		let imgArray = new Array();
-		let t = 0; 
-		let source_image = "";
-		
-//		console.log("pictures_item dans my image : " + pictures_item);
-		
-		for (let i = 0; i < pictures_item.length; i++) {
-				if (pictures_item[i] == "("){
-					imgArray[t] = new Image();
-					let source_image = "";
-					
-					while (pictures_item[i] != ")") {
-						i = i + 1;
-						if ((pictures_item[i] != ")") && (i < pictures_item.length)){
-							source_image = source_image + pictures_item[i];
-						}
-					}
-					imgArray[t].src = source_image;
-					t = t + 1;	
-					console.log("image " + t + " " + source_image);
-				}		
-		}
-	//	console.log("lien : " + imgArray[0].src);
-
-
-		if ((imgArray[0].width > imgArray[0].height) && (imgArray[0].width > 300)) {
-		
-			return (<img src={imgArray[0].src} class="displayed" width="300" />);	
-		}
-		else if ((imgArray[0].width > imgArray[0].height) && (imgArray[0].width <= 300)) {
-		
-			return (<img src={imgArray[0].src} class="displayed" />);	
-		}
-		else if ((imgArray[0].width <= imgArray[0].height) && (imgArray[0].height > 300)) {
-		
-			return (<img src={imgArray[0].src} class="displayed" height="300" />);	
-		}
-		else if ((imgArray[0].width <= imgArray[0].height) && (imgArray[0].height < 300)) {
-		
-			return (<img src={imgArray[0].src} class="displayed" />);	
-		}
-	}
-	else return null;
-	
-}
-
 // this function list all the operation order from History_Movement
 // and show them for specific item selected
 function Item_historique({key_primary,table}) {
@@ -425,8 +374,7 @@ function List_items__usestate({table,my_record}){
 		}
 	}
 	else {
-		console.log("No record"); 
-
+	//	console.log("No record"); 
 	}
 	
 	//				END ---> My list of information for my key is upto date (if not empty)	
