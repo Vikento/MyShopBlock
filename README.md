@@ -218,6 +218,7 @@ There is 3 modules created : My Stock, Item Information, My Dash Board. They hav
       ```
 
 
+
   - My Dash Board : this module will show all the KPI you are authorize to see. The user is detected and the KPI is shower base on the user ID. There is 3 types of KPI that can be seen :
       - **KPI on the alert** : it is a fixed KPI which depend on the recommanded fields name configurated in the previous chapter. It is important to have all the fields in **"Inventory List" table** (check chap **3. Installation and configuration of your block** and **a. List of tables and fields to create**). The KPI will list all the alert on the quantity, when it is lower than the threshold and the value when it is higher than the value configurated. It will show 2 alerts by items. If one of the fields or the table are not present, the KPi will not show. If you need to see all the table and fields, but you dont want to have the KPI, you can desastivated the option in myConstClass puting false in front of constant **"LIST_OF_LOG_FUNCTION_ACTIVATED"**.
 
