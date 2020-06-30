@@ -73,6 +73,8 @@ block Run
    - "Storage Activities" : is the list of movement of all the items. It can be received or delivery.
 
 
+![alt text](https://github.com/Vikento/MyShopBlock/media/Block_creation/Table_Name.jpg)
+
 ### 3. Installation and configuration of your block
 
    In the follwing part we will describe the creation of the different tables and fields in order to optimize your table .
@@ -99,7 +101,7 @@ Currently you have 3 tables : Inventory List , Sales and Suppliers. We will conf
       export const my_const_name = "Name";
       ```
 
-      - **"Items"** : it is the primary key to define a item. It is a unique ID that can help to get the exact items. It is an option for the KPI module : it will permit to activate the KPI on the alarm on the stock (function List_of_log_fonction). Others indicators mention here are needed. I can also be named "Product Code Serrial Number". The field name will not create issue but it is important to use the same primary key in your table *"Inventory List" table* and *"Storage activities" table*. 
+      - **"Items"** : it is the primary key to define an item. It is an unique ID that can help to get the exact items. It is not mandatory but you need the primary Key for the KPI module : function List_of_log_fonction. The field name will not create issue but it is important to use the same primary key in your table *"Inventory List" table* and *"Storage activities" table*. 
 
       - **"Threshold Alarm"** : it is the threshold on the number of item and it will trigger the warning. It is a number defined by the managers to have in time the information that the level of a specific item is low. It is an option for the KPI module : it will permit to activate the KPI on the alarm on the stock (function List_of_log_fonction). Others indicators mention here are needed. It can be personnalized in the myConstClass.js :
       ```javascript
@@ -162,7 +164,7 @@ Currently you have 3 tables : Inventory List , Sales and Suppliers. We will conf
       export const my_const_Date_IN_OUT = "Date IN OUT";
       ```
 
-      - **"OUT"** : it is the field indicated if the items went in or or for a specific items. It can be personnalized in the myConstClass.js :
+      - **"OUT"** : it is the field indicated if the items went in or out for a specific items. It can be personnalized in the myConstClass.js :
       ```javascript
         // change the "OUT" to personnalize
       export const my_const_OUT = "OUT";
