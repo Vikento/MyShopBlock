@@ -139,6 +139,8 @@ Currently you have 3 tables : Inventory List , Sales and Suppliers. We will conf
       export const my_const_Check_total_Value = "Check total Value";
       ```
  
+      ![alt text](https://github.com/Vikento/MyShopBlock/blob/master/media/Block_creation/Fields_Inventory_List.JPG?raw=true)
+
 
 - **"Storage activities" table** :
    - The table **"Storage Activities"** will record all the mouvement of the items to and from the warehouse. It is a item tracker which help the Warehouse Manager on the actities of the warehouse stock. With formula it is possible to link the **"Inventory List" table** to **"Storage Activities" table** : then you can see the current stock based on the activities
