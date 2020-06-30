@@ -73,7 +73,7 @@ block Run
    - "Storage Activities" : is the list of movement of all the items. It can be received or delivery.
 
 
-![alt text](https://github.com/Vikento/MyShopBlock/blob/master/media/Block_creation/Table_Name.jpg)
+![alt text](https://github.com/Vikento/MyShopBlock/blob/master/media/Block_creation/Table_Name.jpg?raw=true)
 
 ### 3. Installation and configuration of your block
 
