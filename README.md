@@ -36,7 +36,7 @@ This block is build for the Storage Activities or Store activities, or any place
   | Option 1 Start with a template  | Option 2 : start from scratch |
   | ------------- | ------------- |
   | We look for the template "Lemonade Stand Inventory". We just write "Inventory" and we can find it.  | - We create two new tables for instances *"Inventory List"*, where we will list all the existing items , and *"Storage activities"* where we will follow the activities of our store. We will see why those two tables are important in the next chapter. |
-  | ------------- | ------------- |
+  |  |  |
   | Once you have chose your template you can personalize it : create new fields, add your own items, create your description and information for each items... | You can add the fields we will need. To facilitate you can import a spreadsheet : click on the + at the level of your table name, import a spreadsheet, CSV file, choose CSV file. You can get the CSV file we need in the https://github.com/Vikento/MyShopBlock/tree/master/media/CSV%20Table |
   
   - The two options continue in the same way
@@ -92,7 +92,7 @@ This block is build for the Storage Activities or Store activities, or any place
 
 If you have choosen the option 1 above *Start with a template* you should have 3 tables : Inventory List , Sales and Suppliers. We will configure the Inventory list. If you have choosen the option 2 *start from scratch* you should have 2 tables Inventory List and Storage activities
 
-:warning: If you have not created your block with one of the two options, you need at least to name one of the table **"Inventory List"**.
+> :warning: if you have not created your block with one of the two options, you need at least to name one of the table **"Inventory List"**.
 
 - **"Inventory List" table** :
    - With option 1 - the template **"Lemonade Stand Inventory"** - the fields *"Items"*, *"Quantity in stock"*, *"Unit Price"*, *"Next Delivery"*, *"Notes"*, *"Pictures"* are already  . 
