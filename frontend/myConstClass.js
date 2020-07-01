@@ -40,7 +40,7 @@ export const STORAGE_ACTIVITY_LOG_ACTIVATED = true;
 // Def : activation of Storage Activities and History of operation
 // Usage : Module Dash Board / KPI
 // file : List_of_log_fonction.js
-export const LIST_OF_LOG_FUNCTION_ACTIVATED = false;
+export const LIST_OF_LOG_FUNCTION_ACTIVATED = true;
 
 
 // Def : List of fields in the table INVENTORY_WAREHOUSE

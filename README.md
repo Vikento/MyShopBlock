@@ -30,8 +30,16 @@ This block is build for the Storage Activities or Store activities, or any place
    1. Importation of the Block from GitHub
   - First how to integrate the module Block Stock from GitHub
   - Connect to Airtable, and create a new base clicking "Add a base"
-  - It is possible to create from scratch or to start with a template. To facilitate the exercice we will assume we start with a template. We will look for the template "Lemonade Stand Inventory". WWe just write Inventory and we can find it.
-  - Once you have chose your template you can personalize it.
+  - It is possible to create from scratch or to start with a template. Let see the two options :
+  
+
+  | Option 1 Start with a template  | Option 2 : start from scratch |
+  | ------------- | ------------- |
+  | - We look for the template "Lemonade Stand Inventory". We just write "Inventory" and we can find it. | - We create two new table for instances *"Inventory List"*, where we will list all the existing items , and *"Storage activities"* where we will follow the activities of our store. We will see why those two tables are important in the next chapter. |
+  |  - Once you have chose your template you can personalize it : create new fields, add your own items, create your description and information for each items...|  |  
+
+  
+
   - Then open you new base. We can already start to use the block. To do so, you need to go at your right and click on "Blocks"
   - Install a Block (you can check : [Digital video production template](https://airtable.com/templates/content-production/expKOGNEdcF0gmFW3/digital-video-production). You can also use an existing base or a different template: this block doesn't depend on any specific attributes from that template. Or Create a new block in your new base (see
    [Create a new block](https://airtable.com/developers/blocks/guides/hello-world-tutorial#create-a-new-block),    selecting "Table structure" as your template.
@@ -73,7 +81,7 @@ block Run
    - "Storage Activities" : is the list of movement of all the items. It can be received or delivery.
 
 
-![alt text](https://github.com/Vikento/MyShopBlock/blob/master/media/Block_creation/Table_Name.jpg?raw=true)
+![Tables Needed](https://github.com/Vikento/MyShopBlock/blob/master/media/Block_creation/Table_Name.jpg?raw=true)
 
 ### 3. Installation and configuration of your block
 
@@ -139,7 +147,7 @@ Currently you have 3 tables : Inventory List , Sales and Suppliers. We will conf
       export const my_const_Check_total_Value = "Check total Value";
       ```
  
-      ![alt text](https://github.com/Vikento/MyShopBlock/blob/master/media/Block_creation/Fields_Inventory_List.JPG?raw=true)
+      ![Inventory List Fields](https://github.com/Vikento/MyShopBlock/blob/master/media/Block_creation/Fields_Inventory_List.JPG?raw=true)
 
 
 - **"Storage activities" table** :
@@ -178,13 +186,15 @@ Currently you have 3 tables : Inventory List , Sales and Suppliers. We will conf
       export const my_const_Supply_name = "Supplier Name";
       ```
 
+   ![Storage activities Fields](https://github.com/Vikento/MyShopBlock/blob/master/media/Block_creation/Fields_Store_Activities_List.JPG?raw=true)
+
 
 - **"KPI" table** :
    It is possible to create your own table to give KPI information. Currently you can have 2 types of KPI table : 
     - one table personallized where all the informations will be showed how it is. Only the first line is taken in account
     - one table with VLookup rule which permit to give information based on 3 conditions : the value maximum, the value minimum and the median value
 
-    The KPI table is described in the next chapter.
+    The KPI table is described in the next chapter (in 4. Using your block under Dash Board)
 
  #### b. Customizing
 

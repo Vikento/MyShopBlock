@@ -31,8 +31,14 @@ function ConditionValMax(table, field_value_max, field_target){
     
         for (let i = 0; i < my_records_field.length; i++) {
             {
-                if ( max < (my_records_field[i].getCellValue(field_value_max))){
-                    max = my_records_field[i].getCellValue(field_value_max);
+                let temp_value = 0;
+                if (!Number.isFinite(my_records_field[i].getCellValue(field_value_max))){
+                    temp_value = parseFloat(my_records_field[i].getCellValue(field_value_max));
+                }
+                else  temp_value = my_records_field[i].getCellValue(field_value_max);
+
+                if ( max < temp_value){
+                    max = temp_value;
                     name_field_targeted = my_records_field[i].getCellValue(field_target);
                 }
             }
@@ -59,8 +65,16 @@ function ConditionValMin(table, field_value_min, field_target){
         
             for (let i = 0; i < my_records_field.length; i++) {
                 {
-                    if ( min > (my_records_field[i].getCellValue(field_value_min))){
-                        min = my_records_field[i].getCellValue(field_value_min);
+
+                    let temp_value = 0;
+                    if (!Number.isFinite(my_records_field[i].getCellValue(field_value_min))){
+                        temp_value = parseFloat(my_records_field[i].getCellValue(field_value_min));
+                    }
+                    else  temp_value = my_records_field[i].getCellValue(field_value_min);
+
+
+                    if ( min > temp_value){
+                        min = temp_value;
                         name_field_targeted = my_records_field[i].getCellValue(field_target);
                     }
                 }
@@ -83,8 +97,15 @@ function ConditionMedian(table, field_value_median, field_target){
         let temporary_list = [];
 
         for (let i = 0; i < my_records_field.length; i++) {
+
+            let temp_value = 0;
+            if (!Number.isFinite(my_records_field[i].getCellValue(field_value_median))){
+                temp_value = parseFloat(my_records_field[i].getCellValue(field_value_median));
+            }
+            else  temp_value = my_records_field[i].getCellValue(field_value_median);
+
             temporary_list.push({
-                value_figure : my_records_field[i].getCellValue(field_value_median),
+                value_figure : temp_value,
                 name_figure : my_records_field[i].getCellValue(field_target),
             });
         }

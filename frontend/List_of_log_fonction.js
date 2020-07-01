@@ -73,6 +73,8 @@ function List_of_log_fonction() {
 			}	
 	}
 	
+	console.log( " l 76 : " + check_stock_exist + " " + Threshold_Alarm_exist + " " + Total_Stock_exist + " " + Name_exist + " " + Threshold_total_Value_exist  + " " +  total_value_exist  + " " + Check_total_Value_exist);
+
 	if (check_stock_exist && Threshold_Alarm_exist && Total_Stock_exist && Name_exist && Threshold_total_Value_exist  &&  total_value_exist  && Check_total_Value_exist){
 
 		for (let i = 0; i < my_record_historique.length; i++) {
