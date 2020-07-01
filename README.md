@@ -41,7 +41,7 @@ This block is build for the Storage Activities or Store activities, or any place
   - Open your new base. We can already start to use the block. To do so, you need to go at your right and click on "Blocks"
   - Install a Block . You can also check : [Digital video production template](https://airtable.com/templates/content-production/expKOGNEdcF0gmFW3/digital-video-production).
   - Build a custom block
-  - Name your Block
+  - Give a name to your Block
   - Choose the option "Remix from GitHub"
   - Add the GitHub repository : https://github.com/Vikento/MyShopBlock
   - And validate clicking on Create Block
@@ -63,82 +63,82 @@ This block is build for the Storage Activities or Store activities, or any place
   ```bash
   block Run 
   ```
-  - When the block is running, you can put the URL shared by your terminal on the airtable windows
-  - your block is installed !
+  - When the block is running, you can put the URL shared by your terminal on the airtable windows browser
+  - Congrats :-) , your block is installed !
 
 ### 2. Creation of the Tables and Fields
 
-   It is possible to personnalize the table : name the table, the base and the fields. Some of the table and field name have to be
-   configurated directly in the code.
+   It is possible to personnalize the table : name the table, the base and the fields. But some of the table and field name have to be
+   configurated with the exactly name, as we need to identify the fonctionnality of each of them. Of course, as we will see in the constant part, it is possible to modify the constant name and give the personalized name which the code you understand. This part is little more complexe, but not impossible ;-) 
    
-  Before to start : there are two different table very important for the management of the stock : **"Inventory List"** and **"Storage Activities"**
+  Before to start : there are two different tables very important for the management of the stock : **"Inventory List"** and **"Storage Activities"**
   
-   - "Inventory List" : list all the items existing in the stock.
+   - "Inventory List" : list all the items existing in the stock. It describe the type of items you can have
 
-   - "Storage Activities" : is the list of movement of all the items. It can be received or delivery.
+   - "Storage Activities" : list of movement of all the items. It can be received or delivery. It uselly fill by the warehouse manager when he received or give a items from the store. 
 
+   - it is not mandatory, but the two table can be linked. For instance to get the information on the total stock available in table **"Inventory List"** the quantity should be linked to all the operation done for one item in the table **"Storage Activities"**.
 
 ![Tables Needed](https://github.com/Vikento/MyShopBlock/blob/master/media/Block_creation/Table_Name.jpg?raw=true)
 
 ### 3. Installation and configuration of your block
 
-   In the follwing part we will describe the creation of the different tables and fields in order to optimize your table .
-   We assume that the step 1 Integration of My Block Stock in Airtable is done and work.
+   In the following part we will describe the creation of the different tables and fields in order to optimize your table .
+   We assume that the step 1 Integration of My Block Stock in Airtable is done and works.
 
  #### a. List of tables and fields to create 
 
-Currently you have 3 tables : Inventory List , Sales and Suppliers. We will configure the Inventory list.
+If you have choosen the option 1 above *Start with a template* you should have 3 tables : Inventory List , Sales and Suppliers. We will configure the Inventory list. If you have choosen the option 2 *start from scratch* you should have 2 tables Inventory List and Storage activities
 
-:warning: If you have not created your block with the template "Lemonade Stand Inventory" , you need to name one of the table **"Inventory List"**.
+:warning: If you have not created your block with one of the two options, you need at least to name one of the table **"Inventory List"**.
 
 - **"Inventory List" table** :
-   - The fields *"Items"*, *"Quantity in stock"*, *"Unit Price"*, *"Next Delivery"*, *"Notes"*, *"Pictures"* are alreaday created with the template **"Lemonade Stand Inventory"**. 
-   - It is possible to add more fields to get more information. For instance : name, color, size, description, total value, last inventory date, last inventory quantity, last inventory 
-   value...
-   - You are free to create any additional field you need. All the fields you have will be automaticaly reach in the different modules :
+   - With option 1 - the template **"Lemonade Stand Inventory"** - the fields *"Items"*, *"Quantity in stock"*, *"Unit Price"*, *"Next Delivery"*, *"Notes"*, *"Pictures"* are already  . 
+   - It is possible to add more fields to get more information. For instance : name, color, size, description, total value, last inventory date, last inventory quantity, last inventory, weight, List of provider, contract ID... 
+   - You are free to create any additional fields you need. All the fields you have will be automatically reachable in the different modules :
          - the Stock
          - Item information 
          - KPI 
    - For the full usage of some the modules it is recommanded to create the following field in "Inventory List" :  
-      - **"Name"**: he will describe your item (simple line text). It is different from the fields "Items" which is also the primary key. For instance some items can have the same name, but the color can change. So the field "Items" will have 2 differents values. The Name of the field will be used by the function "List_items__usestate" and will autosuggest the items with the name when the user start typing the item. If no field Name exist, the reference will be the primary key (here "Items" for the template choosen). All the following field are not mandatory but it will give more powerfull to your Block Stock. It can be personnalized in the myConstClass.js :
+      1. **"Items"** : it is the primary key to define an item. It is an unique ID that can help to get the exact items. It is not mandatory but you need the primary Key for the KPI module : function List_of_log_fonction. The field name will not create issue but it is important to use the same primary key in your table *"Inventory List" table* and *"Storage activities" table*. 
+
+      2. **"Name"**: he will describe your item (simple line text). It is different from the fields "Items" which is the primary key. For instance some items can have the same name, but the color can change. So the field "Items" will have 2 differents values. The Name of the field will be used by the function "List_items__usestate" and will autosuggest the items with the name when the user start typing the item. If no field Name exist, the reference will be the primary key (here "Items" for the template choosen). All the following fields are not mandatory but it will give more powerfull to your Block Stock : it will permit to create KPI alarm if the stock is low or alarm if the value for one item is high . It can be personnalized in the myConstClass.js :
       ```javascript
         // change the "name" to personnalized
       export const my_const_name = "Name";
       ```
 
-      - **"Items"** : it is the primary key to define an item. It is an unique ID that can help to get the exact items. It is not mandatory but you need the primary Key for the KPI module : function List_of_log_fonction. The field name will not create issue but it is important to use the same primary key in your table *"Inventory List" table* and *"Storage activities" table*. 
-
-      - **"Threshold Alarm"** : it is the threshold on the number of item and it will trigger the warning. It is a number defined by the managers to have in time the information that the level of a specific item is low. It is an option for the KPI module : it will permit to activate the KPI on the alarm on the stock (function List_of_log_fonction). Others indicators mention here are needed. It can be personnalized in the myConstClass.js :
+      3. **"Threshold Alarm"** : it is the threshold on the quantity of items and it will trigger the warning. It is a number defined by the managers to have in time the information that the level of a specific item is low. It is an option for the KPI module : it will permit to activate the KPI on the alarm on the stock (function List_of_log_fonction). Others indicators mention here are needed. It can be personnalized in the myConstClass.js :
       ```javascript
         // change the  "Threshold Alarm" to personnalize
       export const my_const_Threshold_Alarm = "Threshold Alarm";
       ```
 
-      - **"Threshold total Value"** :  it is the threshold on the value of items and it will trigger the warning. It is a number defined by the managers to have in time the information that the value of a specific item is high. It is an option for the KPI module : it will permit to activate the KPI on the alarm on the stock (function List_of_log_fonction). Others indicators mention here are needed. It can be personnalized in the myConstClass.js :
+      4. **"Threshold total Value"** :  it is the threshold on the value of items and it will trigger the warning. It is a number defined by the managers to have in time the information that the value of a specific item is high. It is an option for the KPI module : it will permit to activate the KPI on the alarm on the stock (function List_of_log_fonction). Others indicators mention here are needed. It can be personnalized in the myConstClass.js :
       ```javascript
         // change the "Threshold total Value" to personnalize
       export const my_const_Threshold_total_Value = "Threshold total Value";
       ```
 
-      - **"Total Stock"** : it is the stock total for one item . It is an option for the KPI module : it will permit to activate the KPI on the alarm on the stock (function List_of_log_fonction). Others indicators mention here are needed. It can be personnalized in the myConstClass.js :
+      5. **"Total Stock"** : it is the stock total for one item . It is an option for the KPI module : it will permit to activate the KPI on the alarm on the stock (function List_of_log_fonction). Others indicators mention here are needed. It can be personnalized in the myConstClass.js :
       ```javascript
         // change the "Total Stock" to personnalize
       export const  my_const_Total_Stock = "Total Stock";
       ```
 
-      - **"Total Value"** : it is the total value in the stock for a specific item. It is an option for the KPI module : it will permit to activate the KPI on the alarm on the stock (function List_of_log_fonction). Others indicators mention here are needed. It can be personnalized in the myConstClass.js :
+      6. **"Total Value"** : it is the total value in the stock for a specific item. It is an option for the KPI module : it will permit to activate the KPI on the alarm on the stock (function List_of_log_fonction). Others indicators mention here are needed. It can be personnalized in the myConstClass.js :
       ```javascript
         // change the "Total Value" to personnalize
       export const my_const_Total_Value = "Total Value";
       ```
 
-      - **"Check Stock"** : he give indicator in the state of the stock : low stock, stock OK... It is an option for the KPI module : it will permit to activate the KPI on the alarm on the stock (function List_of_log_fonction). Others indicators mention here are needed. It can be personnalized in the myConstClass.js :
+      7. **"Check Stock"** : he give indicator in the state of the stock : low stock, stock OK... It is an option for the KPI module : it will permit to activate the KPI on the alarm on the stock (function List_of_log_fonction). Others indicators mention here are needed. It can be personnalized in the myConstClass.js :
       ```javascript
         // change the "Check Stock" to personnalize
       export const my_const_Check_Stock = "Check Stock";
       ```
 
-      - **"Check total Value"** : he give indicator in the value of the stock : value ok, stock high... It helps the warehouse manager and finance team that the stock value of the items are high. It will help to take decision and mitigate the risk of lost if something happen in the warehouse. It is an option for the KPI module : it will permit to activate the KPI on the alarm on the stock (function List_of_log_fonction). Others indicators mention here are needed. It can be personnalized in the myConstClass.js :
+      7. **"Check total Value"** : he give indicator in the value of the stock : value ok, stock high... It helps the warehouse manager and finance team that the stock value of the items are high. It will help to take decision and mitigate the risk of lost if something happen in the warehouse. It is an option for the KPI module : it will permit to activate the KPI on the alarm on the stock (function List_of_log_fonction). Others indicators mention here are needed. It can be personnalized in the myConstClass.js :
       ```javascript
         // change the "Check total Value" to personnalize
       export const my_const_Check_total_Value = "Check total Value";
@@ -148,36 +148,36 @@ Currently you have 3 tables : Inventory List , Sales and Suppliers. We will conf
 
 
 - **"Storage activities" table** :
-   - The table **"Storage Activities"** will record all the mouvement of the items to and from the warehouse. It is a item tracker which help the Warehouse Manager on the actities of the warehouse stock. With formula it is possible to link the **"Inventory List" table** to **"Storage Activities" table** : then you can see the current stock based on the activities
-   - In the primaryField, you need to add the primaryfield of Inventory List table. The date will reconigne the name are identical to show the information on the activities
+   - The table **"Storage Activities"** will record all the mouvement of the items to and from the warehouse. It is an item tracker which help the Warehouse Manager on the actities of the warehouse stock. With formula it is possible to link the **"Inventory List" table** to **"Storage Activities" table** : then you can see the current stock based on the activities
+   - In the primaryField, you need to add the same primary field identification of Inventory List table. The date will recognize the name are identical to show the information on the activities
 
-   - In order to get the history of items in the module "Item information" and to see the KPI in the module Dashboard, it is recommanded the create specific fields in Storage activities. As it is the case for the table **"Inventory List"**, all the following fields are not mandatory but it will give more powerfull to your Block Stock
+   - In order to get the history of items in the module "Item information" and to see the KPI in the module Dashboard, it is recommanded the create specific fields in Storage activities. As it is the case for the table **"Inventory List"**, all the following fields are not mandatory but it will give more powerfull to your Block Stock : it will create a part in Item information with all the activites for a specific item (function item_information.js). 
      
-      - **"Quantity Before"** : it is the quantity of one specific item counted during the inventory or the quantity get before any move. It must be always positive. It can be personnalized in the myConstClass.js :
+      1. **"Quantity Before"** : it is the quantity of one specific item counted during the inventory or the quantity get before any move. It must be always positive. It can be personnalized in the myConstClass.js :
       ```javascript
         // change the "Quantity Before" to personnalize
       export const my_const_Quantity_Before ="Quantity Before";
       ```
 
-      - **"Quantity after"** : it is the quantity count for one specific item after any move. It must be always positive. It can be personnalized in the myConstClass.js :
+      2. **"Quantity after"** : it is the quantity count for one specific item after any move. It must be always positive. It can be personnalized in the myConstClass.js :
       ```javascript
         // change the "Quantity after" to personnalize
       export const my_const_Quantity_after ="Quantity after";
       ```
 
-      - **"Date IN OUT"** : it is the date of the move of the specified items. It can be personnalized in the myConstClass.js :
+      3. **"Date IN OUT"** : it is the date of the move of the specified items. It can be personnalized in the myConstClass.js :
       ```javascript
         // change the "Date IN OUT" to personnalize
       export const my_const_Date_IN_OUT = "Date IN OUT";
       ```
 
-      - **"OUT"** : it is the field indicated if the items went in or out for a specific items. It can be personnalized in the myConstClass.js :
+      4. **"OUT"** : it is the field indicated if the items went in or out for a specific items. It can be personnalized in the myConstClass.js :
       ```javascript
         // change the "OUT" to personnalize
       export const my_const_OUT = "OUT";
       ```
 
-      - **"Supplier Name"** : this field will give the supplier name. It must be always positive. It can be personnalized in the myConstClass.js :
+      5. **"Supplier Name"** : this field will give the supplier name. It must be always positive. It can be personnalized in the myConstClass.js :
       ```javascript
       // change the "Supplier Name" to personnalize
       export const my_const_Supply_name = "Supplier Name";
