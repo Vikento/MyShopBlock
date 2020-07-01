@@ -35,7 +35,9 @@ This block is build for the Storage Activities or Store activities, or any place
 
   | Option 1 Start with a template  | Option 2 : start from scratch |
   | ------------- | ------------- |
-  | We look for the template "Lemonade Stand Inventory". We just write "Inventory" and we can find it. Once you have chose your template you can personalize it : create new fields, add your own items, create your description and information for each items... | - We create two new table for instances *"Inventory List"*, where we will list all the existing items , and *"Storage activities"* where we will follow the activities of our store. We will see why those two tables are important in the next chapter. |
+  | We look for the template "Lemonade Stand Inventory". We just write "Inventory" and we can find it.  | - We create two new tables for instances *"Inventory List"*, where we will list all the existing items , and *"Storage activities"* where we will follow the activities of our store. We will see why those two tables are important in the next chapter. |
+  | ------------- | ------------- |
+  | Once you have chose your template you can personalize it : create new fields, add your own items, create your description and information for each items... | You can add the fields we will need. To facilitate you can import a spreadsheet : click on the + at the level of your table name, import a spreadsheet, CSV file, choose CSV file. You can get the CSV file we need in the https://github.com/Vikento/MyShopBlock/tree/master/media/CSV%20Table |
   
   - The two options continue in the same way
   - Open your new base. We can already start to use the block. To do so, you need to go at your right and click on "Blocks"
@@ -195,7 +197,7 @@ If you have choosen the option 1 above *Start with a template* you should have 3
 
  #### b. Customizing
 
-  Once you have created the table and field, it is time to customize and add all the missing table and field. 
+  Once you have created the table and field, it is time to customize and add all the missing table and field that you feel you will need.
 
   - Order your item : in the module Item information you will see the field information ordered by alphabetic. So to have a better classication, you need to rename the field. For instance you can use 1/ , 2/, 3/ ... to get the exact order need.
 
