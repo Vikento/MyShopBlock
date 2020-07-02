@@ -483,9 +483,9 @@ function List_items__usestate({table,my_record}){
 							<div class="row" >
 								<div class="column1">    																	
 										<h2>My items information :  </h2>
-											<ul class="bloc">	{List_of_variable}	</ul>									
+											<ul className="bloc">	{List_of_variable}	</ul>									
 								</div>
-								<div  class="bloc" display="table-cell" vertical-align="middle" >
+								<div  className="bloc_image" display="table-cell" vertical-align="middle" >
 									{my_images_items}
 
 								</div>

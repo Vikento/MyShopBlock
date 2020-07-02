@@ -33,7 +33,7 @@ This block is build for the Storage Activities or Store activities, or any place
   - It is possible to create from scratch or to start with a template. Let see the two options :
   
 
-  | Option 1 Start with a template  | Option 2 : start from scratch |
+  | Option 1 : start with a template  | Option 2 : start from scratch |
   | ------------- | ------------- |
   | We look for the template "Lemonade Stand Inventory". We just write "Inventory" and we can find it.  | - We create two new tables for instances *"Inventory List"*, where we will list all the existing items , and *"Storage activities"* where we will follow the activities of our store. We will see why those two tables are important in the next chapter. |
   |  |  |
@@ -206,23 +206,35 @@ If you have choosen the option 1 above *Start with a template* you should have 3
 
   2. update all the items : when the previous fine tunning is done, it is time to update all the items in your table *"Inventory List"*
 
-  3. adapt color and css : to match with your company, it is possible to modify the code and modify the CSS information. The current version was adapted for African Product Saler. It is free to use. All the information CSS are in **main.js**.
-  Personalized Color background
+          ![Add Data](https://github.com/Vikento/MyShopBlock/blob/master/media/Block_creation/Add_Data.gif?raw=true)
+
+
+  3. adapt color and css : to match with your company, it is possible to modify the code and modify the CSS information. The current version was created for the Store BijouMax. It is free to use. All CSS information are in **Apply_CSS**.
+        ![Adapt Color](https://github.com/Vikento/MyShopBlock/blob/master/media/Block_creation/Adapt_CSS.gif?raw=true)
+
+  
 
 
 ### 4. Using your block
-There is 3 modules created : My Stock, Item Information, My Dash Board. They have all a specific usage and can be accessible to all the users.
-  - My Stock : it is the list of all the items in the stock. It is create with 3 colums : the primary Key and 2 others column showing 2 fields from the table **"Inventory List"**. 
+There is 3 modules created : *My Stock*, *Item Information*, *My Dash Board*. They have all a specific usage and can be accessible to all the users.
+  1. My Stock : 
+    - It is the list of all the items in the stock. It is create with 3 colums : the primary Key and 2 others column showing 2 fields from the table **"Inventory List"**. 
+
+  ![Module My Stock ](https://github.com/Vikento/MyShopBlock/blob/master/media/Block_creation/My_Stock_module_1.gif?raw=true)
+
     - To get access to more information on the item it is possible to click on the item (ITEM ID - PRIMARY KEY // first column). It will open the second module : **"Item Information"**. If you want to update information, you can click on the second or the third column. It will open a window with summary information of the items.
     - The items are classify ordered by the creation. It is not possible for now to order by alphabetic order.
-    
     - You can chose the fields of your need. To avoid table not adapted the name and information of the items were limited and truncated. It will write 10 chars if you have not changed anything . It is possible to change the numbner of char keep to have optimized view of your table changing the default value of **"NUNBER_OF_CHAR_SEEN_IN_STOCK_PER_COLL"** . This constant is in the file `myConstClass.js` :
     ```javascript
         // change the value to the number of char you want to print in the table
       export const NUNBER_OF_CHAR_SEEN_IN_STOCK_PER_COLL = 10;
     ```
 
- - Item Information : this module show all the information relative to a specific item. 
+    ![Change size char ](https://github.com/Vikento/MyShopBlock/blob/master/media/Block_creation/ChangeSizeName.gif?raw=true)
+
+ 2. Item Information : 
+    
+    - this module show all the information relative to a specific item. 
     - If you have clicked on the item ID from the module **"My Stock"**, it will show the information from this item. If you need to look for another item you can click on the input field, be sure there is not item already writen (you can delete), and type the item you are looking for. The search will target the *"Items"* field. If you have create *"Name"* field, it will all check on this part. In order to facilitate, it will autosuggest the list of item during you write the name or ID of the item. With this version the Item Information will show you on the right part the picture you added in your table. The format .gif, .png, .bmp and .jpg are supported. 
     - Ignore some items if needed : add **"--"** in front of the fields name will result to ignore the item. You will not see this specific item in the Module Item Information. You can as well change **"--"** with another string from `myConstClass.js` .  
     ```javascript
@@ -230,6 +242,9 @@ There is 3 modules created : My Stock, Item Information, My Dash Board. They hav
     export const KPI_IGNORE_FIELD_CHAR = "--"; 
     ```
     - Order your items if needed : in the module Item information you will see the field information ordered by alphabetic. So to have a better classication, you need to rename the field. For instance you can use 1/ , 2/, 3/ ... to get the exact order need.
+
+    ![Change Order ](https://github.com/Vikento/MyShopBlock/blob/master/media/Block_creation/Change_order.gif?raw=true)
+
     - If the table **"Storage Activities"** is created with all the information fields listed in the previous chapter, it will list all the operations : item received and given from the store. If the fields or the table doesn't exist, you will get message it is not created. If you don't create the table and all the fields needed, you will get a message to inform you need the data cannot be show. To avoid this message, you have the constante **"STORAGE_ACTIVITY_LOG_ACTIVATED"** that you can change the value (in myConstClass.js) to false :
      ```javascript
         // change the value to true if you want to activate the log or false if not
@@ -238,7 +253,7 @@ There is 3 modules created : My Stock, Item Information, My Dash Board. They hav
 
 
 
-  - My Dash Board : this module will show all the KPI you are authorize to see. The user is detected and the KPI is shower base on the user ID. There is 3 types of KPI that can be seen :
+  3. My Dash Board : this module will show all the KPI you are authorize to see. The user is detected and the KPI is shower base on the user ID. There is 3 types of KPI that can be seen :
       - **KPI on the alert** : it is a fixed KPI which depend on the recommanded fields name configurated in the previous chapter. It is important to have all the fields in **"Inventory List" table** (check chap **3. Installation and configuration of your block** and **a. List of tables and fields to create**). The KPI will list all the alerts on the quantity, when it is lower than the threshold. Also alert on the total value for an item when it is higher than the value configurated. So it will show 2 alerts by items. If one of the fields or the tables are not presents, the KPi will not show. If you need to see all the table and fields, but you dont want to have the KPI, you can desastivated the option in myConstClass puting false in front of constant **"LIST_OF_LOG_FUNCTION_ACTIVATED"**.
 
       - **personalized KPI** : the module **"My Dash Board"** will check all the table starting by **"DashBoard"** and it will show the information for each field. 

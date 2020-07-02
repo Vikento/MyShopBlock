@@ -24,7 +24,8 @@ loadCSSFromString('a:hover { background: #FF9F1C; border-radius: 25px; border: 2
 loadCSSFromString('box.tittle {font-size: 25px; text-align: center;  background: #FF9F1C ; border: 15px solid #FF9F1C; border-radius: 25px }' );
 
 // Background color :
-loadCSSFromString('body {background-color:' + myConstClass.Couleur_BBC);
+loadCSSFromString('body {background-color:' + myConstClass.Couleur_BBC + '}');
+
 
 //css from index 
 // CSS de index.js
@@ -54,9 +55,11 @@ loadCSSFromString(' .column1g{  border-radius: 25px; float: left;   width: 100%;
 // FIN CSS KPI
 
 // CSS de index.js + item information
-loadCSSFromString('img.displayed {display: block; margin-left: auto; margin-right: auto;} .row { display : flex;} .column1{  float: left;  width: 60%;} .column2{ width:100%; height:100%; display: inline-block} ' );
+loadCSSFromString('img.displayed {display: block; margin-left: auto; margin-right: auto;  max-width: 95%; max-height: 300px; } .row { display : flex;} .column1{  float: left;  width: 60%;} .column2{ width:100%; height:100%; display: inline-block} ' );
 loadCSSFromString(' ul.column1{ text-align: left ; display: inline-block; }');
 loadCSSFromString(' ul.bloc { word-wrap: break-word; max-width: 95% ; }');
+//loadCSSFromString(' ul.bloc_image { word-wrap: break-word; max-width: 150px; max-height: 150px; }');
+//loadCSSFromString(' ul.bloc { word-wrap: break-word; max-width: 95% ; }');
 // END CSS de index.js + item information
 
 

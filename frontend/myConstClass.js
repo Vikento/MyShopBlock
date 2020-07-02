@@ -20,7 +20,7 @@ export const FIELD_QUANTITY_WIDTH_PERCENTAGE = '30%';
 // Def : Number of Char to limit the size of the string. It will give a better view of the tools
 // Usage : Module "My Stock"
 // file : index.js
-export const NUNBER_OF_CHAR_SEEN_IN_STOCK_PER_COLL = 10;
+export const NUNBER_OF_CHAR_SEEN_IN_STOCK_PER_COLL = 30;
 
 // Def : name of the table
 // Usage : Module "Item Information" and "My Dash Board"
