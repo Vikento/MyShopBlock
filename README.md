@@ -264,17 +264,18 @@ There is 3 modules created : *My Stock*, *Item Information*, *My Dash Board*. Th
   ```
 
 
-  3. My Dash Board :
+  3. My Dash Board 
   
       > This module will show all the KPI you are authorize to see. The user is detected and the KPI is shower base on the user ID. There is 3 types of KPI that can be seen :
       
-    1. **KPI on the alert** : 
+
+    - **KPI on the alert** : 
       - it is a fixed KPI which depend on the recommanded fields name configurated in the previous chapter. It is important to have all the fields in **"Inventory List" table** (check chap **3. Installation and configuration of your block** and **a. List of tables and fields to create**). The KPI will list all the alerts on the quantity, when it is lower than the threshold. Also alert on the total value for an item when it is higher than the value configurated. So it will show 2 alerts by items. If one of the fields or the tables are not presents, the KPi will not show. If you need to see all the table and fields, but you dont want to have the KPI, you can desastivated the option in myConstClass puting false in front of constant **"LIST_OF_LOG_FUNCTION_ACTIVATED"**.
 
 
 ![Activation Log KPI ](https://github.com/Vikento/MyShopBlock/blob/master/media/Block_creation/Activation_Log_KPI.gif?raw=true)
 
-  2. **personalized KPI** : 
+  - **personalized KPI** : 
     - the module **"My Dash Board"** will check all the table starting by **"DashBoard"** and it will show the information for each field. 
     - all the take which doesn't start by **"DashBoard"** will not take in account in the Dash Board module
     - The field name will be the name of the KPI, and in the first line, the value filled will be the value. 
@@ -286,7 +287,7 @@ There is 3 modules created : *My Stock*, *Item Information*, *My Dash Board*. Th
 
 ![KPI creation ](https://github.com/Vikento/MyShopBlock/blob/master/media/Block_creation/KPI_Creation_TYPE_1.gif?raw=true)
 
-  3. **VLook Up KPI** : 
+  - **VLook Up KPI** : 
     - this KPI is usefull to create indicor which is relative the highest, the lowest or the medium value. 
     - It will give the value based on what you need (max value, min value or median value) and will apply to the field of your selection. Then based on your need it will show which field relative to the result you want to show. For instance you need to check the item name of the highest stocks from all the items : you will choose the table where you have the field *"number of stock"*, you choose the condition (Value maximum), and the field you want to see *"Name of the item"*. 
     - Only for numeric field it is applicable (Types : COUNT, CURRENCY, DATE, DATE_TIME, DURATION, FORMULA, NUMBER, PERCENT, RATING
