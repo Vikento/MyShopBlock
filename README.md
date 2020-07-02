@@ -270,28 +270,27 @@ There is 3 modules created : *My Stock*, *Item Information*, *My Dash Board*. Th
 
 ![Activation Log KPI ](https://github.com/Vikento/MyShopBlock/blob/master/media/Block_creation/Activation_Log_KPI.gif?raw=true)
       
-
-      - **personalized KPI** : the module **"My Dash Board"** will check all the table starting by **"DashBoard"** and it will show the information for each field. 
-        - all the take which doesn't start by **"DashBoard"** will not take in account in the Dash Board module
-        - The field name will be the name of the KPI, and in the first line, the value filled will be the value. 
-        - If you plan to add column to link the others tables or if you don't need to show some fields, it is possible to ignore them. On the field name, you add "--" (const KPI_IGNORE_FIELD_CHAR) and it will ignore the field.
-        - the field is accessible to the user only if the field "--USER ONLY--" (const KPI_USER_AUTORIZE) is created. In this field (first row), all the users need to see the field have to be added. 
-        - only the first row is taken in account for the creation of the KPI.
-        - the name of the KPI can be give : in the name of the table , after **"DashBoard"** you can add the name of your field. For instance, you can name it : **"DashBoard My best Sales"** and the KPI **"My best Sales will"** be added
+  - **personalized KPI** : the module **"My Dash Board"** will check all the table starting by **"DashBoard"** and it will show the information for each field. 
+  - all the take which doesn't start by **"DashBoard"** will not take in account in the Dash Board module
+    - The field name will be the name of the KPI, and in the first line, the value filled will be the value. 
+    - If you plan to add column to link the others tables or if you don't need to show some fields, it is possible to ignore them. On the field name, you add "--" (const KPI_IGNORE_FIELD_CHAR) and it will ignore the field.
+    - the field is accessible to the user only if the field "--USER ONLY--" (const KPI_USER_AUTORIZE) is created. In this field (first row), all the users need to see the field have to be added. 
+    - only the first row is taken in account for the creation of the KPI.
+    - the name of the KPI can be give : in the name of the table , after **"DashBoard"** you can add the name of your field. For instance, you can name it : **"DashBoard My best Sales"** and the KPI **"My best Sales will"** be added
 
 
 ![KPI creation ](https://github.com/Vikento/MyShopBlock/blob/master/media/Block_creation/KPI_Creation_TYPE_1.gif?raw=true)
 
 
-      - **VLook Up KPI** : this KPI is usefull to create indicor which is relative the highest, the lowest or the medium value. 
-        - It will give the value based on what you need (max value, min value or median value) and will apply to the field of your selection. Then based on your need it will show which field relative to the result you want to show. For instance you need to check the item name of the highest stocks from all the items : you will choose the table where you have the field *"number of stock"*, you choose the condition (Value maximum), and the field you want to see *"Name of the item"*. 
-        - Only for numeric field it is applicable (Types : COUNT, CURRENCY, DATE, DATE_TIME, DURATION, FORMULA, NUMBER, PERCENT, RATING
-        - The field you want to show should be in the same table
-        - Only Creator user and Editor user can create  **VLook Up KPI** .
-        - the creation can be done directly with the button **"Create Vlookup indicator"** . The user who creates the table will be added automatically. To add more users, it is possible to do it using the field **"--USER ONLY--"** : you add the collaborators line by line where you want the user get access to the **VLook Up KPI**
-        - the creation of this type of KPI can be also done using the field **"Dashboard Table VLookup"**. All the KPI relative to the "Create Vlookup indicator" are listed in this table. The risk to do it manually is to make a mistake on the name of the table and fields. At this moment you will get alert and you will not see the KPI desired
-        - it is recommended to not change the type of the field
-        - to delete one *VLook Up KPI* go on the table **"Dashboard Table VLookup"** . Select the row of the KPI you don't need and delete it. All the user will not have access to the KPI. 
+  - **VLook Up KPI** : this KPI is usefull to create indicor which is relative the highest, the lowest or the medium value. 
+    - It will give the value based on what you need (max value, min value or median value) and will apply to the field of your selection. Then based on your need it will show which field relative to the result you want to show. For instance you need to check the item name of the highest stocks from all the items : you will choose the table where you have the field *"number of stock"*, you choose the condition (Value maximum), and the field you want to see *"Name of the item"*. 
+    - Only for numeric field it is applicable (Types : COUNT, CURRENCY, DATE, DATE_TIME, DURATION, FORMULA, NUMBER, PERCENT, RATING
+    - The field you want to show should be in the same table
+    - Only Creator user and Editor user can create  **VLook Up KPI** .
+    - the creation can be done directly with the button **"Create Vlookup indicator"** . The user who creates the table will be added automatically. To add more users, it is possible to do it using the field **"--USER ONLY--"** : you add the collaborators line by line where you want the user get access to the **VLook Up KPI**
+    - the creation of this type of KPI can be also done using the field **"Dashboard Table VLookup"**. All the KPI relative to the "Create Vlookup indicator" are listed in this table. The risk to do it manually is to make a mistake on the name of the table and fields. At this moment you will get alert and you will not see the KPI desired
+    - it is recommended to not change the type of the field
+    - to delete one *VLook Up KPI* go on the table **"Dashboard Table VLookup"** . Select the row of the KPI you don't need and delete it. All the user will not have access to the KPI. 
 
 
 ![KPI creation ](https://github.com/Vikento/MyShopBlock/blob/master/media/Block_creation/KPI_Creation_TYPE_3.gif?raw=true)
