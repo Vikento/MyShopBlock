@@ -218,9 +218,10 @@ If you have choosen the option 1 above *Start with a template* you should have 3
 
 ### 4. Using your block
 There is 3 modules created : *My Stock*, *Item Information*, *My Dash Board*. They have all a specific usage and can be accessible to all the users.
+
   1. My Stock :
 
-  - It is the list of all the items in the stock. It is create with 3 colums : the primary Key and 2 others column showing 2 fields from the table **"Inventory List"**. 
+  > It is the list of all the items in the stock. It is create with 3 colums : the primary Key and 2 others column showing 2 fields from the table **"Inventory List"**. 
 
 ![Module My Stock ](https://github.com/Vikento/MyShopBlock/blob/master/media/Block_creation/My_Stock_module_1.gif?raw=true)
 
@@ -237,7 +238,7 @@ There is 3 modules created : *My Stock*, *Item Information*, *My Dash Board*. Th
 
  2. Item Information : 
     
-    - this module show all the information relative to a specific item.
+    > this module show all the information relative to a specific item.
 
 ![Item Information Module ](https://github.com/Vikento/MyShopBlock/blob/master/media/Block_creation/My_Item_Information_module.gif?raw=true)
 
@@ -264,15 +265,15 @@ There is 3 modules created : *My Stock*, *Item Information*, *My Dash Board*. Th
 
   3. My Dash Board 
   
-      - This module will show all the KPI you are authorize to see. The user is detected and the KPI is shower base on the user ID. There is 3 types of KPI that can be seen :
+      > This module will show all the KPI you are authorize to see. The user is detected and the KPI is shower base on the user ID. There is 3 types of KPI that can be seen :
       
 
-  1. **KPI on the alert** : 
-    - it is a fixed KPI which depend on the recommanded fields name configurated in the previous chapter. It is important to have all the fields in **"Inventory List" table** (check chap **3. Installation and configuration of your block** and **a. List of tables and fields to create**). The KPI will list all the alerts on the quantity, when it is lower than the threshold. Also alert on the total value for an item when it is higher than the value configurated. So it will show 2 alerts by items. If one of the fields or the tables are not presents, the KPi will not show. If you need to see all the table and fields, but you dont want to have the KPI, you can desastivated the option in myConstClass puting false in front of constant **"LIST_OF_LOG_FUNCTION_ACTIVATED"**.
+    1. **KPI on the alert** : 
+      - it is a fixed KPI which depend on the recommanded fields name configurated in the previous chapter. It is important to have all the fields in **"Inventory List" table** (check chap **3. Installation and configuration of your block** and **a. List of tables and fields to create**). The KPI will list all the alerts on the quantity, when it is lower than the threshold. Also alert on the total value for an item when it is higher than the value configurated. So it will show 2 alerts by items. If one of the fields or the tables are not presents, the KPi will not show. If you need to see all the table and fields, but you dont want to have the KPI, you can desastivated the option in myConstClass puting false in front of constant **"LIST_OF_LOG_FUNCTION_ACTIVATED"**.
 
 
 ![Activation Log KPI ](https://github.com/Vikento/MyShopBlock/blob/master/media/Block_creation/Activation_Log_KPI.gif?raw=true)
-      
+
   2. **personalized KPI** : 
     - the module **"My Dash Board"** will check all the table starting by **"DashBoard"** and it will show the information for each field. 
     - all the take which doesn't start by **"DashBoard"** will not take in account in the Dash Board module
