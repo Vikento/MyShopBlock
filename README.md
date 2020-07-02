@@ -53,6 +53,7 @@ This block is build for the Storage Activities or Store activities, or any place
   ```bash
   "npm install -g @airtable/blocks-cli"
     ```
+    
   - Set up the block on your computer : the command starts by 
   ```bash
   "block init " ....
