@@ -55,7 +55,7 @@ loadCSSFromString(' .column1g{  border-radius: 25px; float: left;   width: 100%;
 // FIN CSS KPI
 
 // CSS de index.js + item information
-loadCSSFromString('img.displayed {display: block; margin-left: auto; margin-right: auto;  max-width: 95%; max-height: 300px; } .row { display : flex;} .column1{  float: left;  width: 60%;} .column2{ width:100%; height:100%; display: inline-block} ' );
+loadCSSFromString('img.displayed {display: block; margin-left: auto; margin-right: auto;  width: auto; max-height: 400px; } .row { display : flex;} .column1{  float: left;  width: 60%;} .column2{ width:100%; height:100%; display: inline-block} ' );
 loadCSSFromString(' ul.column1{ text-align: left ; display: inline-block; }');
 loadCSSFromString(' ul.bloc { word-wrap: break-word; max-width: 95% ; }');
 //loadCSSFromString(' ul.bloc_image { word-wrap: break-word; max-width: 150px; max-height: 150px; }');

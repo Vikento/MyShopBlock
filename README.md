@@ -225,7 +225,7 @@ There is 3 modules created : *My Stock*, *Item Information*, *My Dash Board*. Th
 ![Module My Stock ](https://github.com/Vikento/MyShopBlock/blob/master/media/Block_creation/My_Stock_module_1.gif?raw=true)
 
   - To get access to more information on the item it is possible to click on the item (ITEM ID - PRIMARY KEY // first column). It will open the second module : **"Item Information"**. If you want to update information, you can click on the second or the third column. It will open a window with summary information of the items.
-  - The items are classify ordered by the creation. It is not possible for now to order by alphabetic order.
+  - The items are ordered by the creation order. It is not possible for now to order by alphabetic order. It will be a feature if requested
   - You can chose the fields of your need. To avoid table not adapted the name and information of the items were limited and truncated. It will write 10 chars if you have not changed anything . It is possible to change the numbner of char keep to have optimized view of your table changing the default value of **"NUNBER_OF_CHAR_SEEN_IN_STOCK_PER_COLL"** . This constant is in the file `myConstClass.js` :
     ```javascript
         // change the value to the number of char you want to print in the table
@@ -237,7 +237,11 @@ There is 3 modules created : *My Stock*, *Item Information*, *My Dash Board*. Th
 
  2. Item Information : 
     
-    - this module show all the information relative to a specific item. 
+    - this module show all the information relative to a specific item.
+
+![Item Information Module ](https://github.com/Vikento/MyShopBlock/blob/master/media/Block_creation/My_Item_Information_module.gif?raw=true)
+
+
     - If you have clicked on the item ID from the module **"My Stock"**, it will show the information from this item. If you need to look for another item you can click on the input field, be sure there is not item already writen (you can delete), and type the item you are looking for. The search will target the *"Items"* field. If you have create *"Name"* field, it will all check on this part. In order to facilitate, it will autosuggest the list of item during you write the name or ID of the item. With this version the Item Information will show you on the right part the picture you added in your table. The format .gif, .png, .bmp and .jpg are supported. 
     - Ignore some items if needed : add **"--"** in front of the fields name will result to ignore the item. You will not see this specific item in the Module Item Information. You can as well change **"--"** with another string from `myConstClass.js` .  
     ```javascript
