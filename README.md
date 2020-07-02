@@ -242,7 +242,7 @@ There is 3 modules created : *My Stock*, *Item Information*, *My Dash Board*. Th
 ![Item Information Module ](https://github.com/Vikento/MyShopBlock/blob/master/media/Block_creation/My_Item_Information_module.gif?raw=true)
 
 
-    - If you have clicked on the item ID from the module **"My Stock"**, it will show the information from this item. If you need to look for another item you can click on the input field, be sure there is not item already writen (you can delete), and type the item you are looking for. The search will target the *"Items"* field. If you have create *"Name"* field, it will all check on this part. In order to facilitate, it will autosuggest the list of item during you write the name or ID of the item. With this version the Item Information will show you on the right part the picture you added in your table. The format .gif, .png, .bmp and .jpg are supported. 
+   - If you have clicked on the item ID from the module **"My Stock"**, it will show the information from this item. If you need to look for another item you can click on the input field, be sure there is not item already writen (you can delete), and type the item you are looking for. The search will target the *"Items"* field. If you have create *"Name"* field, it will all check on this part. In order to facilitate, it will autosuggest the list of item during you write the name or ID of the item. With this version the Item Information will show you on the right part the picture you added in your table. The format .gif, .png, .bmp and .jpg are supported. 
     - Ignore some items if needed : add **"--"** in front of the fields name will result to ignore the item. You will not see this specific item in the Module Item Information. You can as well change **"--"** with another string from `myConstClass.js` .  
     ```javascript
     // change "--" if you want to adapt to your need.
@@ -250,14 +250,13 @@ There is 3 modules created : *My Stock*, *Item Information*, *My Dash Board*. Th
     ```
     - Order your items if needed : in the module Item information you will see the field information ordered by alphabetic. So to have a better classication, you need to rename the field. For instance you can use 1/ , 2/, 3/ ... to get the exact order need.
 
-    ![Change Order ](https://github.com/Vikento/MyShopBlock/blob/master/media/Block_creation/Change_order.gif?raw=true)
+![Change Order ](https://github.com/Vikento/MyShopBlock/blob/master/media/Block_creation/Change_order.gif?raw=true)
 
-    - If the table **"Storage Activities"** is created with all the information fields listed in the previous chapter, it will list all the operations : item received and given from the store. If the fields or the table doesn't exist, you will get message it is not created. If you don't create the table and all the fields needed, you will get a message to inform you need the data cannot be show. To avoid this message, you have the constante **"STORAGE_ACTIVITY_LOG_ACTIVATED"** that you can change the value (in myConstClass.js) to false :
+   - If the table **"Storage Activities"** is created with all the information fields listed in the previous chapter, it will list all the operations : item received and given from the store. If the fields or the table doesn't exist, you will get message it is not created. If you don't create the table and all the fields needed, you will get a message to inform you need the data cannot be show. To avoid this message, you have the constante **"STORAGE_ACTIVITY_LOG_ACTIVATED"** that you can change the value (in myConstClass.js) to false :
      ```javascript
         // change the value to true if you want to activate the log or false if not
       export const STORAGE_ACTIVITY_LOG_ACTIVATED = true;
       ```
-
 
 
   3. My Dash Board : this module will show all the KPI you are authorize to see. The user is detected and the KPI is shower base on the user ID. There is 3 types of KPI that can be seen :
