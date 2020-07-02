@@ -206,11 +206,13 @@ If you have choosen the option 1 above *Start with a template* you should have 3
 
   2. update all the items : when the previous fine tunning is done, it is time to update all the items in your table *"Inventory List"*
 
-          ![Add Data](https://github.com/Vikento/MyShopBlock/blob/master/media/Block_creation/Add_Data.gif?raw=true)
+![Add Data](https://github.com/Vikento/MyShopBlock/blob/master/media/Block_creation/Add_Data.gif?raw=true)
 
 
-  3. adapt color and css : to match with your company, it is possible to modify the code and modify the CSS information. The current version was created for the Store BijouMax. It is free to use. All CSS information are in **Apply_CSS**.
-        ![Adapt Color](https://github.com/Vikento/MyShopBlock/blob/master/media/Block_creation/Adapt_CSS.gif?raw=true)
+  3. adapt color and css : to match with your company, it is possible to modify the code and modify the CSS information. The current version was created for the Store BijouMax. It is free to use. All CSS information are in **Apply_CSS.js**.
+
+
+![Adapt Color](https://github.com/Vikento/MyShopBlock/blob/master/media/Block_creation/Adapt_CSS.gif?raw=true)
 
   
 
