@@ -95,7 +95,7 @@ If you have choosen the option 1 above *Start with a template* you should have 3
 > :warning: if you have not created your block with one of the two options, you need at least to name one of the table **"Inventory List"**.
 
 - **"Inventory List" table** :
-   - With option 1 - the template **"Lemonade Stand Inventory"** - the fields *"Items"*, *"Quantity in stock"*, *"Unit Price"*, *"Next Delivery"*, *"Notes"*, *"Pictures"* are already  . 
+   - With the option 2 follow during the installation (**1 Integration of My Block Stock in Airtable**), you have all the fields created . Be sure the type of the fields matchs to your need. With option 1 - the template **"Lemonade Stand Inventory"** - the fields *"Items"*, *"Quantity in stock"*, *"Unit Price"*, *"Next Delivery"*, *"Notes"*, *"Pictures"* are created. You need to create the others listed below. 
    - It is possible to add more fields to get more information. For instance : name, color, size, description, total value, last inventory date, last inventory quantity, last inventory, weight, List of provider, contract ID... 
    - You are free to create any additional fields you need. All the fields you have will be automatically reachable in the different modules :
          - the Stock
@@ -150,7 +150,7 @@ If you have choosen the option 1 above *Start with a template* you should have 3
 
 
 - **"Storage activities" table** :
-   - The table **"Storage Activities"** will record all the mouvement of the items to and from the warehouse. It is an item tracker which helps the Warehouse Manager on the actities of the warehouse stock. With formula it is possible to link the **"Inventory List" table** to **"Storage Activities" table** : then you can see the current stock based on the activities
+   - The table **"Storage Activities"** will record all the mouvements of the items to and from the warehouse. It is an item tracker which helps the Warehouse Manager on the actities of the warehouse stock. With formula it is possible to link the **"Inventory List" table** to **"Storage Activities" table** : then you can see the current stock based on the activities
    - In the primaryField, you need to add the same primary field identification of Inventory List table. The date will recognize the names are identical to show the information on the activities
 
    - In order to get the history of items in the module "Item information" and to see the KPI in the module Dashboard, it is recommanded to create the specific fields in Storage activities. As it is the case for the table **"Inventory List"**, all the following fields are not mandatory but it will give more powerfull to your Block Stock : it will create a part in Item information with all the activites for a specific item (function **item_information.js**). 
@@ -193,13 +193,13 @@ If you have choosen the option 1 above *Start with a template* you should have 3
     - one table personallized where all the informations will be showed how it is. Only the first line is taken in account
     - one table with VLookup rule which permit to give information based on 3 conditions : the value maximum, the value minimum and the median value
 
-    The KPI table is described in the next chapter (in 4. Using your block under Dash Board)
+   > The KPI table is described in the next chapter (in **4. Using your block under Dash Board**)
 
  #### b. Customizing
 
   Once you have created the table and field, it is time to customize and add all the missing table and field that you feel you will need.
 
-  1. create user with authorization : not all the functionnality is reachable by all type of user. So when the table and fields are created, you can give access to the users. 
+  1. create user with authorization : not all the functionnalities are reachable by all type of users. So when the table and fields are created, you can give access to the users. 
       - The *read only user* and *commenter user* can have access to the list of items (module *"My Stock"*), the description of the items (Module *"Items Information"*) and some KPI (Module *"My DashBoard"*). 
       - the *Editor user* and *the creator* have access to all the module and they have the possibility to create Vlookup KPI. It is the responsability to the creator and editor user to update the table
 
@@ -218,16 +218,15 @@ If you have choosen the option 1 above *Start with a template* you should have 3
 
 ### 4. Using your block
 There is 3 modules created : *My Stock*, *Item Information*, *My Dash Board*. They have all a specific usage and can be accessible to all the users.
-  1. My Stock : 
-    - It is the list of all the items in the stock. It is create with 3 colums : the primary Key and 2 others column showing 2 fields from the table **"Inventory List"**. 
+  1. My Stock :
 
-  ![Module My Stock ](https://github.com/Vikento/MyShopBlock/blob/master/media/Block_creation/My_Stock_module_1.gif?raw=true)
+  - It is the list of all the items in the stock. It is create with 3 colums : the primary Key and 2 others column showing 2 fields from the table **"Inventory List"**. 
 
+![Module My Stock ](https://github.com/Vikento/MyShopBlock/blob/master/media/Block_creation/My_Stock_module_1.gif?raw=true)
 
-    - To get access to more information on the item it is possible to click on the item (ITEM ID - PRIMARY KEY // first column). It will open the second module : **"Item Information"**. If you want to update information, you can click on the second or the third column. It will open a window with summary information of the items.
-    - The items are classify ordered by the creation. It is not possible for now to order by alphabetic order.
-    - You can chose the fields of your need. To avoid table not adapted the name and information of the items were limited and truncated. It will write 10 chars if you have not changed anything . It is possible to change the numbner of char keep to have optimized view of your table changing the default value of **"NUNBER_OF_CHAR_SEEN_IN_STOCK_PER_COLL"** . This constant is in the file `myConstClass.js` :
-
+  - To get access to more information on the item it is possible to click on the item (ITEM ID - PRIMARY KEY // first column). It will open the second module : **"Item Information"**. If you want to update information, you can click on the second or the third column. It will open a window with summary information of the items.
+  - The items are classify ordered by the creation. It is not possible for now to order by alphabetic order.
+  - You can chose the fields of your need. To avoid table not adapted the name and information of the items were limited and truncated. It will write 10 chars if you have not changed anything . It is possible to change the numbner of char keep to have optimized view of your table changing the default value of **"NUNBER_OF_CHAR_SEEN_IN_STOCK_PER_COLL"** . This constant is in the file `myConstClass.js` :
     ```javascript
         // change the value to the number of char you want to print in the table
       export const NUNBER_OF_CHAR_SEEN_IN_STOCK_PER_COLL = 10;
