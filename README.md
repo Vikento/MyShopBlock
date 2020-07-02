@@ -57,17 +57,14 @@ This block is build for the Storage Activities or Store activities, or any place
   ```bash
   "block init " ....
   ```
-
   - Navigate to your block directory: 
   ```bash
   cd name_of_your_block
-    ```
-
+  ```
   - Run the block : 
   ```bash
   block Run 
-    ```
-
+  ```
   - When the block is running, you can put the URL shared by your terminal on the airtable windows browser
   - Congrats :-) , your block is installed !
 
