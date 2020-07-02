@@ -248,9 +248,9 @@ There is 3 modules created : *My Stock*, *Item Information*, *My Dash Board*. Th
 ```javascript
     // change "--" if you want to adapt to your need.
     export const KPI_IGNORE_FIELD_CHAR = "--"; 
- ```
+  ```
 
-    - Order your items if needed : in the module Item information you will see the field information ordered by alphabetic. So to have a better classication, you need to rename the field. For instance you can use 1/ , 2/, 3/ ... to get the exact order need.
+   - Order your items if needed : in the module Item information you will see the field information ordered by alphabetic. So to have a better classication, you need to rename the field. For instance you can use 1/ , 2/, 3/ ... to get the exact order need.
 
 ![Change Order ](https://github.com/Vikento/MyShopBlock/blob/master/media/Block_creation/Change_order.gif?raw=true)
 
@@ -259,7 +259,7 @@ There is 3 modules created : *My Stock*, *Item Information*, *My Dash Board*. Th
   ```javascript
         // change the value to true if you want to activate the log or false if not
       export const STORAGE_ACTIVITY_LOG_ACTIVATED = true;
-    ```
+  ```
 
 
   3. My Dash Board : this module will show all the KPI you are authorize to see. The user is detected and the KPI is shower base on the user ID. There is 3 types of KPI that can be seen :
