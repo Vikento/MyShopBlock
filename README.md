@@ -53,19 +53,18 @@ This block is build for the Storage Activities or Store activities, or any place
   ```bash
   "npm install -g @airtable/blocks-cli"
     ```
-
   - Set up the block on your computer : the command starts by 
   ```bash
   "block init " ....
-  ```
+    ```
   - Navigate to your block directory: 
   ```bash
   cd name_of_your_block
-  ```
+    ```
   - Run the block : 
   ```bash
   block Run 
-  ```
+    ```
   - When the block is running, you can put the URL shared by your terminal on the airtable windows browser
   - Congrats :-) , your block is installed !
 
@@ -224,15 +223,18 @@ There is 3 modules created : *My Stock*, *Item Information*, *My Dash Board*. Th
 
   ![Module My Stock ](https://github.com/Vikento/MyShopBlock/blob/master/media/Block_creation/My_Stock_module_1.gif?raw=true)
 
+
     - To get access to more information on the item it is possible to click on the item (ITEM ID - PRIMARY KEY // first column). It will open the second module : **"Item Information"**. If you want to update information, you can click on the second or the third column. It will open a window with summary information of the items.
     - The items are classify ordered by the creation. It is not possible for now to order by alphabetic order.
     - You can chose the fields of your need. To avoid table not adapted the name and information of the items were limited and truncated. It will write 10 chars if you have not changed anything . It is possible to change the numbner of char keep to have optimized view of your table changing the default value of **"NUNBER_OF_CHAR_SEEN_IN_STOCK_PER_COLL"** . This constant is in the file `myConstClass.js` :
+
     ```javascript
         // change the value to the number of char you want to print in the table
       export const NUNBER_OF_CHAR_SEEN_IN_STOCK_PER_COLL = 10;
     ```
 
-    ![Change size char ](https://github.com/Vikento/MyShopBlock/blob/master/media/Block_creation/ChangeSizeName.gif?raw=true)
+![Change size char ](https://github.com/Vikento/MyShopBlock/blob/master/media/Block_creation/ChangeSizeName.gif?raw=true)
+
 
  2. Item Information : 
     
