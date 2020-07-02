@@ -52,12 +52,11 @@ This block is build for the Storage Activities or Store activities, or any place
   - Install CLI taping 
   ```bash
   "npm install -g @airtable/blocks-cli"
-    ```
-
+  ```
   - Set up the block on your computer : the command starts by 
   ```bash
   "block init " ....
-    ```
+  ```
 
   - Navigate to your block directory: 
   ```bash
@@ -68,7 +67,7 @@ This block is build for the Storage Activities or Store activities, or any place
   ```bash
   block Run 
     ```
-    
+
   - When the block is running, you can put the URL shared by your terminal on the airtable windows browser
   - Congrats :-) , your block is installed !
 
