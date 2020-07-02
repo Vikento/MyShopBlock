@@ -283,7 +283,7 @@ The Stock Block was created with the template offered by Airtable like blocks-to
 
 
 ### Modification of the 3 modules
-  The 3 modules are managed by **main.js**. It will pass from one module to another. It call the CSS file at the begining 
+  The 3 modules are managed by **main.js**. It will pass from one module to another. It load the CSS file at the begining 
 
 #### Module My Stock
   - The module is managed by **index.js**
@@ -299,10 +299,10 @@ The Stock Block was created with the template offered by Airtable like blocks-to
       - **List_of_VlookUp_indicateur.js** : manage the KPi Vlookup indicator
 
 ### Constantes
-  - All the main constant, specialy the one to personalize the user interface are in **myConstClass.js**
+  - All the main constant, specially the one to personalize the user interface are in **myConstClass.js**
 
 ### CSS 
-  - All the CSS loaded are in the file **Apply_CSS.js** . It is call by **main.js** when the block is started
+  - All the CSS loaded are in the file **Apply_CSS.js** . It is loaded by **main.js** when the block is started
 
 ## IV/ See the block running
 
