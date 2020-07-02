@@ -20,7 +20,7 @@ export const FIELD_QUANTITY_WIDTH_PERCENTAGE = '30%';
 // Def : Number of Char to limit the size of the string. It will give a better view of the tools
 // Usage : Module "My Stock"
 // file : index.js
-export const NUNBER_OF_CHAR_SEEN_IN_STOCK_PER_COLL = 30;
+export const NUNBER_OF_CHAR_SEEN_IN_STOCK_PER_COLL = 10;
 
 // Def : name of the table
 // Usage : Module "Item Information" and "My Dash Board"
@@ -40,7 +40,7 @@ export const STORAGE_ACTIVITY_LOG_ACTIVATED = true;
 // Def : activation of Storage Activities and History of operation
 // Usage : Module Dash Board / KPI
 // file : List_of_log_fonction.js
-export const LIST_OF_LOG_FUNCTION_ACTIVATED = true;
+export const LIST_OF_LOG_FUNCTION_ACTIVATED = false;
 
 
 // Def : List of fields in the table INVENTORY_WAREHOUSE
