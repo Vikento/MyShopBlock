@@ -329,5 +329,6 @@ The Stock Block was created with the template offered by Airtable like blocks-to
 
 ## IV/ asic presentation of how the block run
 
-![Video on My Stock Block](https://www.youtube.com/watch?v=aHoCZ61efao)
+
+[![Introdution of My Stock Block ](https://github.com/Vikento/MyShopBlock/blob/master/media/Block_creation/Presentation_Youtube.JPG)](https://www.youtube.com/watch?v=aHoCZ61efao)
 
