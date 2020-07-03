@@ -334,7 +334,7 @@ The Stock Block was created with the template offered by Airtable like blocks-to
 ### CSS 
   - All the CSS loaded are in the file **Apply_CSS.js** . It is loaded by **main.js** when the block is started
 
-## IV/ asic presentation of how the block run
+## IV/ Basic presentation of how the block run
 
 
 [![Introdution of My Stock Block ](https://github.com/Vikento/MyShopBlock/blob/master/media/Block_creation/Presentation_Youtube.JPG)](https://www.youtube.com/watch?v=aHoCZ61efao)
