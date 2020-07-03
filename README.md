@@ -327,7 +327,7 @@ The Stock Block was created with the template offered by Airtable like blocks-to
 ### CSS 
   - All the CSS loaded are in the file **Apply_CSS.js** . It is loaded by **main.js** when the block is started
 
-## IV/ See the block running
+## IV/ asic presentation of how the block run
 
-![Block that shows information about the selected table and its fields](media/Block creation/PresentationBlock.gif)
+![Video on My Stock Block](https://www.youtube.com/watch?v=aHoCZ61efao)
 
