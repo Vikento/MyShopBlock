@@ -46,10 +46,17 @@ This block is build for the Storage Activities or Store activities, or any place
   - Give a name to your Block
   - Choose the option "Remix from GitHub"
   - Add the GitHub repository : https://github.com/Vikento/MyShopBlock
+
+![Create Custom Block](https://github.com/Vikento/MyShopBlock/blob/master/media/Block_creation/Name_of_the_Block.PNG?raw=true)
+
   - And validate clicking on Create Block
   - You need to follow the instruction :
+
+![Instruction from Airtable](https://github.com/Vikento/MyShopBlock/blob/master/media/Block_creation/Follow_install_instruction.PNG?raw=true)
+
   - Open a terminal
   - Install CLI taping 
+
   ```bash
   "npm install -g @airtable/blocks-cli"
   ```
@@ -223,7 +230,7 @@ There is 3 modules created : *My Stock*, *Item Information*, *My Dash Board*. Th
 
   It is the list of all the items in the stock. It is create with 3 colums : the primary Key and 2 others column showing 2 fields from the table **"Inventory List"**. 
 
-![Module My Stock ](https://github.com/Vikento/MyShopBlock/blob/master/media/Block_creation/My_Stock_module_1.gif?raw=true)
+![Module My Stock](https://github.com/Vikento/MyShopBlock/blob/master/media/Block_creation/My_Stock_module_1.gif?raw=true)
 
   - To get access to more information on the item it is possible to click on the item (ITEM ID - PRIMARY KEY // first column). It will open the second module : **"Item Information"**. If you want to update information, you can click on the second or the third column. It will open a window with summary information of the items.
   - The items are ordered by the creation order. It is not possible for now to order by alphabetic order. It will be a feature if requested
@@ -233,7 +240,7 @@ There is 3 modules created : *My Stock*, *Item Information*, *My Dash Board*. Th
       export const NUNBER_OF_CHAR_SEEN_IN_STOCK_PER_COLL = 10;
     ```
 
-![Change size char ](https://github.com/Vikento/MyShopBlock/blob/master/media/Block_creation/ChangeSizeName.gif?raw=true)
+![Change size char](https://github.com/Vikento/MyShopBlock/blob/master/media/Block_creation/ChangeSizeName.gif?raw=true)
 
 
  2. Item Information : 
