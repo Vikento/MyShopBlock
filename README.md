@@ -197,7 +197,7 @@ If you have choosen the option 1 above *Start with a template* you should have 3
 
  #### b. Customizing
 
-  Once you have created the table and field, it is time to customize and add all the missing table and field that you feel you will need.
+  Once you have created the tables and fields, it is time to customize and add all the missing tables and fields that you feel you will need.
 
   1. create user with authorization : not all the functionnalities are reachable by all type of users. So when the table and fields are created, you can give access to the users. 
       - The *read only user* and *commenter user* can have access to the list of items (module *"My Stock"*), the description of the items (Module *"Items Information"*) and some KPI (Module *"My DashBoard"*). 
@@ -265,10 +265,10 @@ There is 3 modules created : *My Stock*, *Item Information*, *My Dash Board*. Th
 
   3. My Dash Board 
   
-      This module will show all the KPI you are authorize to see. The user is detected and the KPI is shower base on the user ID. There is 3 types of KPI that can be seen :
+      This module will show all the KPI you are authorize to see. The user is detected and the KPI is showed base on the user ID. There is 3 types of KPI that can be seen :
       
-    - **KPI on the alert** : 
-      - it is a fixed KPI which depend on the recommanded fields name configurated in the previous chapter. It is important to have all the fields in **"Inventory List" table** (check chap **3. Installation and configuration of your block** and **a. List of tables and fields to create**). The KPI will list all the alerts on the quantity, when it is lower than the threshold. Also alert on the total value for an item when it is higher than the value configurated. So it will show 2 alerts by items. If one of the fields or the tables are not presents, the KPi will not show. If you need to see all the table and fields, but you dont want to have the KPI, you can desastivated the option in myConstClass puting false in front of constant **"LIST_OF_LOG_FUNCTION_ACTIVATED"**.
+  - **KPI on the alert** : 
+    - it is a fixed KPI which depend on the recommanded fields name configurated in the previous chapter. It is important to have all the fields in **"Inventory List" table** (check chap **3. Installation and configuration of your block** and **a. List of tables and fields to create**). The KPI will list all the alerts on the quantity, when it is lower than the threshold. Also alert on the total value for an item when it is higher than the value configurated. So it will show 2 alerts by items. If one of the fields or the tables are not presents, the KPi will not show. If you need to see all the table and fields, but you dont want to have the KPI, you can desastivated the option in myConstClass puting false in front of constant **"LIST_OF_LOG_FUNCTION_ACTIVATED"**.
 
 
 ![Activation Log KPI ](https://github.com/Vikento/MyShopBlock/blob/master/media/Block_creation/Activation_Log_KPI.gif?raw=true)
