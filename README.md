@@ -340,3 +340,32 @@ Video Introduction :
 
 [![Introdution of My Stock Block ](https://github.com/Vikento/MyShopBlock/blob/master/media/Block_creation/Presentation_Youtube.JPG)](https://www.youtube.com/watch?v=aHoCZ61efao)
 
+-------------------------------
+
+## Inspiration
+In the forum I saw a lot of question on the stock management and my wife has a store as well. Indded she needs an easy tools to manage her stocks. To get quick information I believe Airtable is the solution and it is accessible to all the users, with different permission. So I use this oportunity to create the Block, and I put myself in the place of novice users who are managing a small and medium store. 
+
+## What it does
+My Stock Block manage the stock of a store and can be shared to all the users of the company : store manager, seller, procurement and finance team. You can see all the stocks, check specific information for a items and create a KPI to check on live that everything is OK. There are 3 types of KPI : 
+- hard coded KPI for the alert of low stock and high value store
+- one personalized KPI created manually with one table
+- one personalized Vertical Lookup KPI created with one button
+
+## How I built it
+- Interface : Airtable and Blocks SDK
+- Language : REACT, Javascript and CSS
+- Tools : Visual Studio Code
+
+## Challenges I ran into
+I didn't know the REACT, so I must read and try a lot before to understand how it works.
+Also, as I was a novice in Airtable I face some difficulties . For instance I had some difficultes to link the tables together specially when I want to show the Max/Min of the fields from another table. At the end I add all the record from other tables manually, and it took time. Because of that, I add the KPI Vlookup that find a field based on condition Max, Min or Median.
+
+## Accomplishments that I'm proud of
+To be able to close my project, even I know that the Block can be improved base of the specific need. It is a good start, and as the code is accessible to everybody, it is possible to add new module and option.
+
+## What I learned
+I learn how to use Airtable and the limit of the soft. Also I learn the REACT language.
+
+## What's next for My Shop Block
+My Stock Block has the basic usage for now. It can evolve a lot, but it will depend to the need of the business. Probably the usage of the block will create oportunity to develop the Block. 
+
